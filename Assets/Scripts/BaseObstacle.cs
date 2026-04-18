@@ -16,6 +16,7 @@ public class BaseObstacle : MonoBehaviour
     protected virtual void Awake()
     {
         collider = gameObject.GetComponent<Collider>();
+        shipCoordinates = GameObject.FindWithTag("Player").GetComponent<Transform>();
         rb = gameObject.GetComponent<Rigidbody>();
     }
 

@@ -1,14 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTestController : MonoBehaviour
 {
-     Vector3 Movement;
+    Vector3 Movement;
     Vector2 LookingAround;
     Rigidbody rb;
     Transform ori;
     Camera cam;
 
     bool isGrounded;
+
 
     float MouseSpeed = 120f;
 
@@ -30,6 +32,8 @@ public class PlayerTestController : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    
     void Update()
     {
            InputKey();       
