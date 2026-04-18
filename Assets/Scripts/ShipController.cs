@@ -24,9 +24,11 @@ public class ShipController : MonoBehaviour
 
     public float ShipRotationSpeed = 1f; 
 
-    private bool isMoving = false;
+    private bool isMoving = true;
 
     private Vector3 Movement = new Vector3(0,0,1); 
+
+    private Vector3 curMovment = Vector3.zero;
 
     private Transform ShipObject; 
 
@@ -36,9 +38,17 @@ public class ShipController : MonoBehaviour
 
     private Rigidbody rb; 
     
-    private bool isRotating = false; 
+    private bool isRotating = false;
 
+    void OnEnable()
+    {
+         EventBus.Subscribe<setInput>(retriveInputSingal);
+    }
 
+    void OnDisable()
+    {
+        EventBus.Unsubscribe<setInput>(retriveInputSingal);
+    }
 
     void Start()
     {
@@ -46,22 +56,23 @@ public class ShipController : MonoBehaviour
         ShipObject = gameObject.GetComponent<Transform>();
     }
 
-    // Update is called once per frame
+    private void retriveInputSingal(setInput data)=> RecieveSingals(data.action);
 
     protected virtual void RecieveSingals(SignalDirections dir)
     {
         switch (dir)
         {
-            case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-0.4f, RotationTime)); break;
-            case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(0.4f, RotationTime)); break; 
-            case SignalDirections.Stop: break;
-            case SignalDirections.Move: break;
+            case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-40f, RotationTime)); break;
+            case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(40f, RotationTime)); break; 
+            case SignalDirections.Stop: StartCoroutine(ManageShipSpeed(0.6f, 0f)); isMoving = false; break;
+            case SignalDirections.Move: StartCoroutine(ManageShipSpeed(0.3f, 3f)); isMoving = true; break;
             default: break;
         }
     }
 
     private IEnumerator RotateShip(float amount, float duration)
     {
+          Debug.Log("rotating");
           isRotating = true;
           Movement.y = amount; 
           Quaternion startRotation = transform.rotation;
@@ -81,7 +92,7 @@ public class ShipController : MonoBehaviour
         isRotating = false; 
     }
 
-    private IEnumerator ShipManageShipSpeed(float duration, float targetSpeed)
+    private IEnumerator ManageShipSpeed(float duration, float targetSpeed)
     {
         if(targetSpeed == ShipSpeed) yield break;
 
@@ -113,7 +124,6 @@ public class ShipController : MonoBehaviour
     private void MoveShip()
     {
         Vector3 newDir = (ShipObject.forward * Movement.z).normalized;
-        Vector3 curMovment = Vector3.zero;
         curMovment = Vector3.Lerp(curMovment, newDir, smoothMovement);
         rb.MovePosition(rb.position + curMovment * ShipSpeed * Time.fixedDeltaTime);
     }

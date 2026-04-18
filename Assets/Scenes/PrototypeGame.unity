@@ -378,9 +378,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 312061873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80501e5a36fff98448b322bdf66b4e6f, type: 3}
+  m_Script: {fileID: 11500000, guid: e4a74e743b21aad40af6dd580f1d5efa, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseSignalButton
+  m_EditorClassIdentifier: Assembly-CSharp::LeftSignalButton
 --- !u!1 &534077509
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,8 +570,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1863927230}
   - {fileID: 312061877}
+  - {fileID: 1863927230}
   - {fileID: 1770324376}
   m_Father: {fileID: 608138275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -910,6 +910,7 @@ GameObject:
   - component: {fileID: 1770324375}
   - component: {fileID: 1770324374}
   - component: {fileID: 1770324373}
+  - component: {fileID: 1770324377}
   m_Layer: 0
   m_Name: StopButton
   m_TagString: Untagged
@@ -1010,6 +1011,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 896238168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 28.492}
+--- !u!114 &1770324377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770324372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af86100e7f49eeb4b96f32aec983dd66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ManageSpeedButton
 --- !u!1 &1863927226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,6 +1035,7 @@ GameObject:
   - component: {fileID: 1863927229}
   - component: {fileID: 1863927228}
   - component: {fileID: 1863927227}
+  - component: {fileID: 1863927231}
   m_Layer: 0
   m_Name: RightButton
   m_TagString: Untagged
@@ -1122,6 +1136,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 896238168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 28.492}
+--- !u!114 &1863927231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863927226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c347e4c1491edf347982baf00d48ce97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RightSignalButton
 --- !u!1 &1890839515
 GameObject:
   m_ObjectHideFlags: 0

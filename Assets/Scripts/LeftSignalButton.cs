@@ -1,16 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LeftSignalButton : BaseSignalButton
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void OnMouseDown()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+         EventBus.Act(new setInput(SignalDirections.Left));
+         //Debug.Log("clicked");
     }
 }

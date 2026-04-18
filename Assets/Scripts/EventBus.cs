@@ -1,16 +1,54 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
-public class EventBus : MonoBehaviour
+public static class EventBus
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private static Dictionary<Type, Delegate> SubbedActions = new();
+
+    public static void Act(EventData data)
     {
-        
+
+        Type newType = data.GetType();
+
+        if (SubbedActions.TryGetValue(newType, out Delegate ActionExists))
+        {
+
+            ActionExists.DynamicInvoke(data);
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void Subscribe<T>(Action<T> act) where T : EventData
     {
-        
+        Type type = typeof(T);
+
+        if (SubbedActions.ContainsKey(type))
+        {
+            SubbedActions[type] = Delegate.Combine(SubbedActions[type], act);
+        }
+
+        else
+        {
+            SubbedActions[type] = act;
+        }
     }
+
+    public static void Unsubscribe<T>(Action<T> act) where T : EventData
+    {
+        Type type = typeof(T);
+
+        if (SubbedActions.ContainsKey(type))
+        {
+
+            SubbedActions[type] = Delegate.Remove(SubbedActions[type], act);
+
+        }
+
+
+    }
+    
+
+    
 }
