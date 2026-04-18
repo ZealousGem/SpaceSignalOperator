@@ -62,8 +62,8 @@ public class ShipController : MonoBehaviour
     {
         switch (dir)
         {
-            case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-40f, RotationTime)); break;
-            case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(40f, RotationTime)); break; 
+            case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime)); break;
+            case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(45f, RotationTime)); break; 
             case SignalDirections.Stop: StartCoroutine(ManageShipSpeed(0.6f, 0f)); isMoving = false; break;
             case SignalDirections.Move: StartCoroutine(ManageShipSpeed(0.3f, 3f)); isMoving = true; break;
             default: break;
@@ -72,7 +72,7 @@ public class ShipController : MonoBehaviour
 
     private IEnumerator RotateShip(float amount, float duration)
     {
-          Debug.Log("rotating");
+          //Debug.Log("rotating");
           isRotating = true;
           Movement.y = amount; 
           Quaternion startRotation = transform.rotation;

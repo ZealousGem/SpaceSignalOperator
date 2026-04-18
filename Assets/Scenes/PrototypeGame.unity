@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 58992209}
   - component: {fileID: 58992208}
   - component: {fileID: 58992211}
+  - component: {fileID: 58992212}
   m_Layer: 0
   m_Name: ' SpaceCamera'
   m_TagString: Untagged
@@ -206,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 58992207}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 25.61, z: -13.24}
+  m_LocalPosition: {x: 0, y: 25.61, z: -5.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -256,6 +257,25 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &58992212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58992207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4f2387cb76bd748b58a7da3f7311df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShipTracker
+  DampTime: 0.2
+  ScreenEdgeBuffer: 0.2
+  MinSize: 2.1
+  MaxSize: 2.92
+  ZoomSpeed: 0.4
+  targets:
+  - {fileID: 1428964416}
 --- !u!1 &312061873
 GameObject:
   m_ObjectHideFlags: 0
