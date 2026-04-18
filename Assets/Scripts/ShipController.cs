@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum SignalDirections
@@ -18,7 +16,6 @@ public enum SignalDirections
 public class ShipController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
 
     public float ShipSpeed = 3f;
 
@@ -40,12 +37,12 @@ public class ShipController : MonoBehaviour
     
     private bool isRotating = false;
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
          EventBus.Subscribe<setInput>(retriveInputSingal);
     }
 
-    void OnDisable()
+    protected virtual void OnDisable()
     {
         EventBus.Unsubscribe<setInput>(retriveInputSingal);
     }
@@ -117,7 +114,7 @@ public class ShipController : MonoBehaviour
 
     void FixedUpdate()
     {
-       // if(!isMoving) return;
+        if(!isMoving) return;
         MoveShip();
     }
 
