@@ -7,12 +7,13 @@ public class NeutronStar : Star
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
      
-    public float rotationSpeed = 100f;
+    public float rotationSpeed = 700f;
     public GameObject Pulsar;
     public Collider PulsarCollider;  
     protected enum NeutronStarDirection  {x, y};
     protected NeutronStarDirection currentDir;
     private Vector3 NeutronStarDir; 
+
     private Vector3 MovingRotation;
     private float FinalTimer = 0; 
     private float currentTimer = 0;
@@ -79,9 +80,12 @@ public class NeutronStar : Star
 
         if (FinalTimer <= currentTimer)
         {
+            
+            currentTimer = 0;
             FinalTimer = 0;
-            FinalTimer = 0;
+
             StartCoroutine(TurnOnPulsar(3f));
+            
         }
     }
 
@@ -89,7 +93,9 @@ public class NeutronStar : Star
     {
         
         Pulsar.SetActive(true);
+        PulsarCollider.enabled = true;
         yield return new WaitForSeconds(duration);
+        PulsarCollider.enabled = false;
         Pulsar.SetActive(false);
     }
     

@@ -29,12 +29,12 @@ public class HydrogenStar : Star
  
         if(!ShootShip) return;
         
-        GameObject temp = Instantiate(SolarFlare, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
+        GameObject temp = Instantiate(SolarFlare, transform.position, Quaternion.identity);
         Rigidbody r = temp.GetComponent<Rigidbody>();
         if(r == null) return;
 
-        Vector3 Flare = (shipCoordinates.position - transform.position).normalized;
-        Vector3 direction = (Flare - gameObject.transform.position).normalized;
+        
+        Vector3 direction = (shipCoordinates.position - gameObject.transform.position).normalized;
         r.AddForce(direction * SolarFlareSpeed, ForceMode.Impulse); //adds the force to create speed to the projectile once spawned 
         ShootShip = false;
 

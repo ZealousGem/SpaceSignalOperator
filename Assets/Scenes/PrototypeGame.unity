@@ -2626,6 +2626,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8901977785072599847, guid: 0e1b6ba6d5df7e647bad549e1e639fd0, type: 3}
   m_PrefabInstance: {fileID: 888941611}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2743007064484347605
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 35.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02731
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 925785327187481793, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662353550134068433, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_Name
+      value: HydrogenStar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
 --- !u!1001 &3836766624381554225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2780,3 +2837,4 @@ SceneRoots:
   - {fileID: 608138275}
   - {fileID: 1917988477}
   - {fileID: 309691105}
+  - {fileID: 2743007064484347605}

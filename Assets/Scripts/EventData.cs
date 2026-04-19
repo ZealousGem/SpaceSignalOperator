@@ -22,3 +22,16 @@ public class setInput : EventData
         action = _action;
     }
 }
+
+public class DamageShip : EventData
+{
+    public Damagedby action;
+
+    public float Damaged;
+
+    public DamageShip(Damagedby _action, float _Damaged)
+    {
+        action = _action;
+        Damaged = _Damaged;
+    }
+}

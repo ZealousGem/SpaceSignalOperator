@@ -21,7 +21,9 @@ public class ShipController : MonoBehaviour
 
     public float ShipRotationSpeed = 1f; 
 
-    private bool isMoving = true;
+    public float Fuel = 100f;
+
+    protected bool isMoving = true;
 
     private Vector3 Movement = new Vector3(0,0,1); 
 
@@ -33,6 +35,8 @@ public class ShipController : MonoBehaviour
     
     private bool isRotating = false;
 
+    private bool noMoreFuel = false; 
+
     protected virtual void OnEnable()
     {
          EventBus.Subscribe<setInput>(retriveInputSingal);
@@ -43,7 +47,7 @@ public class ShipController : MonoBehaviour
         EventBus.Unsubscribe<setInput>(retriveInputSingal);
     }
 
-    void Start()
+    private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         ShipObject = gameObject.GetComponent<Transform>();
@@ -98,7 +102,7 @@ public class ShipController : MonoBehaviour
             timeElapsed += Time.deltaTime;
             // Normalize time (0 to 1)
             float t = timeElapsed / duration; 
-            
+            Fuel -= 0.1f * Time.fixedDeltaTime;
             // Linear interpolation
             ShipSpeed = Mathf.Lerp(startSpeed, targetSpeed, t);
             rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, rb.linearVelocity.normalized * ShipSpeed, t);
@@ -118,7 +122,7 @@ public class ShipController : MonoBehaviour
 
     private void MoveShip()
     {
-        Vector3 forward = ShipObject.forward;
+    Vector3 forward = ShipObject.forward;
        forward.y = 0f;
        forward.Normalize();
 
@@ -130,6 +134,23 @@ public class ShipController : MonoBehaviour
       velocityChange.y = 0f; // 🔒 lock Y
 
       rb.AddForce(velocityChange, ForceMode.Acceleration);
+
+      if(velocityChange != Vector3.zero) DecreaseShipFuel();
+    }
+
+    private void DecreaseShipFuel()
+    {
+         if(noMoreFuel) return;
+
+        Fuel -= 0.1f * Time.fixedDeltaTime;
+
+        if (Fuel <= 0)
+        {
+            Fuel = 0;
+            isMoving = false;
+            noMoreFuel = true;
+            
+        }
     }
     
 }
