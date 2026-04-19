@@ -36,4 +36,12 @@ public class BlackHole : Star
 
         ShipRb.AddForce(pull, ForceMode.Acceleration);
     }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            EventBus.Act(new DamageShip(Damagedby.Blackhole, 100f));
+        }
+    }
 }

@@ -23,9 +23,10 @@ public class Star : BaseObstacle
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void BurnShip()
     {
-         float dist = Vector3.Distance(transform.position, shipCoordinates.position);
+        float dist = Vector3.Distance(transform.position, shipCoordinates.position);
         float damageScale = 1f - (dist / SolarRayMaxDistance);
         float burnAmount = BurningStrenth * damageScale * Time.fixedDeltaTime;
+        EventBus.Act(new DamageShip(Damagedby.BurnUp, burnAmount));
 
         // burns player 
     }

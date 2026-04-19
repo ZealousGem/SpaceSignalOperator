@@ -31,6 +31,7 @@ public class BaseObstacle : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             // damages space ship 
+            EventBus.Act(new DamageShip(Damagedby.Default, Damage));
         }
     }
 
