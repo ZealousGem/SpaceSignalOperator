@@ -25,11 +25,7 @@ public class ShipController : MonoBehaviour
 
     private Vector3 Movement = new Vector3(0,0,1); 
 
-    private Vector3 curMovment = Vector3.zero;
-
     private Transform ShipObject; 
-
-    private float smoothMovement = 10f;
 
     private const float RotationTime = 1f;
 
@@ -81,11 +77,12 @@ public class ShipController : MonoBehaviour
              timeElapsed += Time.deltaTime;
              float t = timeElapsed / duration;
              transform.rotation = Quaternion.Slerp(startRotation, EndRotation, t);
+             rb.MoveRotation(transform.rotation);
              yield return null;
 
         }
 
-        transform.rotation = EndRotation;
+        rb.MoveRotation(EndRotation);
         isRotating = false; 
     }
 
@@ -104,6 +101,7 @@ public class ShipController : MonoBehaviour
             
             // Linear interpolation
             ShipSpeed = Mathf.Lerp(startSpeed, targetSpeed, t);
+            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, rb.linearVelocity.normalized * ShipSpeed, t);
             
             yield return null; // Wait for next frame 
         } 
@@ -120,9 +118,18 @@ public class ShipController : MonoBehaviour
 
     private void MoveShip()
     {
-        Vector3 newDir = (ShipObject.forward * Movement.z).normalized;
-        curMovment = Vector3.Lerp(curMovment, newDir, smoothMovement);
-        rb.MovePosition(rb.position + curMovment * ShipSpeed * Time.fixedDeltaTime);
+        Vector3 forward = ShipObject.forward;
+       forward.y = 0f;
+       forward.Normalize();
+
+       Vector3 targetVelocity = forward * ShipSpeed;
+
+    // Smooth acceleration instead of teleporting
+      Vector3 velocityChange = targetVelocity - rb.linearVelocity;
+
+      velocityChange.y = 0f; // 🔒 lock Y
+
+      rb.AddForce(velocityChange, ForceMode.Acceleration);
     }
     
 }
