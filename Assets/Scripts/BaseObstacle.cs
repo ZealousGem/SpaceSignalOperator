@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class BaseObstacle : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Transform shipCoordinates; 
-    public float Damage; 
-    public new Collider collider;  
-    public Rigidbody rb;
+
+    public float Damage;
+   [NonSerialized] public Transform shipCoordinates;  
+   [NonSerialized] public new Collider collider;  
+   [NonSerialized] public Rigidbody rb;
     public GameObject Object;
     public float renderDistance = 20f;
     public float checkInterval = 0.5f;
@@ -47,10 +49,11 @@ public class BaseObstacle : MonoBehaviour
         }
     }
 
-    private void ToggleVisibility(bool state)
+    protected virtual void ToggleVisibility(bool state)
     {
         isVisible = state;
         Object.SetActive(state);
+        collider.enabled = state;
     }
 
 }

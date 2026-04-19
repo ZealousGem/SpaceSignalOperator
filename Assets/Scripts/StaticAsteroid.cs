@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.Collections;
 using UnityEngine;
+
 
 public class StaticAsteroid : BaseObstacle
 {
@@ -8,10 +10,30 @@ public class StaticAsteroid : BaseObstacle
 
     public float duration = 0f;
 
-    public GameObject ExplosionEffect;  
+    public GameObject ExplosionEffect;
+
+    private enum AsteroidDirection  {x, y ,z};
+ 
+    private AsteroidDirection currentDir; 
+
+    private Vector3 AsteroidDir; 
+
+    protected override void Awake()
+    {
+        base.Awake();
+        rotationSpeed = Random.Range(rotationSpeed - 10f, rotationSpeed);
+        currentDir = (AsteroidDirection)Random.Range(0, (int)AsteroidDirection.z);
+
+        switch (currentDir)
+        {
+            case AsteroidDirection.x: AsteroidDir = new Vector3(rotationSpeed * Time.fixedDeltaTime, 0 ,0); break;
+            case AsteroidDirection.y: AsteroidDir = new Vector3(0, rotationSpeed * Time.fixedDeltaTime ,0); break;
+            case AsteroidDirection.z: AsteroidDir = new Vector3(0, 0 , rotationSpeed * Time.fixedDeltaTime); break;
+        }
+    }
 
     // Update is called once per frame
-    protected virtual void FixedUpdate() => rb.MoveRotation(rb.rotation * Quaternion.Euler(0, rotationSpeed * Time.fixedDeltaTime, 0));
+    protected virtual void FixedUpdate() => rb.MoveRotation(rb.rotation * Quaternion.Euler(AsteroidDir));
 
     protected override void OnTriggerEnter(Collider other)
     {

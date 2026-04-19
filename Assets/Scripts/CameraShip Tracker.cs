@@ -6,17 +6,17 @@ public class CameraShipTracker : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
   [SerializeField] private float DampTime = 0.2f;
-  [SerializeField] private float ScreenEdgeBuffer = 0.2f;
-  [SerializeField] private float MinSize = 2.1f;
-  [SerializeField] private float MaxSize = 2.92f;
-  [SerializeField] private float ZoomSpeed = 0.4f;
+ // [SerializeField] private float ScreenEdgeBuffer = 0.2f;
+//   [SerializeField] private float MinSize = 2.1f;
+//   [SerializeField] private float MaxSize = 2.92f;
+//   [SerializeField] private float ZoomSpeed = 0.4f;
 //    private CinemachineImpulseSource impulseSource;
    private Camera cam;
    public  List<Transform> targets; 
    private Vector3 Velocity;
    private Vector3 DesiredPos;
-   private Vector3 origPos;
-   private float ShakeY;
+//    private Vector3 origPos;
+//    private float ShakeY;
 
    private const float cameraHeight = 25.61f;
 
