@@ -21,10 +21,7 @@ public class MovingAsteroid : StaticAsteroid
             rb.AddForce(direction * Speed, ForceMode.Impulse);
         } 
 
-        else
-        {
-          rb.linearVelocity = Vector3.zero;  
-        }
+        
 
 
     }

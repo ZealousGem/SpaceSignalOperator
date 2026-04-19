@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class Comet : BaseObstacle
+public class Comet : MovingAsteroid
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void OnTriggerEnter(Collider other)
     {
         
-    }
+        if(other.GetComponent<StaticAsteroid>())
+        {
+            StaticAsteroid Asteroid = other.GetComponent<StaticAsteroid>();
+            StartCoroutine(Explosion(Asteroid.duration));
+        }
+       
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

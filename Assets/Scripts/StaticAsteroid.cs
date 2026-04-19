@@ -12,24 +12,39 @@ public class StaticAsteroid : BaseObstacle
 
     public GameObject ExplosionEffect;
 
-    private enum AsteroidDirection  {x, y ,z};
+    protected enum AsteroidDirection  {x, y ,z};
  
-    private AsteroidDirection currentDir; 
+    protected AsteroidDirection currentDir; 
 
     private Vector3 AsteroidDir; 
+
+    private Vector3 MovingRotation;
+
+    protected bool ParentDirection = true; 
 
     protected override void Awake()
     {
         base.Awake();
-        rotationSpeed = Random.Range(rotationSpeed - 10f, rotationSpeed);
-        currentDir = (AsteroidDirection)Random.Range(0, (int)AsteroidDirection.z);
+       
+        if(ParentDirection)
+        {
+            rotationSpeed = Random.Range(rotationSpeed - 10f, rotationSpeed);
+            currentDir = (AsteroidDirection)Random.Range(0, (int)AsteroidDirection.z);
+            SetAsteroidDirection(currentDir);
+        }
+        
+    }
 
+    protected void SetAsteroidDirection(AsteroidDirection currentDir)
+    {
         switch (currentDir)
         {
             case AsteroidDirection.x: AsteroidDir = new Vector3(rotationSpeed * Time.fixedDeltaTime, 0 ,0); break;
             case AsteroidDirection.y: AsteroidDir = new Vector3(0, rotationSpeed * Time.fixedDeltaTime ,0); break;
             case AsteroidDirection.z: AsteroidDir = new Vector3(0, 0 , rotationSpeed * Time.fixedDeltaTime); break;
         }
+
+        MovingRotation = AsteroidDir;
     }
 
     // Update is called once per frame
@@ -44,6 +59,22 @@ public class StaticAsteroid : BaseObstacle
             StartCoroutine(Explosion(duration));
         }
      
+    }
+
+    protected override void ToggleVisibility(bool state)
+    {
+        base.ToggleVisibility(state);
+
+        if(state is true)
+        {
+            AsteroidDir =  MovingRotation; 
+        }
+
+        else
+        {
+            AsteroidDir = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
+        }
     }
 
     protected IEnumerator Explosion(float duration)
