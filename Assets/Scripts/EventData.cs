@@ -35,3 +35,24 @@ public class DamageShip : EventData
         Damaged = _Damaged;
     }
 }
+
+public class EndGameEvent : EventData
+{
+    public Damagedby action;
+
+    public GameState GameEvent;
+
+    public bool StopMoving;
+
+    public EndGameEvent(Damagedby _action, GameState _Damaged)
+    {
+        action = _action;
+        GameEvent = _Damaged;
+    }
+
+    public EndGameEvent(GameState _Damaged, bool _StopMoving)
+    {
+        GameEvent = _Damaged;
+        StopMoving = _StopMoving;
+    }
+}

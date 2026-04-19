@@ -10,7 +10,9 @@ public enum Damagedby
 
   BurnUp,
 
-  Default 
+  Default,
+
+  Timer
 
 
 }
@@ -66,6 +68,7 @@ public class DeliveryShip : ShipController
         if (ShipHealth > 0) return;
 
         ShipHealth = 0; 
+        isMoving = false;
         SetShipsDeathAnimation(damagedby);  
         
     }
@@ -75,7 +78,7 @@ public class DeliveryShip : ShipController
         switch (damagedby)
         {
             case Damagedby.Blackhole: ShrinkShip(); break;
-            case Damagedby.NeutronStar: CrushShip(); break;
+            case Damagedby.NeutronStar: ObliterateShip(); break;
             case Damagedby.BurnUp: BurnShip(); break;
             case Damagedby.Default: ExplodeShip(); break;
         }
@@ -83,21 +86,21 @@ public class DeliveryShip : ShipController
 
     private void BurnShip()
     {
-        
+         EventBus.Act(new EndGameEvent(Damagedby.BurnUp, GameState.Fail));
     }
 
     private void ExplodeShip()
     {
-        
+         EventBus.Act(new EndGameEvent(Damagedby.Default, GameState.Fail));
     }
 
     private void ShrinkShip()
     {
-        
+        EventBus.Act(new EndGameEvent(Damagedby.Blackhole, GameState.Fail));
     }
 
-    private void CrushShip()
+    private void ObliterateShip()
     {
-        
+         EventBus.Act(new EndGameEvent(Damagedby.NeutronStar, GameState.Fail));
     }
 }
