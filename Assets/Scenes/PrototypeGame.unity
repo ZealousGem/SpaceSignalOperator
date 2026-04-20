@@ -703,6 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a74e743b21aad40af6dd580f1d5efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LeftSignalButton
+  buttonType: 0
 --- !u!1001 &407377036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2027,6 +2028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af86100e7f49eeb4b96f32aec983dd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManageSpeedButton
+  buttonType: 2
 --- !u!4 &1803238196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8901977785072599847, guid: 0e1b6ba6d5df7e647bad549e1e639fd0, type: 3}
@@ -2162,6 +2164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c347e4c1491edf347982baf00d48ce97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RightSignalButton
+  buttonType: 1
 --- !u!1 &1890839515
 GameObject:
   m_ObjectHideFlags: 0

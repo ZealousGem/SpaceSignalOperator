@@ -22,6 +22,8 @@ public class StaticAsteroid : BaseObstacle
 
     protected bool ParentDirection = true; 
 
+    private float lockY = 0.016704f; 
+
     protected override void Awake()
     {
         base.Awake();
@@ -33,6 +35,11 @@ public class StaticAsteroid : BaseObstacle
             SetAsteroidDirection(currentDir);
         }
         
+    }
+
+    void Update()
+    {
+       transform.position = new Vector3(transform.position.x, lockY, transform.position.z); 
     }
 
     protected void SetAsteroidDirection(AsteroidDirection currentDir)

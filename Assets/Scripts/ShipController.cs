@@ -59,15 +59,15 @@ public class ShipController : MonoBehaviour
     {
         switch (dir)
         {
-            case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime)); break;
-            case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(45f, RotationTime)); break; 
+            case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime, ButtonAnimations.LeftButton)); break;
+            case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(45f, RotationTime, ButtonAnimations.RightButton));break; 
             case SignalDirections.Stop: StartCoroutine(ManageShipSpeed(0.6f, 0f)); isMoving = false; break;
             case SignalDirections.Move: StartCoroutine(ManageShipSpeed(0.3f, 3f)); isMoving = true; break;
             default: break;
         }
     }
 
-    private IEnumerator RotateShip(float amount, float duration)
+    private IEnumerator RotateShip(float amount, float duration, ButtonAnimations button)
     {
           //Debug.Log("rotating");
           isRotating = true;
@@ -88,6 +88,7 @@ public class ShipController : MonoBehaviour
 
         rb.MoveRotation(EndRotation);
         isRotating = false; 
+        EventBus.Act(new ButtonEvent(button)); 
     }
 
     private IEnumerator ManageShipSpeed(float duration, float targetSpeed)
@@ -110,7 +111,9 @@ public class ShipController : MonoBehaviour
             yield return null; // Wait for next frame 
         } 
 
+       
         ShipSpeed = targetSpeed;
+        EventBus.Act(new ButtonEvent(ButtonAnimations.StopButton));
 
     }
 

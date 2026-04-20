@@ -71,3 +71,18 @@ public class StationEvent : EventData
 
     
 }
+
+public class ButtonEvent : EventData
+{
+    public ButtonAnimations action;
+
+    public float amount;
+
+    public ButtonEvent(ButtonAnimations _action)
+    {
+        action = _action;
+        
+    }
+
+    
+}
