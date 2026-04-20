@@ -6,7 +6,8 @@ public class ManageSpeedButton : BaseSignalButton
     private bool isMoving = true;
     protected override void OnMouseDown()
     {
-
+        
+        base.OnMouseDown();
         if (isMoving)
         {
              EventBus.Act(new setInput(SignalDirections.Stop));
