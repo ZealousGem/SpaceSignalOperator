@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class DeliveredPlanet : MonoBehaviour
+public class DeliveredPlanet : BaseObstacle
 {
-    void OnTriggerEnter(Collider other)
+    protected  override void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player") EventBus.Act(new EndGameEvent(GameState.Success, false));
-        
     }
 }

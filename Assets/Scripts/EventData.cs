@@ -56,3 +56,18 @@ public class EndGameEvent : EventData
         StopMoving = _StopMoving;
     }
 }
+
+public class StationEvent : EventData
+{
+    public StationType action;
+
+    public float amount;
+
+    public StationEvent(StationType _action, float _amount)
+    {
+        action = _action;
+        amount = _amount;
+    }
+
+    
+}

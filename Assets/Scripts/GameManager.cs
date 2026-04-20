@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
             case Damagedby.Blackhole:  break;
             case Damagedby.NeutronStar:  break;
             case Damagedby.BurnUp:  break;
+            case Damagedby.Timer: break;
             case Damagedby.Default:  break;
         }
     }

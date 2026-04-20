@@ -122,13 +122,12 @@ public class ShipController : MonoBehaviour
 
     private void MoveShip()
     {
-    Vector3 forward = ShipObject.forward;
-       forward.y = 0f;
-       forward.Normalize();
 
-       Vector3 targetVelocity = forward * ShipSpeed;
+      Vector3 forward = ShipObject.forward;
+      forward.y = 0f;
+      forward.Normalize();
 
-    // Smooth acceleration instead of teleporting
+      Vector3 targetVelocity = forward * ShipSpeed;
       Vector3 velocityChange = targetVelocity - rb.linearVelocity;
 
       velocityChange.y = 0f; // 🔒 lock Y

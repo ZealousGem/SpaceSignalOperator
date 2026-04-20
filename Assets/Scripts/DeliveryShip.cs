@@ -27,13 +27,25 @@ public class DeliveryShip : ShipController
     protected override void OnEnable()
     {
        base.OnEnable();
-       EventBus.Subscribe<DamageShip>(RetrieveData); 
+       EventBus.Subscribe<DamageShip>(RetrieveData);
+       EventBus.Subscribe<StationEvent>(RetrieveData); 
     }
 
     protected override void OnDisable()
     {
        base.OnDisable();
        EventBus.Unsubscribe<DamageShip>(RetrieveData);
+       EventBus.Unsubscribe<StationEvent>(RetrieveData);
+    }
+
+    private void RetrieveData(StationEvent data)
+    {
+        switch (data.action)
+        {
+            case StationType.Repairs: ShipHealth += data.amount; break;
+            case StationType.ReactorCoolDown: ShipTemp -= data.amount; break;
+            case StationType.Fuel: Fuel += data.amount; break;
+        }
     }
 
     private void RetrieveData(DamageShip data)
@@ -46,7 +58,7 @@ public class DeliveryShip : ShipController
 
         else
         {
-          DamageShip(data.Damaged, data.action);    
+            DamageShip(data.Damaged, data.action);    
         }
         
     }
