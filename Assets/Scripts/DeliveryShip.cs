@@ -38,6 +38,7 @@ public class DeliveryShip : ShipController
 
     private void RetrieveData(DamageShip data)
     {
+        //Debug.Log("here");
         if (data.action == Damagedby.BurnUp)
         {
             BurnShip(data.Damaged, data.action);
@@ -53,6 +54,7 @@ public class DeliveryShip : ShipController
     private void BurnShip(float Burn, Damagedby damagedby)
     {
         ShipTemp += Burn;
+       //  Debug.Log("ShipTemperature: " + ShipTemp);
 
         if (ShipTemp < 100) return;
 
@@ -64,6 +66,7 @@ public class DeliveryShip : ShipController
     private void DamageShip(float Damage, Damagedby damagedby)
     {
         ShipHealth -= Damage;
+        Debug.Log("ShipHealth: " + ShipHealth);
 
         if (ShipHealth > 0) return;
 

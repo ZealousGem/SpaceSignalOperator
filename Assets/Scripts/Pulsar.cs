@@ -4,11 +4,12 @@ public class Pulsar : MonoBehaviour
 { 
 
     public float Damage = 50f;
-    private void OnTriggerEnter(Collider other)
+    public Damagedby action;
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-             EventBus.Act(new DamageShip(Damagedby.NeutronStar, Damage));
+             EventBus.Act(new DamageShip(action, Damage));
         }
     }
 }

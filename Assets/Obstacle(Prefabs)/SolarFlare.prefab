@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3303628743395511884}
   - component: {fileID: 7693492722913409851}
   - component: {fileID: 8375321383978320073}
-  - component: {fileID: 8069342608985893182}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -91,27 +90,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8069342608985893182
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 944080207902429154}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5596975466858872320
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +100,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1513431498750970887}
   - component: {fileID: 5413652984376997255}
+  - component: {fileID: 3045680894488627855}
+  - component: {fileID: 5701947904573766911}
   m_Layer: 0
   m_Name: SolarFlare
   m_TagString: Untagged
@@ -172,3 +152,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!135 &3045680894488627855
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5596975466858872320}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5701947904573766911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5596975466858872320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f59fcb8ddf1b494aba8e2e0a26f1bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SolarFlare
+  Damage: 20
+  action: 3

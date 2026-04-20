@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00578dcf19aae9346b5282105f3e68e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaticAsteroid
-  Damage: 0
+  Damage: 10
   Object: {fileID: 2044057845306054943}
   renderDistance: 20
   checkInterval: 0.5

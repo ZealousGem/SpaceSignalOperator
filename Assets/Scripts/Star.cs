@@ -8,12 +8,6 @@ public class Star : BaseObstacle
     public float BurningStrenth = 5f;
     protected bool PlayerInRange = false; 
 
-    protected override void Awake()
-    {
-        base.Awake();
-        BurningStrenth *= Damage;
-    }
-
     protected virtual void FixedUpdate()
     {
         BurnShip();
@@ -23,10 +17,13 @@ public class Star : BaseObstacle
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void BurnShip()
     {
+        
         float dist = Vector3.Distance(transform.position, shipCoordinates.position);
-        float damageScale = 1f - (dist / SolarRayMaxDistance);
-        float burnAmount = BurningStrenth * damageScale * Time.fixedDeltaTime;
-        EventBus.Act(new DamageShip(Damagedby.BurnUp, burnAmount));
+        float ratio = dist / SolarRayMaxDistance;
+        float damageScale = Mathf.Clamp01(1f - ratio);
+        float burnAmount = BurningStrenth * damageScale;
+        if(burnAmount > 0) EventBus.Act(new DamageShip(Damagedby.BurnUp, burnAmount));
+       // Debug.Log($"Dist: {dist} | Max: {SolarRayMaxDistance} | Scale: {damageScale} | Final Burn: {burnAmount}");
 
         // burns player 
     }
@@ -38,6 +35,7 @@ public class Star : BaseObstacle
         float dist = dir.magnitude;
 
         PlayerInRange = dist <= SolarRayMaxDistance;
+       // Debug.Log(PlayerInRange);
     }
 
    

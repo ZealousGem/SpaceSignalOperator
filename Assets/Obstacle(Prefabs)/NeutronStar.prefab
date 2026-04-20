@@ -118,6 +118,8 @@ GameObject:
   - component: {fileID: 9058105166588622789}
   - component: {fileID: 1828067414326807867}
   - component: {fileID: 7156326481765497268}
+  - component: {fileID: 3230206769397932167}
+  - component: {fileID: 2944540952080303188}
   m_Layer: 0
   m_Name: Pulsar
   m_TagString: Untagged
@@ -220,6 +222,47 @@ CapsuleCollider:
   m_Height: 1.9999998
   m_Direction: 1
   m_Center: {x: 0.000000059604638, y: 0, z: -0.00000008940695}
+--- !u!114 &3230206769397932167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028862043831652093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59af2eb68f8120649bc8a080355fcc84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pulsar
+  Damage: 50
+  action: 0
+--- !u!54 &2944540952080303188
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028862043831652093}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &4619525093138403004
 GameObject:
   m_ObjectHideFlags: 0

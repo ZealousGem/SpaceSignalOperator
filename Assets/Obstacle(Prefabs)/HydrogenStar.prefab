@@ -211,10 +211,10 @@ MonoBehaviour:
   Object: {fileID: 3131926775872324613}
   renderDistance: 20
   checkInterval: 0.5
-  SolarRayMaxDistance: 30
+  SolarRayMaxDistance: 18
   SolarRayMinDistance: 0.5
   BurningStrenth: 5
   SolarFlare: {fileID: 5596975466858872320, guid: 2c4626aea98b3fa4684c0cc19284a0cd, type: 3}
-  SolarFlareSpeed: 30
+  SolarFlareSpeed: 15
   SmallestNum: 3
   LargestNum: 4
