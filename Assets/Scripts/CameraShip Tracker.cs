@@ -17,11 +17,11 @@ public class CameraShipTracker : MonoBehaviour
 //    private Vector3 origPos;
 //    private float ShakeY;
 
-   private const float cameraHeight = 25.61f;
+   private const float cameraHeight = 35.53f;
 
-   private const float SpacshipDistance = -5.1f;
+   private const float SpacshipDistance = -10.2f;
 
-   Vector3 camDistance = new Vector3(0, cameraHeight, SpacshipDistance);
+   Vector3 camDistance = new Vector3(-29.16f, cameraHeight, SpacshipDistance);
 
     
 
