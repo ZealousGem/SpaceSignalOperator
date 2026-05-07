@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c756ec95ced5ef146bcb22cf313fdfcb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,9 +139,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8586945048306329165}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.03, y: 0.26526, z: -28.82}
-  m_LocalScale: {x: 17.983541, y: 17.983541, z: 17.983541}
+  m_LocalScale: {x: 39.51695, y: 39.51695, z: 39.51695}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2467264125835748791}
@@ -166,7 +166,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.67268413
+  m_Radius: 0.34
   m_Center: {x: 0, y: -0.015618503, z: 0}
 --- !u!54 &3916658438581415934
 Rigidbody:
@@ -211,6 +211,9 @@ MonoBehaviour:
   Object: {fileID: 7980537106266608526}
   renderDistance: 60
   checkInterval: 0.5
+  SolarRayMaxDistance: 100
+  SolarRayMinDistance: 0.5
+  BurningStrenth: 5
   GravityStrength: 50
   GrabMaxDistance: 40
   GrabMinDistance: 0.5
