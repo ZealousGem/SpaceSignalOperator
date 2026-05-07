@@ -99,7 +99,7 @@ MonoBehaviour:
   Object: {fileID: 2894402653774190605}
   renderDistance: 20
   checkInterval: 0.5
-  rotationSpeed: 50
+  rotationSpeed: 85.2
   duration: 0
   ExplosionEffect: {fileID: 0}
 --- !u!1001 &2660380745035785564
