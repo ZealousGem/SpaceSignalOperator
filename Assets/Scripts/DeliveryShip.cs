@@ -1,3 +1,4 @@
+using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -12,7 +13,9 @@ public enum Damagedby
 
   Default,
 
-  Timer
+  Timer,
+
+  OringalPlanet
 
 
 }
@@ -23,6 +26,7 @@ public class DeliveryShip : ShipController
     public float ShipHealth = 100f; 
     public float ShipTemp = 0f;
     public GameObject Explosion;
+    public GameObject Ship;
 
     protected override void OnEnable()
     {
@@ -66,11 +70,15 @@ public class DeliveryShip : ShipController
     private void BurnShip(float Burn, Damagedby damagedby)
     {
         ShipTemp += Burn;
-       //  Debug.Log("ShipTemperature: " + ShipTemp);
+        Debug.Log("ShipTemperature: " + ShipTemp +" "+ damagedby);
 
         if (ShipTemp < 100) return;
 
         ShipTemp = 100;
+        isMoving = false;
+        ShipSpeed = 0;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         SetShipsDeathAnimation(damagedby); 
 
     }
@@ -84,6 +92,9 @@ public class DeliveryShip : ShipController
 
         ShipHealth = 0; 
         isMoving = false;
+        ShipSpeed = 0;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         SetShipsDeathAnimation(damagedby);  
         
     }
@@ -96,6 +107,7 @@ public class DeliveryShip : ShipController
             case Damagedby.NeutronStar: ObliterateShip(); break;
             case Damagedby.BurnUp: BurnShip(); break;
             case Damagedby.Default: ExplodeShip(); break;
+            case Damagedby.OringalPlanet: RetrunToOringialPlanet(); break;
         }
     }
 
@@ -106,12 +118,24 @@ public class DeliveryShip : ShipController
 
     private void ExplodeShip()
     {
+         
          EventBus.Act(new EndGameEvent(Damagedby.Default, GameState.Fail));
     }
+
+    // private IEnumerator Explodsion()
+    // {
+    //     Ship.SetActive(false);
+
+    // }
 
     private void ShrinkShip()
     {
         EventBus.Act(new EndGameEvent(Damagedby.Blackhole, GameState.Fail));
+    }
+
+    private void RetrunToOringialPlanet()
+    {
+        EventBus.Act(new EndGameEvent(Damagedby.OringalPlanet, GameState.Fail));
     }
 
     private void ObliterateShip()

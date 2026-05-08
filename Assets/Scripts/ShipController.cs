@@ -30,7 +30,7 @@ public class ShipController : MonoBehaviour
 
     private const float RotationTime = 1f;
 
-    private Rigidbody rb; 
+    protected Rigidbody rb; 
     
     private bool isRotating = false;
 
@@ -55,6 +55,7 @@ public class ShipController : MonoBehaviour
 
     protected virtual void RecieveSingals(SignalDirections dir)
     {
+        if(!isMoving) return;
         switch (dir)
         {
             case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime, ButtonAnimations.LeftButton)); break;

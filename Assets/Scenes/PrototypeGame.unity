@@ -1205,9 +1205,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4594617759592838900, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: BurningStrenth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594617759592838900, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: SolarRayMaxDistance
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8662353550134068433, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
       propertyPath: m_Name
       value: HydrogenStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662353550134068433, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1548,6 +1560,22 @@ PrefabInstance:
     - target: {fileID: 3642040463105162121, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
       propertyPath: m_Name
       value: NeutronStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642040463105162121, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308653164467248279, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
+      propertyPath: BurningStrenth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308653164467248279, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
+      propertyPath: renderDistance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308653164467248279, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
+      propertyPath: SolarRayMaxDistance
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8159403260211186324, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2026,6 +2054,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 306302084798150633, guid: de903711a0de662439d756ca4331df7b, type: 3}
+      propertyPath: BurningStrenth
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 306302084798150633, guid: de903711a0de662439d756ca4331df7b, type: 3}
+      propertyPath: SolarRayMaxDistance
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1363712575469460985, guid: de903711a0de662439d756ca4331df7b, type: 3}
       propertyPath: m_LocalScale.x
       value: 19.258585
@@ -2088,7 +2124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8586945048306329165, guid: de903711a0de662439d756ca4331df7b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2578,6 +2614,7 @@ MonoBehaviour:
   ShipHealth: 100
   ShipTemp: 0
   Explosion: {fileID: 0}
+  Ship: {fileID: 1591982512}
 --- !u!4 &1498435271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 83932d34e38093d49a376de907df8755, type: 3}
@@ -2587,6 +2624,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bcf22cd5932563d40b79f5a4b547dc84, type: 3}
   m_PrefabInstance: {fileID: 567798139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1591982512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fb7b3c60d66f4a34b96a0a8bc84d2e02, type: 3}
+  m_PrefabInstance: {fileID: 1600377792}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1595918670
 PrefabInstance:

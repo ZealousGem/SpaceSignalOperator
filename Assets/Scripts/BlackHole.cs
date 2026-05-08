@@ -33,8 +33,16 @@ public class BlackHole : Star
         float force = GravityStrength / clampedDist;
 
         Vector3 pull = new Vector3(dir.x , 0 , dir.z).normalized * force;
+         if(dist < GrabMinDistance)
+        {
+            ShipRb.linearVelocity = Vector3.zero;
+            ShipRb.angularVelocity = Vector3.zero;
+            return;
+        }
 
         ShipRb.AddForce(pull, ForceMode.Acceleration);
+       
+
     }
 
     protected override void OnTriggerEnter(Collider other)

@@ -38,5 +38,10 @@ public class Star : BaseObstacle
        // Debug.Log(PlayerInRange);
     }
 
-   
+    protected override void  OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")  EventBus.Act(new DamageShip(Damagedby.Default, 100f));
+    }
+
+
 }
