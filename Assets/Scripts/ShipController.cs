@@ -27,7 +27,6 @@ public class ShipController : MonoBehaviour
 
     private Vector3 Movement = new Vector3(0,0,1); 
 
-    private Transform ShipObject; 
 
     private const float RotationTime = 1f;
 
@@ -50,7 +49,6 @@ public class ShipController : MonoBehaviour
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        ShipObject = gameObject.GetComponent<Transform>();
     }
 
     private void retriveInputSingal(setInput data)=> RecieveSingals(data.action);
@@ -80,8 +78,9 @@ public class ShipController : MonoBehaviour
         {
              timeElapsed += Time.deltaTime;
              float t = timeElapsed / duration;
-             transform.rotation = Quaternion.Slerp(startRotation, EndRotation, t);
-             rb.MoveRotation(transform.rotation);
+
+             Quaternion rotate = Quaternion.Slerp(startRotation, EndRotation, t);
+             rb.MoveRotation(rotate);
              yield return null;
 
         }
@@ -125,19 +124,16 @@ public class ShipController : MonoBehaviour
 
     private void MoveShip()
     {
-
-      Vector3 forward = ShipObject.forward;
+      rb.angularVelocity = Vector3.zero;
+      Vector3 forward = transform.forward;
       forward.y = 0f;
       forward.Normalize();
 
-      Vector3 targetVelocity = forward * ShipSpeed;
-      Vector3 velocityChange = targetVelocity - rb.linearVelocity;
+   //   Vector3 velocityChange = targetVelocity - rb.linearVelocity;
 
-      velocityChange.y = 0f; // 🔒 lock Y
+      rb.linearVelocity = forward * ShipSpeed;;
 
-      rb.AddForce(velocityChange, ForceMode.Acceleration);
-
-      if(velocityChange != Vector3.zero) DecreaseShipFuel();
+      if(ShipSpeed > 0.1f) DecreaseShipFuel();
     }
 
     private void DecreaseShipFuel()

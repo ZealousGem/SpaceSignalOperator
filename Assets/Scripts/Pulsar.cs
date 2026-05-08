@@ -10,6 +10,7 @@ public class Pulsar : MonoBehaviour
         if (other.tag == "Player")
         {
              EventBus.Act(new DamageShip(action, Damage));
+             
         }
     }
 }
