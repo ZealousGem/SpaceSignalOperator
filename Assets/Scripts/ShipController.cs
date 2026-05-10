@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum SignalDirections
@@ -23,18 +24,26 @@ public class ShipController : MonoBehaviour
 
     public float Fuel = 100f;
 
-    protected bool isMoving = true;
+    public List<ParticleSystem> ShipThrusters; 
+
+    private bool isMoving = true;
+
+    protected bool isDead = false;
 
     private Vector3 Movement = new Vector3(0,0,1); 
-
 
     private const float RotationTime = 1f;
 
     protected Rigidbody rb; 
+
+     private const float ThrusterSize = 1.5f;
+
+    private float currentThrust = ThrusterSize;
     
     private bool isRotating = false;
 
     private bool noMoreFuel = false; 
+
 
     protected virtual void OnEnable()
     {
@@ -55,13 +64,13 @@ public class ShipController : MonoBehaviour
 
     protected virtual void RecieveSingals(SignalDirections dir)
     {
-        if(!isMoving) return;
+        if(isDead) return;
         switch (dir)
         {
             case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime, ButtonAnimations.LeftButton)); break;
             case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(45f, RotationTime, ButtonAnimations.RightButton));break; 
-            case SignalDirections.Stop: StartCoroutine(ManageShipSpeed(0.6f, 0f)); isMoving = false; break;
-            case SignalDirections.Move: StartCoroutine(ManageShipSpeed(0.3f, 3f)); isMoving = true; break;
+            case SignalDirections.Stop: StartCoroutine(ManageShipSpeed(0.6f, 0f, 0f)); isMoving = false; break;
+            case SignalDirections.Move: StartCoroutine(ManageShipSpeed(0.3f, 3f, ThrusterSize)); isMoving = true; break;
             default: break;
         }
     }
@@ -91,41 +100,56 @@ public class ShipController : MonoBehaviour
         EventBus.Act(new ButtonEvent(button)); 
     }
 
-    private IEnumerator ManageShipSpeed(float duration, float targetSpeed)
+    protected void ManageThrusters(float amount)
     {
-        if(targetSpeed == ShipSpeed) yield break;
+        for (int i = 0; i < ShipThrusters.Count; i++)
+    {
+        var mainModule = ShipThrusters[i].main;
+        mainModule.startLifetime = new ParticleSystem.MinMaxCurve(amount);
+    }
+    }
+
+    private IEnumerator ManageShipSpeed(float duration, float targetSpeed, float targetThrust)
+    {
+        if(targetSpeed == ShipSpeed)yield break;    
 
         float startSpeed = ShipSpeed;
+        float startThrust = currentThrust;
         float timeElapsed = 0f;
+
 
         while (timeElapsed < duration)
         {
             timeElapsed += Time.deltaTime;
             // Normalize time (0 to 1)
             float t = timeElapsed / duration; 
-            Fuel -= 0.1f * Time.fixedDeltaTime;
             // Linear interpolation
             ShipSpeed = Mathf.Lerp(startSpeed, targetSpeed, t);
+            currentThrust = Mathf.Lerp(startThrust, targetThrust, t);
             rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, rb.linearVelocity.normalized * ShipSpeed, t);
+            ManageThrusters(currentThrust);
             
             yield return null; // Wait for next frame 
         } 
 
        
         ShipSpeed = targetSpeed;
+        currentThrust = targetThrust;
+       // Debug.Log(ShipSpeed);
         EventBus.Act(new ButtonEvent(ButtonAnimations.StopButton));
 
     }
 
     void FixedUpdate()
     {
+        if(isDead) return;
         if(!isMoving) return;
         MoveShip();
     }
 
     private void MoveShip()
     {
-      rb.angularVelocity = Vector3.zero;
+
       Vector3 forward = transform.forward;
       forward.y = 0f;
       forward.Normalize();
@@ -146,6 +170,7 @@ public class ShipController : MonoBehaviour
         if (Fuel <= 0)
         {
             Fuel = 0;
+            ManageThrusters(0f);
             isMoving = false;
             noMoreFuel = true;
             

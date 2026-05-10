@@ -70,13 +70,14 @@ public class DeliveryShip : ShipController
     private void BurnShip(float Burn, Damagedby damagedby)
     {
         ShipTemp += Burn;
-        Debug.Log("ShipTemperature: " + ShipTemp +" "+ damagedby);
+      //  Debug.Log("ShipTemperature: " + ShipTemp +" "+ damagedby);
 
-        if (ShipTemp < 100) return;
+        if (ShipTemp < 100f) return;
 
-        ShipTemp = 100;
-        isMoving = false;
-        ShipSpeed = 0;
+        ShipTemp = 100f;
+        isDead = true;
+        ManageThrusters(0f);
+        ShipSpeed = 0f;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         SetShipsDeathAnimation(damagedby); 
@@ -86,12 +87,13 @@ public class DeliveryShip : ShipController
     private void DamageShip(float Damage, Damagedby damagedby)
     {
         ShipHealth -= Damage;
-        Debug.Log("ShipHealth: " + ShipHealth);
+       // Debug.Log("ShipHealth: " + ShipHealth);
 
         if (ShipHealth > 0) return;
 
         ShipHealth = 0; 
-        isMoving = false;
+        isDead = true; 
+        ManageThrusters(0f);
         ShipSpeed = 0;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;

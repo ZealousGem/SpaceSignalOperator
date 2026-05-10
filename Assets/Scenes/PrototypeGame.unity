@@ -923,6 +923,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3554236392099298184, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ac40f4979b172bc4c9bbb9466b43b48e, type: 2}
     - target: {fileID: 4594617759592838900, guid: 9f659f26ba9cdb54198f4cd07c704610, type: 3}
       propertyPath: BurningStrenth
       value: 1
@@ -2393,6 +2397,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3122700456872388040, guid: 9a810df01f7214041bc24baea16241b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.643
+      objectReference: {fileID: 0}
     - target: {fileID: 4107614889579060360, guid: 9a810df01f7214041bc24baea16241b3, type: 3}
       propertyPath: m_Name
       value: Spaceship
