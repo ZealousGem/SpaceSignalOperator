@@ -221,9 +221,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.50000006
-  m_Height: 1.9999998
+  m_Height: 4.6736236
   m_Direction: 1
-  m_Center: {x: 0.000000059604638, y: 0, z: -0.00000008940695}
+  m_Center: {x: 0.00000011329415, y: -0.070872374, z: -0.000000095261996}
 --- !u!114 &3230206769397932167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ VFXRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4028862043831652093}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

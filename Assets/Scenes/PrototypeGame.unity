@@ -1090,6 +1090,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1090022964751334210, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3642040463105162121, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
       propertyPath: m_Name
       value: NeutronStar
@@ -1112,15 +1116,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8159403260211186324, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.8
+      value: 21.33
       objectReference: {fileID: 0}
     - target: {fileID: 8159403260211186324, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5967244
+      value: 0.016704
       objectReference: {fileID: 0}
     - target: {fileID: 8159403260211186324, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.73
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8159403260211186324, guid: 069e2be9d487dba4f85253fddec4584d, type: 3}
       propertyPath: m_LocalRotation.w
