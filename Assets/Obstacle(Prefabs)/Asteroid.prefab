@@ -101,7 +101,7 @@ MonoBehaviour:
   renderDistance: 20
   checkInterval: 0.5
   rotationSpeed: 12.8
-  duration: 1
+  duration: 1.2
   ExplosionEffect: {fileID: 248225912156134047}
 --- !u!1001 &646283964040928685
 PrefabInstance:
@@ -172,16 +172,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8768049692358277875, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
+      propertyPath: InitialModule.size3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768049692358277875, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8768049692358277875, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8768049692358277875, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 8768049692358277875, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
@@ -269,6 +273,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 921ba17dc9ac0c04292151cc5a43e2ac, type: 3}
       propertyPath: m_Name
       value: Asteroid1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 921ba17dc9ac0c04292151cc5a43e2ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

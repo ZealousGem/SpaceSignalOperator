@@ -21,9 +21,21 @@ public class MovingAsteroid : StaticAsteroid
             rb.AddForce(direction * Speed, ForceMode.Impulse);
         } 
 
+
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+
+        base.OnTriggerEnter(other);
         
+        if (other.gameObject.tag == "Player")
+        {
+            Speed = 0;
+            rb.linearVelocity = Vector3.zero;  
+        } 
 
-
+        
     }
     
 }

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public enum StationType {Repairs, ReactorCoolDown, Fuel};
-public class Station : BaseObstacle
+public class Station : BasePlanet
 {
     public StationType station;
     public float amount;
