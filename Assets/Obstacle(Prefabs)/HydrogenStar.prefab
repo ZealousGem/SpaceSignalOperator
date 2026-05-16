@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HydrogenStar
   Damage: 0
-  Object: {fileID: 0}
+  Object: {fileID: 8480298600779628132}
   renderDistance: 20
   checkInterval: 0.5
   SolarRayMaxDistance: 18
@@ -169,7 +169,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e119c1746a73eb44f843abc8066a2e09, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ac40f4979b172bc4c9bbb9466b43b48e, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e606b36ca44132489e7ea2a7a5ed39e, type: 2}
     - target: {fileID: 919132149155446097, guid: e119c1746a73eb44f843abc8066a2e09, type: 3}
       propertyPath: m_Name
       value: Planet
@@ -179,6 +179,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e119c1746a73eb44f843abc8066a2e09, type: 3}
+--- !u!1 &8480298600779628132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e119c1746a73eb44f843abc8066a2e09, type: 3}
+  m_PrefabInstance: {fileID: 8750911291196638005}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9150120411877762270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e119c1746a73eb44f843abc8066a2e09, type: 3}
