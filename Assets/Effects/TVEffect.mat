@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BarSize: 205
+    - _BarSize: 233
     - _BlurOffest: 0.000379
     - _Scan_Lines_Speed: -0.079
     m_Colors:
