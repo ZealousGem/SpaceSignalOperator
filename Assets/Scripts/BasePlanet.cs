@@ -1,14 +1,22 @@
+using System;
 using UnityEngine;
 
 public class BasePlanet : BaseObstacle
 {
    public float rotationSpeed = 50f;
+   [HideInInspector] public enum PlanetDirection  {x, y ,z};
+   public PlanetDirection setDir;
    private const float lockY = 0.016704f;
    private Vector3 PlanetDir;
-   protected enum PlanetDirection  {x, y ,z};
    private Vector3 MovingRotation;
 
-   protected void SetDirection(PlanetDirection currentDir)
+    protected override void Awake()
+    {
+        base.Awake();
+        SetDirection(setDir);
+    }
+
+    protected void SetDirection(PlanetDirection currentDir)
     {
         switch (currentDir)
         {
@@ -20,12 +28,11 @@ public class BasePlanet : BaseObstacle
         MovingRotation = PlanetDir;
     }
 
-    private void Update()
-    {
-       transform.position = new Vector3(transform.position.x, lockY, transform.position.z); 
-    }
+    protected void Update() => transform.position = new Vector3(transform.position.x, lockY, transform.position.z);
 
-     protected override void ToggleVisibility(bool state)
+    protected void FixedUpdate() =>  rb.MoveRotation(rb.rotation * Quaternion.Euler(PlanetDir));
+   
+    protected override void ToggleVisibility(bool state)
     {
         base.ToggleVisibility(state);
 
