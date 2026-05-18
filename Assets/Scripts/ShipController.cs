@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public enum SignalDirections
@@ -32,7 +33,7 @@ public class ShipController : MonoBehaviour
 
     private Vector3 Movement = new Vector3(0,0,1); 
 
-    private const float RotationTime = 0.6f;
+    private const float RotationTime = 1f;
 
     protected Rigidbody rb; 
 
@@ -67,30 +68,41 @@ public class ShipController : MonoBehaviour
         if(isDead) return;
         switch (dir)
         {
-            case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime, ButtonAnimations.LeftButton)); break;
-            case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(45f, RotationTime, ButtonAnimations.RightButton));break; 
+            case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime, ButtonAnimations.LeftButton, 25f)); break;
+            case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(45f, RotationTime, ButtonAnimations.RightButton, -25f));break; 
             case SignalDirections.Stop: StartCoroutine(ManageShipSpeed(0.6f, 0f, 0f)); isMoving = false; break;
             case SignalDirections.Move: StartCoroutine(ManageShipSpeed(0.3f, 3f, ThrusterSize)); isMoving = true; break;
             default: break;
         }
     }
 
-    private IEnumerator RotateShip(float amount, float duration, ButtonAnimations button)
+    
+
+    private IEnumerator RotateShip(float amount, float duration, ButtonAnimations button, float ShipRoatationAmount)
     {
           //Debug.Log("rotating");
           isRotating = true;
           Movement.y = amount; 
-          Quaternion startRotation = transform.rotation;
-          Quaternion EndRotation = startRotation * Quaternion.Euler(0, Movement.y, 0);
+          Movement.z = ShipRoatationAmount;
+
+           Quaternion startRotation = transform.rotation;
+           Quaternion EndRotation = startRotation * Quaternion.Euler(0, amount, 0);
+           //Quaternion EndRotation = startRotation * Quaternion.Euler(0, Movement.y, 0) * Quaternion.Euler(0,0, Movement.z);
+
           float timeElapsed = 0f;
+          float halfwayDuration = duration / 2;
+          float currentTilt = 0f;
 
         while (timeElapsed < duration)
         {
              timeElapsed += Time.deltaTime;
              float t = timeElapsed / duration;
-
-             Quaternion rotate = Quaternion.Slerp(startRotation, EndRotation, t);
-             rb.MoveRotation(rotate);
+            Quaternion rotate = Quaternion.Slerp(startRotation, EndRotation, t); 
+             if(t <= halfwayDuration) currentTilt = Mathf.Lerp(0f, ShipRoatationAmount, t*2f);
+             else currentTilt = Mathf.Lerp(ShipRoatationAmount, 0f, (t - halfwayDuration)* 2f);
+             
+             Quaternion currentBank = Quaternion.Euler(0, 0, currentTilt);
+             rb.MoveRotation(rotate * currentBank);
              yield return null;
 
         }

@@ -101,7 +101,7 @@ MonoBehaviour:
   renderDistance: 20
   checkInterval: 0.5
   rotationSpeed: 12.8
-  duration: 1.2
+  duration: 1
   ExplosionEffect: {fileID: 248225912156134047}
 --- !u!1001 &646283964040928685
 PrefabInstance:

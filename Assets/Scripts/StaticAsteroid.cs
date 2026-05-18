@@ -84,7 +84,9 @@ public class StaticAsteroid : BaseObstacle
         }
     }
 
-    public IEnumerator Explosion(float duration)
+    public void KillAsteroid() => StartCoroutine(Explosion(duration));
+
+    protected IEnumerator Explosion(float duration)
     {
         Object.SetActive(false);
         ExplosionEffect.SetActive(true);
