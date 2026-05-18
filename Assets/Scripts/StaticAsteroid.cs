@@ -84,7 +84,7 @@ public class StaticAsteroid : BaseObstacle
         }
     }
 
-    protected IEnumerator Explosion(float duration)
+    public IEnumerator Explosion(float duration)
     {
         Object.SetActive(false);
         ExplosionEffect.SetActive(true);

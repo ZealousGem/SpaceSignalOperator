@@ -12,7 +12,7 @@ public class BaseObstacle : MonoBehaviour
     public GameObject Object;
     public float renderDistance = 20f;
     public float checkInterval = 0.5f;
-    private bool isVisible = true;
+    private bool isVisible = false;
 
     protected virtual void Awake()
     {
@@ -51,6 +51,7 @@ public class BaseObstacle : MonoBehaviour
 
     protected virtual void ToggleVisibility(bool state)
     {
+         if(gameObject.name == "Comet")Debug.Log(state);
         isVisible = state;
         Object.SetActive(state);
         collider.enabled = state;

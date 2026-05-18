@@ -32,7 +32,7 @@ public class ShipController : MonoBehaviour
 
     private Vector3 Movement = new Vector3(0,0,1); 
 
-    private const float RotationTime = 1f;
+    private const float RotationTime = 0.6f;
 
     protected Rigidbody rb; 
 
