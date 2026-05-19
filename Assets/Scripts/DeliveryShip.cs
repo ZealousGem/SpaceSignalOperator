@@ -70,16 +70,20 @@ public class DeliveryShip : ShipController
     private void BurnShip(float Burn, Damagedby damagedby)
     {
         ShipTemp += Burn;
+        subject.TellObervers(new ShipTemp{amount = (int)ShipTemp});
       //  Debug.Log("ShipTemperature: " + ShipTemp +" "+ damagedby);
 
         if (ShipTemp < 100f) return;
 
         ShipTemp = 100f;
         isDead = true;
+
         ManageThrusters(0f);
+
         ShipSpeed = 0f;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+
         SetShipsDeathAnimation(damagedby); 
 
     }
@@ -87,16 +91,20 @@ public class DeliveryShip : ShipController
     private void DamageShip(float Damage, Damagedby damagedby)
     {
         ShipHealth -= Damage;
+        subject.TellObervers(new ShipHealth{amount = (int)ShipHealth});
        // Debug.Log("ShipHealth: " + ShipHealth);
 
         if (ShipHealth > 0) return;
 
         ShipHealth = 0; 
         isDead = true; 
+
         ManageThrusters(0f);
         ShipSpeed = 0;
+
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+
         SetShipsDeathAnimation(damagedby);  
         
     }

@@ -27,13 +27,15 @@ public class ShipController : MonoBehaviour
 
     public List<ParticleSystem> ShipThrusters; 
 
+    public UIObersver subject;
+
     private bool isMoving = true;
 
     protected bool isDead = false;
 
     private Vector3 Movement = new Vector3(0,0,1); 
 
-    private const float RotationTime = 1f;
+    private const float RotationTime = 1.2f;
 
     protected Rigidbody rb; 
 
@@ -44,7 +46,6 @@ public class ShipController : MonoBehaviour
     private bool isRotating = false;
 
     private bool noMoreFuel = false; 
-
 
     protected virtual void OnEnable()
     {
@@ -90,16 +91,17 @@ public class ShipController : MonoBehaviour
            //Quaternion EndRotation = startRotation * Quaternion.Euler(0, Movement.y, 0) * Quaternion.Euler(0,0, Movement.z);
 
           float timeElapsed = 0f;
-          float halfwayDuration = duration / 2;
+          
           float currentTilt = 0f;
 
         while (timeElapsed < duration)
         {
              timeElapsed += Time.deltaTime;
              float t = timeElapsed / duration;
-            Quaternion rotate = Quaternion.Slerp(startRotation, EndRotation, t); 
-             if(t <= halfwayDuration) currentTilt = Mathf.Lerp(0f, ShipRoatationAmount, t*2f);
-             else currentTilt = Mathf.Lerp(ShipRoatationAmount, 0f, (t - halfwayDuration)* 2f);
+             Quaternion rotate = Quaternion.Slerp(startRotation, EndRotation, t); 
+             
+             if(t <= 0.5f) currentTilt = Mathf.Lerp(0f, ShipRoatationAmount, t*2f);
+             else currentTilt = Mathf.Lerp(ShipRoatationAmount, 0f, (t - 0.5f)* 2f);
              
              Quaternion currentBank = Quaternion.Euler(0, 0, currentTilt);
              rb.MoveRotation(rotate * currentBank);
@@ -187,6 +189,8 @@ public class ShipController : MonoBehaviour
             noMoreFuel = true;
             
         }
+
+        subject.TellObervers(new ShipFuel{amount = (int)Fuel});
     }
     
 }
