@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour, IObserver
         switch (notificationData)
         {
             case ShipFuel fuel: ShipFuel.text ="Fuel: "+ fuel.amount.ToString();break;
-            case ShipHealth health: ShipHealth.text ="Health: "+ health.amount.ToString(); break;
+            case ShipHealth health: ShipHealth.text = health.amount.ToString() +"%"; break;
             case ShipTemp temp: ShipTemperature.text ="Temp: "+ temp.amount.ToString(); break;
         }
     }
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour, IObserver
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ShipHealth.text ="Health: "+ 100.ToString();
+        ShipHealth.text =100.ToString()+"%";
         ShipFuel.text ="Fuel: "+ 100.ToString();
         ShipTemperature.text ="Temp: "+ 0.ToString();
     }
