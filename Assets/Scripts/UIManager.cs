@@ -8,10 +8,8 @@ public class UIManager : MonoBehaviour, IObserver
     
     public UIObersver subject;
     public TMP_Text ShipHealth;
-    
     public TMP_Text ShipTemperature;
-
-    public TMP_Text ShipFuel;
+    public FuelGauge guage;
 
     void OnEnable()
     {
@@ -27,7 +25,7 @@ public class UIManager : MonoBehaviour, IObserver
     {
         switch (notificationData)
         {
-            case ShipFuel fuel: ShipFuel.text ="Fuel: "+ fuel.amount.ToString();break;
+            case ShipFuel fuel: guage.StartMovement(fuel.amount); break;
             case ShipHealth health: ShipHealth.text = health.amount.ToString() +"%"; break;
             case ShipTemp temp: ShipTemperature.text = temp.amount.ToString() +"c"; break;
         }
@@ -38,13 +36,9 @@ public class UIManager : MonoBehaviour, IObserver
     void Start()
     {
         ShipHealth.text =100.ToString()+"%";
-        ShipFuel.text ="Fuel: "+ 100.ToString();
         ShipTemperature.text =0.ToString() +"c";
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

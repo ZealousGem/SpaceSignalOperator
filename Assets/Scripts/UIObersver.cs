@@ -9,7 +9,7 @@ public interface IObserver
 
 public struct ShipHealth{ public int amount;}
 
-public struct ShipFuel{public int amount;}
+public struct ShipFuel{public float amount;}
 
 public struct ShipTemp{public int amount;}
 public class UIObersver : MonoBehaviour

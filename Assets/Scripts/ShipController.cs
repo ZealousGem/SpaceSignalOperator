@@ -23,7 +23,7 @@ public class ShipController : MonoBehaviour
 
     public float ShipRotationSpeed = 1f; 
 
-    public float Fuel = 100f;
+    public float Fuel = 200f;
 
     public List<ParticleSystem> ShipThrusters; 
 
@@ -179,7 +179,7 @@ public class ShipController : MonoBehaviour
     {
          if(noMoreFuel) return;
 
-        Fuel -= 0.1f * Time.fixedDeltaTime;
+        Fuel -= 0.7f * Time.fixedDeltaTime;
 
         if (Fuel <= 0)
         {
@@ -190,7 +190,7 @@ public class ShipController : MonoBehaviour
             
         }
 
-        subject.TellObervers(new ShipFuel{amount = (int)Fuel});
+        subject.TellObervers(new ShipFuel{amount = Fuel});
     }
     
 }
