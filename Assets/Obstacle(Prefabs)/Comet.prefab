@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef09daadcbd74446a07288abdafdabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Comet
-  Damage: 0
+  Damage: 30
   Object: {fileID: 1735019730308754625}
   renderDistance: 20
   checkInterval: 0.5

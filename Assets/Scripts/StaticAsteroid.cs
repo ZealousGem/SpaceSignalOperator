@@ -68,6 +68,17 @@ public class StaticAsteroid : BaseObstacle
      
     }
 
+    protected override void InitialCheck()
+    {
+        base.InitialCheck();
+
+        if (Object.activeSelf is false)
+        {
+            AsteroidDir = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
+        }
+    }
+
     protected override void ToggleVisibility(bool state)
     {
         base.ToggleVisibility(state);

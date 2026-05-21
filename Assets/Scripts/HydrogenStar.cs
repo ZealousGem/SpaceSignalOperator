@@ -20,7 +20,7 @@ public class HydrogenStar : Star
 
     private void Update()
     {
-        CheckDistance();
+        CheckShipDistance();
         SolarFlareTimer();
     }
 

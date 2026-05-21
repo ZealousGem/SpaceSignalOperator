@@ -28,7 +28,7 @@ public class Star : BaseObstacle
         // burns player 
     }
 
-    protected void CheckDistance()
+    protected void CheckShipDistance()
     {
         Vector3 dir = transform.position - shipCoordinates.position;
         dir.y = 0f;

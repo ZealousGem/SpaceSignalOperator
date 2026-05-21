@@ -31,6 +31,17 @@ public class BasePlanet : BaseObstacle
     protected void Update() => transform.position = new Vector3(transform.position.x, lockY, transform.position.z);
 
     protected void FixedUpdate() =>  rb.MoveRotation(rb.rotation * Quaternion.Euler(PlanetDir));
+
+    protected override void InitialCheck()
+    {
+        base.InitialCheck();
+
+        if (Object.activeSelf is false)
+        {
+             PlanetDir= Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
+        }
+    }
    
     protected override void ToggleVisibility(bool state)
     {

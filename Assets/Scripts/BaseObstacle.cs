@@ -23,8 +23,20 @@ public class BaseObstacle : MonoBehaviour
 
     protected virtual void Start()
     {
+        InitialCheck();
         InvokeRepeating(nameof(CheckDistance), 0f, checkInterval);
     }
+    protected virtual void InitialCheck()
+    {
+    float dist = Vector3.Distance(transform.position, shipCoordinates.position);
+    
+    // Set the initial state based on actual distance
+    bool renderObject = dist <= renderDistance;
+
+    isVisible = !renderObject;
+    ToggleVisibility(renderObject);
+    
+   }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -39,6 +51,7 @@ public class BaseObstacle : MonoBehaviour
     {
         float dist = Vector3.Distance(transform.position,  shipCoordinates.position);
 
+
         if (dist > renderDistance && isVisible)
         {
             ToggleVisibility(false);
@@ -51,7 +64,6 @@ public class BaseObstacle : MonoBehaviour
 
     protected virtual void ToggleVisibility(bool state)
     {
-         if(gameObject.name == "Comet")Debug.Log(state);
         isVisible = state;
         Object.SetActive(state);
         collider.enabled = state;
