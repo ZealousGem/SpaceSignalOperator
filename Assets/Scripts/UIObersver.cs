@@ -11,7 +11,7 @@ public struct ShipHealth{ public int amount;}
 
 public struct ShipFuel{public float amount;}
 
-public struct ShipTemp{public int amount;}
+public struct ShipTemp{public float amount;}
 public class UIObersver : MonoBehaviour
 {
      List<IObserver> _observers = new List<IObserver>();
