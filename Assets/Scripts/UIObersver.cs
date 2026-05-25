@@ -12,6 +12,9 @@ public struct ShipHealth{ public int amount;}
 public struct ShipFuel{public float amount;}
 
 public struct ShipTemp{public float amount;}
+
+public struct PlanetPosDirection{public float amount; public Vector3 Direction;}
+
 public class UIObersver : MonoBehaviour
 {
      List<IObserver> _observers = new List<IObserver>();

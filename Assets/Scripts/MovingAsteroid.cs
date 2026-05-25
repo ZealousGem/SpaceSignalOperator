@@ -13,10 +13,10 @@ public class MovingAsteroid : StaticAsteroid
     protected override void ToggleVisibility(bool state)
     {
        base.ToggleVisibility(state);
-       if(gameObject.name == "Comet")Debug.Log(state);
+      
         if (state is true)
         {  
-           // if(gameObject.name == "Comet")Debug.Log(state);
+
             ShipTarget = new Vector3(shipCoordinates.position.x, 0, shipCoordinates.position.z);
             Vector3 direction = (ShipTarget - transform.position).normalized;
             rb.AddForce(direction * Speed, ForceMode.Impulse);

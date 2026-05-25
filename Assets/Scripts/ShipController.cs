@@ -47,14 +47,18 @@ public class ShipController : MonoBehaviour
 
     private bool noMoreFuel = false; 
 
+    private Transform PlanetCoordinates;
+
     protected virtual void OnEnable()
     {
          EventBus.Subscribe<setInput>(retriveInputSingal);
+         EventBus.Subscribe<GetTransformOfObject>(GetPlanetCoordinates);
     }
 
     protected virtual void OnDisable()
     {
         EventBus.Unsubscribe<setInput>(retriveInputSingal);
+        EventBus.Unsubscribe<GetTransformOfObject>(GetPlanetCoordinates);
     }
 
     private void Awake()
@@ -63,6 +67,11 @@ public class ShipController : MonoBehaviour
     }
 
     private void retriveInputSingal(setInput data)=> RecieveSingals(data.action);
+
+    private void GetPlanetCoordinates(GetTransformOfObject Destination)
+    {
+        PlanetCoordinates = Destination.PlanetCoordinates;
+    }
 
     protected virtual void RecieveSingals(SignalDirections dir)
     {
@@ -168,11 +177,24 @@ public class ShipController : MonoBehaviour
       forward.y = 0f;
       forward.Normalize();
 
-   //   Vector3 velocityChange = targetVelocity - rb.linearVelocity;
-
       rb.linearVelocity = forward * ShipSpeed;;
-
       if(ShipSpeed > 0.1f) DecreaseShipFuel();
+
+      if(PlanetCoordinates == null) return;
+      EvokeDistanceBetweenShipandPlanet();
+      
+      //Debug.Log(DistacnetoPlanet);
+      
+
+    }
+
+    private void EvokeDistanceBetweenShipandPlanet()
+    {
+        float DistacnetoPlanet = Vector3.Distance(gameObject.transform.position, PlanetCoordinates.position);
+
+        Vector3 direction = PlanetCoordinates.position - gameObject.transform.position; 
+
+        subject.TellObervers(new PlanetPosDirection{amount = DistacnetoPlanet, Direction = direction});
     }
 
     private void DecreaseShipFuel()

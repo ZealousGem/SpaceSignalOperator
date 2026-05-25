@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour, IObserver
     public UIObersver subject;
     public TMP_Text ShipHealth;
     public TMP_Text ShipTemperature;
+    public TMP_Text LightYearsScale;
+    public Image Arrow;
     public FuelGauge guage;
 
     public Image TempImage;
@@ -33,7 +35,19 @@ public class UIManager : MonoBehaviour, IObserver
             case ShipFuel fuel: guage.StartMovement(fuel.amount); break;
             case ShipHealth health: ShipHealth.text = health.amount.ToString() +"%"; break;
             case ShipTemp temp: setTemperature(temp.amount); break;
+            case PlanetPosDirection planet: DisplayPlanetDirection(planet.amount, planet.Direction); break;
         }
+    }
+
+    private void DisplayPlanetDirection(float pos, Vector3 dir)
+    {
+        int displayLightYears = (int)pos;
+        LightYearsScale.text = displayLightYears.ToString() +" light years";
+
+        float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+
+        Arrow.rectTransform.localRotation = Quaternion.Euler(0,0, angle);
+
     }
 
     private void setTemperature(float amount)

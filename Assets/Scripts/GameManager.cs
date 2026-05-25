@@ -1,25 +1,68 @@
 using System.Collections;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
- public enum GameState { Start, Ongoing, Fail, Success};
+public enum GameState { Start, Ongoing, Fail, Success, Pause};
 
 public class GameManager : MonoBehaviour
 {
      // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float TimerToReachPlanet = 100f; 
+    private float TimerToReachPlanet = 0f; 
 
     private GameState currentGameState = GameState.Start;
 
     private Damagedby damagedTo; 
 
-    private bool GameIsOver = true;
+    public List<DeliveredPlanet> Planets;
+
+    private Queue<DeliveredPlanet> PlanetObjectives = new Queue<DeliveredPlanet>();
+
+    private void Awake()
+    {
+        AddPlanetsToQueue();
+    }
+
+    private void AddPlanetsToQueue()
+    { 
+
+        if(Planets == null || PlanetObjectives == null) return;  
+
+        for (int i = Planets.Count - 1; i >= 0; i--)
+        {
+            PlanetObjectives.Enqueue(Planets[i]);
+        }
+    }
+
+    //  private void Update()
+    //  {
+
+    //   if (currentGameState == GameState.Ongoing)TimerToReachPlanet += Time.deltaTime;   
+       
+    //  }
+
+    private void setPlanetCoordinate()
+    {
+        if(PlanetObjectives.Count ==0)
+        {
+           currentGameState = GameState.Success;
+           DetermineGame(currentGameState);
+           return;     
+        }
+
+        GameObject Planet = PlanetObjectives.Dequeue().gameObject;
+        EventBus.Act(new GetTransformOfObject(Planet.transform));      
+       
+    }
 
     private void Start()
     {
-        StartCoroutine(StartDelivery());
+        setPlanetCoordinate();
+        //StartCoroutine(StartDelivery());
     }
+     
 
     private IEnumerator StartDelivery()
     {
@@ -43,36 +86,7 @@ public class GameManager : MonoBehaviour
         
         
        currentGameState = GameState.Ongoing; 
-       GameIsOver = false; 
        
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        if(GameIsOver) return;
-
-        if (currentGameState == GameState.Ongoing)
-        {
-            if (0 < TimerToReachPlanet)
-            {
-               TimerToReachPlanet -= Time.deltaTime;     
-            }
-
-            else
-            {
-                TimerToReachPlanet -= Time.deltaTime; 
-                currentGameState = GameState.Fail;
-                damagedTo = Damagedby.Timer; 
-
-            }
-                 
-        }
-
-        else
-        {
-            DetermineGame(currentGameState);
-        }
     }
 
     private void DetermineGame(GameState state)
@@ -83,7 +97,6 @@ public class GameManager : MonoBehaviour
             case GameState.Fail: Fail(damagedTo); break;
         }
 
-        GameIsOver = true;
     }
 
     private void Fail(Damagedby damagedby)

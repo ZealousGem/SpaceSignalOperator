@@ -86,3 +86,14 @@ public class ButtonEvent : EventData
 
     
 }
+
+public class GetTransformOfObject : EventData
+{
+    public Transform PlanetCoordinates;
+
+    public GetTransformOfObject(Transform Planet)
+    {
+        PlanetCoordinates = Planet;
+    }
+
+}
