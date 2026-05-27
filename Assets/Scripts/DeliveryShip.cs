@@ -27,6 +27,11 @@ public class DeliveryShip : ShipController
     public float ShipTemp = 0f;
     public GameObject Explosion;
     public GameObject Ship;
+    public MeshRenderer ShipMaterial; 
+
+    private const float dissolveRate = 0.0125f;
+
+    private const float refreshRate = 0.025f;
 
     protected override void OnEnable()
     {
@@ -127,7 +132,26 @@ public class DeliveryShip : ShipController
 
     private void BurnShip()
     {
+         StartCoroutine(DissolveShip(dissolveRate, refreshRate));
          EventBus.Act(new EndGameEvent(Damagedby.BurnUp, GameState.Fail));
+    }
+
+    private IEnumerator DissolveShip(float dissolveRate, float refreshRate)
+    {
+        if(ShipMaterial == null) yield break;
+        float counter = 0;
+
+        while (ShipMaterial.materials[0].GetFloat("_DissolveAmount") < 1)
+        {
+           counter+= dissolveRate;
+
+            for (int i = 0;  i < ShipMaterial.materials.Length; i++)
+            {
+                ShipMaterial.materials[i].SetFloat("_DissolveAmount", counter);
+            }
+           
+           yield return new WaitForSeconds(refreshRate); 
+        }
     }
 
     private void ExplodeShip()
