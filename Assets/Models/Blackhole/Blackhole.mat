@@ -130,13 +130,13 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SSRadius: 0.082
+    - _SSRadius: 0.422
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StepSize: 0.164
+    - _StepSize: 0.058
     - _Steps: 256.23
     - _Surface: 0
     - _WorkflowMode: 1

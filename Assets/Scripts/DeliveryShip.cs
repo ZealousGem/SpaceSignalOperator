@@ -69,6 +69,8 @@ public class DeliveryShip : ShipController
 
     private void BurnShip(float Burn, Damagedby damagedby)
     {
+        if(isDead) return;
+
         ShipTemp += Burn;
         subject.TellObervers(new ShipTemp{amount = (int)ShipTemp});
       //  Debug.Log("ShipTemperature: " + ShipTemp +" "+ damagedby);
@@ -90,8 +92,10 @@ public class DeliveryShip : ShipController
 
     private void DamageShip(float Damage, Damagedby damagedby)
     {
+        if(isDead) return;
+
         ShipHealth -= Damage;
-        subject.TellObervers(new ShipHealth{amount = (int)ShipHealth});
+        subject.TellObervers(new ShipHealth{amount = (int)Mathf.Max(0, ShipHealth)});
        // Debug.Log("ShipHealth: " + ShipHealth);
 
         if (ShipHealth > 0) return;
@@ -128,19 +132,53 @@ public class DeliveryShip : ShipController
 
     private void ExplodeShip()
     {
-         
+         StartCoroutine(ExplosionEffect(1f));
          EventBus.Act(new EndGameEvent(Damagedby.Default, GameState.Fail));
     }
+    
+    protected IEnumerator ExplosionEffect(float duration)
+    {
+        Ship.SetActive(false);
+        Explosion.SetActive(true);
+        float timeElapsed = 0f;
 
-    // private IEnumerator Explodsion()
-    // {
-    //     Ship.SetActive(false);
+        while (timeElapsed < duration)
+        {
+            timeElapsed += Time.deltaTime;
+            // Normalize time (0 to 1)
+            float t = timeElapsed / duration;
 
-    // }
+            yield return null; // Wait for next frame 
+        }
 
+        Explosion.SetActive(false);
+        //Destroy(gameObject);
+    }
     private void ShrinkShip()
     {
+        Debug.Log("shrinking");
+        StartCoroutine(ShrinkEffect());
         EventBus.Act(new EndGameEvent(Damagedby.Blackhole, GameState.Fail));
+    }
+
+    private IEnumerator ShrinkEffect()
+    {
+        float duration = 4f;
+        Vector3 initialScale = gameObject.transform.localScale;
+        Vector3 targetScale = new Vector3(0.002219783f, 0.002219783f, 0.005828707f);
+        float Timer = 0f;
+
+        while (Timer < duration)
+        {
+            Timer += Time.fixedDeltaTime;
+            float t = Timer / duration;
+
+            gameObject.transform.localScale = Vector3.Lerp(initialScale, targetScale, t);
+            yield return null;
+        }
+
+        gameObject.transform.localScale = targetScale;
+
     }
 
     private void RetrunToOringialPlanet()
