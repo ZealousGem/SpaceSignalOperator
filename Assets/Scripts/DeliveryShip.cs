@@ -1,5 +1,6 @@
 using System.Collections;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -30,10 +31,16 @@ public class DeliveryShip : ShipController
     public GameObject Ship;
     public MeshRenderer ShipMaterial; 
     public VisualEffect burningVFX;
+    
+    private string OrangeHexidicaml = "#BF2C03";
 
-    private const float dissolveRate = 0.0125f;
+    private string blueHecidicaml = "#18D4EA";
 
-    private const float refreshRate = 0.025f;
+    private float intensity = 1f;
+
+    private float dissolveRate = 0.0125f;
+
+    private float refreshRate = 0.025f;
 
     protected override void OnEnable()
     {
@@ -134,13 +141,32 @@ public class DeliveryShip : ShipController
 
     private void BurnShip()
     {
-         StartCoroutine(DissolveShip(dissolveRate, refreshRate));
+         StartCoroutine(DissolveShip(dissolveRate, refreshRate, OrangeHexidicaml));
          EventBus.Act(new EndGameEvent(Damagedby.BurnUp, GameState.Fail));
     }
 
-    private IEnumerator DissolveShip(float dissolveRate, float refreshRate)
+    private IEnumerator DissolveShip(float dissolveRate, float refreshRate, string hexColour)
     {
         if(ShipMaterial == null) yield break;
+
+        if (UnityEngine.ColorUtility.TryParseHtmlString(hexColour, out Color customColor))
+        {
+             float multiplier = Mathf.Pow(2, intensity);
+            Color hdrColor = new Color(
+                customColor.r * multiplier,
+                customColor.g * multiplier,
+                customColor.b * multiplier,
+                customColor.a
+            );
+
+            for (int i = 0;  i < ShipMaterial.materials.Length; i++)
+            {
+                 ShipMaterial.materials[i].SetColor("_DissolveColour", hdrColor);
+            }
+
+            Debug.Log("worked");
+           
+        }
 
         if (burningVFX != null)
         {
@@ -220,6 +246,7 @@ public class DeliveryShip : ShipController
 
     private void ObliterateShip()
     {
+         StartCoroutine(DissolveShip(dissolveRate, refreshRate, blueHecidicaml));
          EventBus.Act(new EndGameEvent(Damagedby.NeutronStar, GameState.Fail));
     }
 }
