@@ -1,6 +1,7 @@
 using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public enum Damagedby
 {
@@ -28,6 +29,7 @@ public class DeliveryShip : ShipController
     public GameObject Explosion;
     public GameObject Ship;
     public MeshRenderer ShipMaterial; 
+    public VisualEffect burningVFX;
 
     private const float dissolveRate = 0.0125f;
 
@@ -139,6 +141,12 @@ public class DeliveryShip : ShipController
     private IEnumerator DissolveShip(float dissolveRate, float refreshRate)
     {
         if(ShipMaterial == null) yield break;
+
+        if (burningVFX != null)
+        {
+            burningVFX.Play();
+        }
+
         float counter = 0;
 
         while (ShipMaterial.materials[0].GetFloat("_DissolveAmount") < 1)
