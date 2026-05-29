@@ -26,6 +26,7 @@ public class HydrogenStar : Star
 
      protected void ShootSolarFlares()
     {
+        if(GameHasEnded) return;
  
         if(!ShootShip) return;
         
@@ -43,6 +44,8 @@ public class HydrogenStar : Star
 
     protected void SolarFlareTimer()
     {
+
+       if(GameHasEnded) return;
 
        if (!PlayerInRange) return;
        shootFlareTimer += Time.deltaTime;

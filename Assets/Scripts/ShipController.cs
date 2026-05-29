@@ -29,9 +29,9 @@ public class ShipController : MonoBehaviour
 
     public UIObersver subject;
 
-    private bool isMoving = true;
-
     protected bool isDead = false;
+
+    private bool isMoving = true;
 
     private Vector3 Movement = new Vector3(0,0,1); 
 

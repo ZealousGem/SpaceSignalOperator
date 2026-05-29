@@ -23,6 +23,16 @@ public class setInput : EventData
     }
 }
 
+public class StopObstacles : EventData
+{
+    public bool action;
+
+    public StopObstacles(bool _action)
+    {
+        action = _action;
+    }
+}
+
 public class DamageShip : EventData
 {
     public Damagedby action;

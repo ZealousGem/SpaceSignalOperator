@@ -21,11 +21,13 @@ public class BlackHole : Star
 
     private void GrabShip()
     {
+
+
         Vector3 dir = transform.position - shipCoordinates.position;
         dir.y = 0f;
         float dist = dir.magnitude;
 
-        if (dist > GrabMaxDistance) return;
+        if (dist > GrabMaxDistance || GameHasEnded) return;
 
      //   float clampedDist = Mathf.Max(dist, GrabMinDistance);
          float clampedDist = Mathf.Max(dist, GrabMinDistance);

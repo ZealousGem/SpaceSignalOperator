@@ -100,6 +100,8 @@ public class DeliveryShip : ShipController
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
+        EventBus.Act(new StopObstacles(true));
+
         SetShipsDeathAnimation(damagedby); 
 
     }
@@ -129,6 +131,8 @@ public class DeliveryShip : ShipController
 
     private void SetShipsDeathAnimation(Damagedby damagedby)
     {
+        if(damagedby != Damagedby.Blackhole) EventBus.Act(new StopObstacles(true));
+
         switch (damagedby)
         {
             case Damagedby.Blackhole: ShrinkShip(); break;
@@ -164,7 +168,7 @@ public class DeliveryShip : ShipController
                  ShipMaterial.materials[i].SetColor("_DissolveColour", hdrColor);
             }
 
-            Debug.Log("worked");
+           // Debug.Log("worked");
            
         }
 
@@ -215,13 +219,12 @@ public class DeliveryShip : ShipController
     private void ShrinkShip()
     {
         Debug.Log("shrinking");
-        StartCoroutine(ShrinkEffect());
+        StartCoroutine(ShrinkEffect(4f));
         EventBus.Act(new EndGameEvent(Damagedby.Blackhole, GameState.Fail));
     }
 
-    private IEnumerator ShrinkEffect()
+    private IEnumerator ShrinkEffect(float duration)
     {
-        float duration = 4f;
         Vector3 initialScale = gameObject.transform.localScale;
         Vector3 targetScale = new Vector3(0.002219783f, 0.002219783f, 0.005828707f);
         float Timer = 0f;
@@ -241,6 +244,7 @@ public class DeliveryShip : ShipController
 
     private void RetrunToOringialPlanet()
     {
+        StartCoroutine(ShrinkEffect(5f));
         EventBus.Act(new EndGameEvent(Damagedby.OringalPlanet, GameState.Fail));
     }
 

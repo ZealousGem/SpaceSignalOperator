@@ -6,13 +6,23 @@ public class Star : BaseObstacle
     public float SolarRayMaxDistance = 100f;
     public float SolarRayMinDistance = 0.5f;
     public float BurningStrenth = 5f;
-    protected bool PlayerInRange = false; 
+    protected bool PlayerInRange = false;
+    protected bool GameHasEnded = false;
 
-    protected virtual void FixedUpdate()
+    private void OnEnable()
     {
-        BurnShip();
+         EventBus.Subscribe<StopObstacles>(retrieveData);
     }
 
+    private void OnDisable()
+    {
+         EventBus.Unsubscribe<StopObstacles>(retrieveData);
+    }
+
+    private void retrieveData(StopObstacles data) => GameHasEnded = data.action;
+    
+
+    protected virtual void FixedUpdate() => BurnShip();
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void BurnShip()
