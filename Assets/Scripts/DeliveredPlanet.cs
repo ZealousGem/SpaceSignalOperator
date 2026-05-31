@@ -3,16 +3,33 @@ using UnityEngine;
 public class DeliveredPlanet : BasePlanet
 {
 
-    private bool isDelivered = false; 
+    public MeshRenderer mesh;
+    private Material outlineMaterial;
+    private const float outlineSize = 1.02f;
+    private float currentPlanet = 0f;
+    private bool interactablePlanet = false;
+
+    protected override void Start()
+    {
+        base.Start();
+        outlineMaterial = mesh.materials[1];
+    }
+
+    protected override void ToggleVisibility(bool state)
+    {
+        base.ToggleVisibility(state);
+        if (state) ChangeOutlineSize(currentPlanet);       
+    }
 
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Player") return;
 
-        if (!isDelivered)
+        if (interactablePlanet)
         {
            EventBus.Act(new EndGameEvent(GameState.Success, false));
-           isDelivered = true;    
+           ChangeOutlineSize(0f);
+           interactablePlanet = false;    
         }
 
         else
@@ -20,6 +37,25 @@ public class DeliveredPlanet : BasePlanet
              EventBus.Act(new DamageShip(Damagedby.OringalPlanet, 100f));
         }
         
+
+    }
+
+    public void setTargetPlanet()
+    {
+      interactablePlanet = true;  
+      currentPlanet = outlineSize;
+
+        if (mesh.gameObject.activeSelf)
+        {
+            ChangeOutlineSize(currentPlanet);
+        } 
+    } 
+
+    private void ChangeOutlineSize(float amount)
+    {
+        if(outlineMaterial == null) return; 
+        
+        outlineMaterial.SetFloat("_OutlineSize", amount);
 
     }
 }

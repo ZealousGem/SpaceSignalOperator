@@ -52,8 +52,9 @@ public class GameManager : MonoBehaviour
            return;     
         }
 
-        GameObject Planet = PlanetObjectives.Dequeue().gameObject;
-        EventBus.Act(new GetTransformOfObject(Planet.transform));      
+        DeliveredPlanet Planet = PlanetObjectives.Dequeue();
+        Planet.setTargetPlanet();
+        EventBus.Act(new GetTransformOfObject(Planet.gameObject.transform));      
        
     }
 
