@@ -101,6 +101,7 @@ MonoBehaviour:
   checkInterval: 0.5
   rotationSpeed: 1
   setDir: 1
+  mesh: {fileID: 8393506192334893620}
 --- !u!1001 &1465663019879531672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,5 +175,10 @@ Transform:
 --- !u!1 &8033090335909745633 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8875558959111378809, guid: 8e5afde7ad88994428ef62bb1038375c, type: 3}
+  m_PrefabInstance: {fileID: 1465663019879531672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8393506192334893620 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6930104868152620716, guid: 8e5afde7ad88994428ef62bb1038375c, type: 3}
   m_PrefabInstance: {fileID: 1465663019879531672}
   m_PrefabAsset: {fileID: 0}
