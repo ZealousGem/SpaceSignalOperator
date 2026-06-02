@@ -24,7 +24,7 @@ public class BaseObstacle : MonoBehaviour
     protected virtual void Start()
     {
         InitialCheck();
-        InvokeRepeating(nameof(CheckDistance), 0f, checkInterval);
+       InvokeRepeating(nameof(CheckDistance), 0f, checkInterval);
     }
     protected virtual void InitialCheck()
     {
@@ -52,6 +52,19 @@ public class BaseObstacle : MonoBehaviour
         float dist = Vector3.Distance(transform.position,  shipCoordinates.position);
 
 
+        if (dist > renderDistance && isVisible)
+        {
+            ToggleVisibility(false);
+        }
+        else if (dist <= renderDistance && !isVisible)
+        {
+            ToggleVisibility(true);
+        }
+    }
+
+    public void CheckDistance(float dist)
+    {
+        
         if (dist > renderDistance && isVisible)
         {
             ToggleVisibility(false);

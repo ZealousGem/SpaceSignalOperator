@@ -8,6 +8,19 @@ public class Station : BasePlanet
     public float amount;
     public GameObject StationOutLine;
     private bool PickedUp = false; 
+
+    private const float ScaleSize = 6.92f;
+    private SphereCollider StationCollider;
+    protected override void ToggleVisibility(bool state)
+    {
+        base.ToggleVisibility(state);
+
+        if (state && StationCollider == null)
+        {
+             StationCollider = gameObject.GetComponent<SphereCollider>();
+        }
+    }
+
     protected override void OnTriggerEnter(Collider other)
     {
         if(other.tag != "Player") return;
@@ -16,6 +29,7 @@ public class Station : BasePlanet
         {
             EventBus.Act(new StationEvent(station, amount));
             StationOutLine.SetActive(false);
+            StationCollider.radius = ScaleSize;
             PickedUp = true;
         }
 
