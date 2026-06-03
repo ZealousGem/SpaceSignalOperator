@@ -6,13 +6,20 @@ public class DeliveredPlanet : BasePlanet
     public MeshRenderer mesh;
     private Material outlineMaterial;
     private const float outlineSize = 1.02f;
+    private const float planetradius = 7.79f;
     private float currentPlanet = 0f;
     private bool interactablePlanet = false;
+    private SphereCollider sphereCollider;
 
-    private void Start()
+    protected override void Awake()
     {
-        outlineMaterial = mesh.materials[1];
-    }
+
+      base.Awake();
+      sphereCollider = gameObject.GetComponent<SphereCollider>(); 
+       
+    } 
+
+    private void Start()=> outlineMaterial = mesh.materials[1];
 
     protected override void ToggleVisibility(bool state)
     {
@@ -28,6 +35,7 @@ public class DeliveredPlanet : BasePlanet
         {
            EventBus.Act(new EndGameEvent(GameState.Success, false));
            ChangeOutlineSize(0f);
+           sphereCollider.radius = planetradius;
            interactablePlanet = false;    
         }
 

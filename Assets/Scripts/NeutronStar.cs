@@ -25,11 +25,8 @@ public class NeutronStar : Star
        
     }
 
-    private void Update()
-    {
-        ActivatingPulsar();
-    }
-
+    private void Update()=> ActivatingPulsar();
+    
     protected override void Awake()
     {
             base.Awake();
@@ -94,7 +91,9 @@ public class NeutronStar : Star
         
         Pulsar.SetActive(true);
         PulsarCollider.enabled = true;
+
         yield return new WaitForSeconds(duration);
+
         PulsarCollider.enabled = false;
         Pulsar.SetActive(false);
     }

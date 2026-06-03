@@ -1,29 +1,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct Obstacle
+{
+    public GameObject obstacle;
+
+    public float frequency;
+
+    public Obstacle(GameObject _obstacle, float _frequncy)
+    {
+        obstacle = _obstacle;
+        frequency = _frequncy;
+    }
+}
+
 public class ObstacleSpawner : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public Transform shipCoordinates;
-   
 
-    void Example(List<BaseObstacle> obstacles)
-{
-    Vector3 playerPos = shipCoordinates.position;
+    private Vector3 TopLeftBorder = new Vector3(300, 0, 96);
 
-    for (int i = 0; i < obstacles.Count; i++)
+    private Vector3 TopRightBorder = new Vector3(-300, 0, 96);
+
+    private Vector3 BottomRightBorder= new Vector3(-300, 0, -200); 
+
+    private Vector3 BottomLeftBorder = new Vector3(300, 0, -200);
+
+    private void Awake()
     {
-        // 1. Get the raw offset vector
-        Vector3 offset = obstacles[i].transform.position - playerPos;
-        
-        // 2. Get the squared distance (Incredibly fast math)
-        float sqrDist = offset.sqrMagnitude; 
-        
-        // 3. Pass the squared distance down
-       // obstacles[i].CheckDistance(sqrDist);
+         shipCoordinates = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
-}
+
+    //private Ien
+
 
     // Update is called once per fram
 }

@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     private void setPlanetCoordinate()
     {
-        if(PlanetObjectives.Count ==0)
+        if(PlanetObjectives.Count == 0)
         {
            currentGameState = GameState.Success;
            DetermineGame(currentGameState);

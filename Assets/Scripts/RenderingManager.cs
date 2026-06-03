@@ -11,14 +11,14 @@ public class RenderingManager : MonoBehaviour
 
     private float timer;
 
-    void OnEnable()
+    private void OnEnable()
     {
         EventBus.Subscribe<ClearObjectFromList>(RemoveObjectFromList);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-         EventBus.Unsubscribe<ClearObjectFromList>(RemoveObjectFromList);
+        EventBus.Unsubscribe<ClearObjectFromList>(RemoveObjectFromList);
     }
 
     private void RemoveObjectFromList(ClearObjectFromList data)
@@ -28,6 +28,7 @@ public class RenderingManager : MonoBehaviour
             if (data.action == ListOfObjects[i])
             {
                 ListOfObjects.Remove(ListOfObjects[i]);
+                return;
             }
         }
     }
@@ -50,15 +51,13 @@ public class RenderingManager : MonoBehaviour
 
     }
 
-    void Start()
+    private void Start()
     {
         shipCoordinates = GameObject.FindWithTag("Player").GetComponent<Transform>();
         ListOfObjects = getGameObjectsInMap("obstacles");
         EvokeIntialObject(ListOfObjects);
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         timer += Time.deltaTime;
 
@@ -75,7 +74,6 @@ public class RenderingManager : MonoBehaviour
         for (int i = 0; i < obstacles.Count; i++)
         {
              float dist = (obstacles[i].transform.position - shipCoordinates.transform.position).sqrMagnitude;
-            // float dist = Vector3.Distance(obstacles[i].transform.position, shipCoordinates.position);
              obstacles[i].CheckDistance(dist);
         }
     }

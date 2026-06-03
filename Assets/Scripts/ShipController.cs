@@ -68,10 +68,8 @@ public class ShipController : MonoBehaviour
 
     private void retriveInputSingal(setInput data)=> RecieveSingals(data.action);
 
-    private void GetPlanetCoordinates(GetTransformOfObject Destination)
-    {
-        PlanetCoordinates = Destination.PlanetCoordinates;
-    }
+    private void GetPlanetCoordinates(GetTransformOfObject Destination)=> PlanetCoordinates = Destination.PlanetCoordinates;
+    
 
     protected virtual void RecieveSingals(SignalDirections dir)
     {
