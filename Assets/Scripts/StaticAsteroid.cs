@@ -68,7 +68,7 @@ public class StaticAsteroid : BaseObstacle
      
     }
 
-    protected override void InitialCheck()
+    public override void InitialCheck()
     {
         base.InitialCheck();
 
@@ -113,6 +113,7 @@ public class StaticAsteroid : BaseObstacle
         }
 
         ExplosionEffect.SetActive(false);
+        EventBus.Act(new ClearObjectFromList(this));
         Destroy(gameObject);
     }
 

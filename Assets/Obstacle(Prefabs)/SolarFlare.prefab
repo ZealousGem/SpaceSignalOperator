@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8375321383978320073}
   - component: {fileID: 6277464141349502853}
   - component: {fileID: 4607132797023858375}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4962,7 +4962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3618808210286212917}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4999,7 +4999,7 @@ GameObject:
   - component: {fileID: 657348357306564302}
   - component: {fileID: 6453346530125009105}
   - component: {fileID: 2811272069955414253}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9953,7 +9953,7 @@ GameObject:
   - component: {fileID: 5413652984376997255}
   - component: {fileID: 3045680894488627855}
   - component: {fileID: 5701947904573766911}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SolarFlare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10052,7 +10052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4871032325772220784}
   - component: {fileID: 8881118819855456999}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10194,7 +10194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9040736757425654007}
   - component: {fileID: 1115975793134384884}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10337,6 +10337,10 @@ PrefabInstance:
     - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: m_Name
       value: Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: m_IsActive

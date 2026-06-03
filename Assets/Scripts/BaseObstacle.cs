@@ -20,17 +20,10 @@ public class BaseObstacle : MonoBehaviour
         shipCoordinates = GameObject.FindWithTag("Player").GetComponent<Transform>();
         rb = gameObject.GetComponent<Rigidbody>();
     }
-
-    protected virtual void Start()
-    {
-        InitialCheck();
-       InvokeRepeating(nameof(CheckDistance), 0f, checkInterval);
-    }
-    protected virtual void InitialCheck()
+    public virtual void InitialCheck()
     {
     float dist = Vector3.Distance(transform.position, shipCoordinates.position);
     
-    // Set the initial state based on actual distance
     bool renderObject = dist <= renderDistance;
 
     isVisible = !renderObject;
@@ -47,29 +40,15 @@ public class BaseObstacle : MonoBehaviour
         }
     }
 
-    private void CheckDistance()
-    {
-        float dist = Vector3.Distance(transform.position,  shipCoordinates.position);
-
-
-        if (dist > renderDistance && isVisible)
-        {
-            ToggleVisibility(false);
-        }
-        else if (dist <= renderDistance && !isVisible)
-        {
-            ToggleVisibility(true);
-        }
-    }
-
     public void CheckDistance(float dist)
     {
+         float renderDistanceSqr = renderDistance * renderDistance;
         
-        if (dist > renderDistance && isVisible)
+        if (dist > renderDistanceSqr && isVisible)
         {
             ToggleVisibility(false);
         }
-        else if (dist <= renderDistance && !isVisible)
+        else if (dist <= renderDistanceSqr && !isVisible)
         {
             ToggleVisibility(true);
         }

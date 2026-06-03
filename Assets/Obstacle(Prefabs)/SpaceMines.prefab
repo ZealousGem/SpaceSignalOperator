@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4741175966748388456}
   - component: {fileID: 2130322452563139048}
   - component: {fileID: 8335730444387995613}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpaceMines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpaceMine
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5caa7b2176a77b448e8c186e805e82c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -208,6 +212,10 @@ PrefabInstance:
     - target: {fileID: 604413661608589065, guid: 7878f4ebe1eb6664eae8d24eeaf66a8c, type: 3}
       propertyPath: m_Name
       value: Thruster (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 604413661608589065, guid: 7878f4ebe1eb6664eae8d24eeaf66a8c, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5707430073723322237, guid: 7878f4ebe1eb6664eae8d24eeaf66a8c, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -286,6 +294,10 @@ PrefabInstance:
     - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: m_Name
       value: Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: m_IsActive

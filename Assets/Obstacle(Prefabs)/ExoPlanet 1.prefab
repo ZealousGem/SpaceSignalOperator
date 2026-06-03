@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9017465998383588152}
   - component: {fileID: 6796993415240530062}
   - component: {fileID: 1594925286764607750}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ExoPlanet 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,6 +152,10 @@ PrefabInstance:
     - target: {fileID: 8875558959111378809, guid: 8e5afde7ad88994428ef62bb1038375c, type: 3}
       propertyPath: m_Name
       value: ExoPlanet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875558959111378809, guid: 8e5afde7ad88994428ef62bb1038375c, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

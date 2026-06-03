@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39396142667533920}
   - component: {fileID: 3983592157999944119}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5067884051753455006}
   - component: {fileID: 7516115650958420606}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 710114423726561644}
   - component: {fileID: 4299311439834708459}
   - component: {fileID: 1274859283773317024}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Comet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,6 +459,10 @@ PrefabInstance:
       value: Asteroid5
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f3ec736b8a1853b49b1fdd6314c35130, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f3ec736b8a1853b49b1fdd6314c35130, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -488,6 +492,10 @@ PrefabInstance:
     - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: m_Name
       value: Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: m_IsActive

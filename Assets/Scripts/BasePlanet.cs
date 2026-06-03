@@ -32,7 +32,7 @@ public class BasePlanet : BaseObstacle
 
     protected void FixedUpdate() =>  rb.MoveRotation(rb.rotation * Quaternion.Euler(PlanetDir));
 
-    protected override void InitialCheck()
+    public override void InitialCheck()
     {
         base.InitialCheck();
 

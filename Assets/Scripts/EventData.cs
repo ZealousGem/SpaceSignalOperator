@@ -23,6 +23,16 @@ public class setInput : EventData
     }
 }
 
+public class ClearObjectFromList : EventData
+{
+    public BaseObstacle action;
+
+    public ClearObjectFromList(BaseObstacle _action)
+    {
+        action = _action;
+    }
+}
+
 public class StopObstacles : EventData
 {
     public bool action;

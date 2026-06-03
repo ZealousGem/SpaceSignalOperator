@@ -9,9 +9,8 @@ public class DeliveredPlanet : BasePlanet
     private float currentPlanet = 0f;
     private bool interactablePlanet = false;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         outlineMaterial = mesh.materials[1];
     }
 

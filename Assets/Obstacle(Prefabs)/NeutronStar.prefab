@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 282020593856541947}
   - component: {fileID: 8481599919477432312}
   - component: {fileID: 4308653164467248279}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NeutronStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 2944540952080303188}
   - component: {fileID: 2085555445116930620}
   - component: {fileID: 1090022964751334210}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pulsar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,6 +405,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e119c1746a73eb44f843abc8066a2e09, type: 3}
       propertyPath: m_Name
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e119c1746a73eb44f843abc8066a2e09, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

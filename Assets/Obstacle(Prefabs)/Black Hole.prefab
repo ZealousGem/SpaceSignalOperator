@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1272904443771954752}
   - component: {fileID: 4405245204051568034}
   - component: {fileID: 867957805982647777}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 1456154342238796589}
   - component: {fileID: 3916658438581415934}
   - component: {fileID: 306302084798150633}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Black Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
