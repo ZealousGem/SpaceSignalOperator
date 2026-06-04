@@ -17,7 +17,9 @@ public enum Damagedby
 
   Timer,
 
-  OringalPlanet
+  OringalPlanet,
+
+  FlewAway
 
 
 }
