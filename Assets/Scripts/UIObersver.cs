@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public interface IObserver
 {
@@ -14,6 +15,8 @@ public struct ShipFuel{public float amount;}
 public struct ShipTemp{public float amount;}
 
 public struct PlanetPosDirection{public float amount; public Vector3 Direction;}
+
+public struct EvokeSpawnScreen{public bool action; public float timer;}
 
 public class UIObersver : MonoBehaviour
 {

@@ -36,7 +36,7 @@ public class DeliveryShip : ShipController
     
     private string OrangeHexidicaml = "#BF2C03";
 
-    private string blueHecidicaml = "#18D4EA";
+    private string blueHexidicaml = "#18D4EA";
 
     private float intensity = 1f;
 
@@ -148,7 +148,37 @@ public class DeliveryShip : ShipController
     private void BurnShip()
     {
          StartCoroutine(DissolveShip(dissolveRate, refreshRate, OrangeHexidicaml));
+         subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 1.5f});
          EventBus.Act(new EndGameEvent(Damagedby.BurnUp, GameState.Fail));
+    }
+
+    private void RetrunToOringialPlanet()
+    {
+        StartCoroutine(ShrinkEffect(5f));
+        subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 1f});
+        EventBus.Act(new EndGameEvent(Damagedby.OringalPlanet, GameState.Fail));
+    }
+
+    private void ObliterateShip()
+    {
+         StartCoroutine(DissolveShip(dissolveRate, refreshRate, blueHexidicaml));
+        subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 1.5f});
+         EventBus.Act(new EndGameEvent(Damagedby.NeutronStar, GameState.Fail));
+    }
+
+    private void ExplodeShip()
+    {
+         StartCoroutine(ExplosionEffect(1f));
+         subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 2f});
+         EventBus.Act(new EndGameEvent(Damagedby.Default, GameState.Fail));
+    }
+
+    private void ShrinkShip()
+    {
+        //Debug.Log("shrinking");
+        StartCoroutine(ShrinkEffect(4f));
+        subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 2f});
+        EventBus.Act(new EndGameEvent(Damagedby.Blackhole, GameState.Fail));
     }
 
     private IEnumerator DissolveShip(float dissolveRate, float refreshRate, string hexColour)
@@ -193,12 +223,6 @@ public class DeliveryShip : ShipController
            yield return new WaitForSeconds(refreshRate); 
         }
     }
-
-    private void ExplodeShip()
-    {
-         StartCoroutine(ExplosionEffect(1f));
-         EventBus.Act(new EndGameEvent(Damagedby.Default, GameState.Fail));
-    }
     
     protected IEnumerator ExplosionEffect(float duration)
     {
@@ -217,12 +241,6 @@ public class DeliveryShip : ShipController
 
         Explosion.SetActive(false);
         //Destroy(gameObject);
-    }
-    private void ShrinkShip()
-    {
-        Debug.Log("shrinking");
-        StartCoroutine(ShrinkEffect(4f));
-        EventBus.Act(new EndGameEvent(Damagedby.Blackhole, GameState.Fail));
     }
 
     private IEnumerator ShrinkEffect(float duration)
@@ -244,15 +262,5 @@ public class DeliveryShip : ShipController
 
     }
 
-    private void RetrunToOringialPlanet()
-    {
-        StartCoroutine(ShrinkEffect(5f));
-        EventBus.Act(new EndGameEvent(Damagedby.OringalPlanet, GameState.Fail));
-    }
 
-    private void ObliterateShip()
-    {
-         StartCoroutine(DissolveShip(dissolveRate, refreshRate, blueHecidicaml));
-         EventBus.Act(new EndGameEvent(Damagedby.NeutronStar, GameState.Fail));
-    }
 }

@@ -27,7 +27,7 @@ public class ShipController : MonoBehaviour
 
     public List<ParticleSystem> ShipThrusters; 
 
-    public UIObersver subject;
+    protected UIObersver subject;
 
     protected bool isDead = false;
 
@@ -39,7 +39,7 @@ public class ShipController : MonoBehaviour
 
     protected Rigidbody rb; 
 
-     private const float ThrusterSize = 1.5f;
+    private const float ThrusterSize = 1.5f;
 
     private float currentThrust = ThrusterSize;
     
@@ -63,6 +63,7 @@ public class ShipController : MonoBehaviour
 
     private void Awake()
     {
+        subject = GameObject.FindWithTag("Manager").GetComponent<UIObersver>();
         rb = gameObject.GetComponent<Rigidbody>();
     }
 

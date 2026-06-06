@@ -1,6 +1,7 @@
 using System.Collections;
 using NUnit.Framework;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,15 +16,17 @@ public class UIManager : MonoBehaviour, IObserver
     public FuelGauge guage;
 
     public Image TempImage;
+
+    public Image StaticScreen;
     
     private const float maxAlhpa = 7f / 255f;
 
-    void OnEnable()
+    private void OnEnable()
     {
         subject.AddObersver(this);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         subject.RemoveObserver(this);
     }
@@ -36,8 +39,17 @@ public class UIManager : MonoBehaviour, IObserver
             case ShipHealth health: ShipHealth.text = health.amount.ToString() +"%"; break;
             case ShipTemp temp: setTemperature(temp.amount); break;
             case PlanetPosDirection planet: DisplayPlanetDirection(planet.amount, planet.Direction); break;
+            case EvokeSpawnScreen spawnStaticScreen: StartCoroutine(StaticScreenTimer(spawnStaticScreen.timer, spawnStaticScreen.action)); break; 
         }
     }
+
+    private IEnumerator StaticScreenTimer(float counter, bool state)
+    {
+        yield return new WaitForSeconds(counter);
+        ActivateStaticScreen(state);
+    } 
+
+    private void ActivateStaticScreen(bool state) => StaticScreen.gameObject.SetActive(state);
 
     private void DisplayPlanetDirection(float pos, Vector3 dir)
     {
@@ -66,6 +78,8 @@ public class UIManager : MonoBehaviour, IObserver
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        ActivateStaticScreen(false);
+        
         Color colour = TempImage.color;
         colour.a = 0f;
         TempImage.color = colour;
