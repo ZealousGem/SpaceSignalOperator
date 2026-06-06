@@ -29,7 +29,7 @@ public class ShipController : MonoBehaviour
 
     protected UIObersver subject;
 
-    protected bool isDead = false;
+    protected bool isOver = false;
 
     private bool isMoving = true;
 
@@ -53,18 +53,26 @@ public class ShipController : MonoBehaviour
     {
          EventBus.Subscribe<setInput>(retriveInputSingal);
          EventBus.Subscribe<GetTransformOfObject>(GetPlanetCoordinates);
+         EventBus.Subscribe<EndGameEvent>(StopShipEvent);
     }
 
     protected virtual void OnDisable()
     {
         EventBus.Unsubscribe<setInput>(retriveInputSingal);
         EventBus.Unsubscribe<GetTransformOfObject>(GetPlanetCoordinates);
+        EventBus.Unsubscribe<EndGameEvent>(StopShipEvent);
     }
 
     private void Awake()
     {
         subject = GameObject.FindWithTag("Manager").GetComponent<UIObersver>();
         rb = gameObject.GetComponent<Rigidbody>();
+    }
+
+    private void StopShipEvent(EndGameEvent data)
+    {
+        if (data.stop == StopShip.stop) isOver = data.StopMoving;
+        
     }
 
     private void retriveInputSingal(setInput data)=> RecieveSingals(data.action);
@@ -74,7 +82,7 @@ public class ShipController : MonoBehaviour
 
     protected virtual void RecieveSingals(SignalDirections dir)
     {
-        if(isDead) return;
+        if(isOver) return;
         switch (dir)
         {
             case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime, ButtonAnimations.LeftButton, 25f)); break;
@@ -164,7 +172,7 @@ public class ShipController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(isDead) return;
+        if(isOver) return;
         if(!isMoving) return;
         MoveShip();
     }

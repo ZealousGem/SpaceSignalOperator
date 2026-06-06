@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 
-public enum GameState { Start, Ongoing, Fail, Success, Pause};
+public enum GameState { Start, Ongoing, Fail, Success, Pause, Delivered};
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private Queue<DeliveredPlanet> PlanetObjectives = new Queue<DeliveredPlanet>();
 
-    private void Awake()
+    protected virtual void Awake()
     {
         AddPlanetsToQueue();
     }
@@ -36,11 +36,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()=> EventBus.Subscribe<EndGameEvent>(ReceiveGameEvent);
+    
+
+    private void OnDisable()=> EventBus.Unsubscribe<EndGameEvent>(ReceiveGameEvent);
+
+    private void ReceiveGameEvent(EndGameEvent data)
+    {
+        if (data.GameEvent == GameState.Fail)
+        {
+            damagedTo = data.action;
+        }
+
+        DetermineGame(data.GameEvent);
+    }
     //  private void Update()
     //  {
 
     //   if (currentGameState == GameState.Ongoing)TimerToReachPlanet += Time.deltaTime;   
-       
+
     //  }
 
     private void setPlanetCoordinate()
@@ -94,8 +108,9 @@ public class GameManager : MonoBehaviour
     {
         switch (state)
         {
-            case GameState.Success: break;
-            case GameState.Fail: Fail(damagedTo); break;
+            case GameState.Success: EventBus.Act(new EndGameEvent(StopShip.stop, true)); UnityEngine.Debug.Log("delivery successful"); break;
+            case GameState.Fail: currentGameState = state; Fail(damagedTo); break;
+            case GameState.Delivered: setPlanetCoordinate(); break;
         }
 
     }
@@ -108,6 +123,7 @@ public class GameManager : MonoBehaviour
             case Damagedby.NeutronStar:  break;
             case Damagedby.BurnUp:  break;
             case Damagedby.Timer: break;
+            case Damagedby.FlewAway: break;
             case Damagedby.Default:  break;
         }
     }

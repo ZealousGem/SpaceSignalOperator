@@ -1,7 +1,5 @@
 using System.Collections;
-using NUnit.Framework;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +17,7 @@ public class UIManager : MonoBehaviour, IObserver
 
     public Image StaticScreen;
     
-    private const float maxAlhpa = 7f / 255f;
+    private readonly float maxAlhpa = 7f / 255f;
 
     private void OnEnable()
     {
@@ -79,7 +77,7 @@ public class UIManager : MonoBehaviour, IObserver
     private void Start()
     {
         ActivateStaticScreen(false);
-        
+
         Color colour = TempImage.color;
         colour.a = 0f;
         TempImage.color = colour;

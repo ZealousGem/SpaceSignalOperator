@@ -1,6 +1,7 @@
 using System.Collections;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -24,6 +25,8 @@ public enum Damagedby
 
 }
 
+public enum StopShip{ stop }
+
 public class DeliveryShip : ShipController
 {
 
@@ -33,22 +36,22 @@ public class DeliveryShip : ShipController
     public GameObject Ship;
     public MeshRenderer ShipMaterial; 
     public VisualEffect burningVFX;
-    
-    private string OrangeHexidicaml = "#BF2C03";
+    private readonly string OrangeHexidicaml = "#BF2C03";
 
-    private string blueHexidicaml = "#18D4EA";
+    private readonly string blueHexidicaml = "#18D4EA";
 
-    private float intensity = 1f;
+    private  readonly float intensity = 1f;
 
-    private float dissolveRate = 0.0125f;
+    private readonly float dissolveRate = 0.0125f;
 
-    private float refreshRate = 0.025f;
+    private readonly float refreshRate = 0.025f;
 
     protected override void OnEnable()
     {
        base.OnEnable();
        EventBus.Subscribe<DamageShip>(RetrieveData);
-       EventBus.Subscribe<StationEvent>(RetrieveData); 
+       EventBus.Subscribe<StationEvent>(RetrieveData);
+       EventBus.Subscribe<EndGameEvent>(StopShipEvent); 
     }
 
     protected override void OnDisable()
@@ -56,6 +59,23 @@ public class DeliveryShip : ShipController
        base.OnDisable();
        EventBus.Unsubscribe<DamageShip>(RetrieveData);
        EventBus.Unsubscribe<StationEvent>(RetrieveData);
+       EventBus.Unsubscribe<EndGameEvent>(StopShipEvent);
+    }
+
+    private void StopShipEvent(EndGameEvent data)
+    {
+        if (data.stop == StopShip.stop)
+        {
+            isOver = data.StopMoving;
+
+            ManageThrusters(0f);
+
+           ShipSpeed = 0f;
+           rb.linearVelocity = Vector3.zero;
+           rb.angularVelocity = Vector3.zero;
+        }
+        
+        
     }
 
     private void RetrieveData(StationEvent data)
@@ -85,7 +105,7 @@ public class DeliveryShip : ShipController
 
     private void BurnShip(float Burn, Damagedby damagedby)
     {
-        if(isDead) return;
+        if(isOver) return;
 
         ShipTemp += Burn;
         subject.TellObervers(new ShipTemp{amount = (int)ShipTemp});
@@ -94,7 +114,7 @@ public class DeliveryShip : ShipController
         if (ShipTemp < 100f) return;
 
         ShipTemp = 100f;
-        isDead = true;
+        isOver = true;
 
         ManageThrusters(0f);
 
@@ -110,7 +130,7 @@ public class DeliveryShip : ShipController
 
     private void DamageShip(float Damage, Damagedby damagedby)
     {
-        if(isDead) return;
+        if(isOver) return;
 
         ShipHealth -= Damage;
         subject.TellObervers(new ShipHealth{amount = (int)Mathf.Max(0, ShipHealth)});
@@ -119,7 +139,7 @@ public class DeliveryShip : ShipController
         if (ShipHealth > 0) return;
 
         ShipHealth = 0; 
-        isDead = true; 
+        isOver = true; 
 
         ManageThrusters(0f);
         ShipSpeed = 0;
@@ -142,6 +162,8 @@ public class DeliveryShip : ShipController
             case Damagedby.BurnUp: BurnShip(); break;
             case Damagedby.Default: ExplodeShip(); break;
             case Damagedby.OringalPlanet: RetrunToOringialPlanet(); break;
+            case Damagedby.FlewAway: subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 1.5f});  
+            EventBus.Act(new EndGameEvent(Damagedby.FlewAway, GameState.Fail));break;
         }
     }
 

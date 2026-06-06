@@ -5,8 +5,8 @@ public class DeliveredPlanet : BasePlanet
 
     public MeshRenderer mesh;
     private Material outlineMaterial;
-    private const float outlineSize = 1.02f;
-    private const float planetradius = 7.79f;
+    private readonly float outlineSize = 1.02f;
+    private readonly float planetradius = 7.79f;
     private float currentPlanet = 0f;
     private bool interactablePlanet = false;
     private SphereCollider sphereCollider;
@@ -33,7 +33,7 @@ public class DeliveredPlanet : BasePlanet
 
         if (interactablePlanet)
         {
-           EventBus.Act(new EndGameEvent(GameState.Success, false));
+           EventBus.Act(new EndGameEvent(GameState.Delivered));
            ChangeOutlineSize(0f);
            sphereCollider.radius = planetradius;
            interactablePlanet = false;    

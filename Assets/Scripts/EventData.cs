@@ -64,16 +64,23 @@ public class EndGameEvent : EventData
 
     public bool StopMoving;
 
+    public StopShip stop;
+
+    public EndGameEvent(StopShip _stop, bool _StopMoving)
+    {
+        stop = _stop;
+        StopMoving = _StopMoving;
+    }
+
     public EndGameEvent(Damagedby _action, GameState _Damaged)
     {
         action = _action;
         GameEvent = _Damaged;
     }
 
-    public EndGameEvent(GameState _Damaged, bool _StopMoving)
+    public EndGameEvent(GameState _Damaged)
     {
         GameEvent = _Damaged;
-        StopMoving = _StopMoving;
     }
 }
 
