@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovingAsteroid
   Damage: 10
   Object: {fileID: 6258353755520571909}
-  renderDistance: 20
+  renderDistance: 30
   checkInterval: 0.5
   rotationSpeed: 50
   duration: 1.2

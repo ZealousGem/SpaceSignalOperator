@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.VFX;
 
 public enum Damagedby
@@ -64,8 +65,9 @@ public class DeliveryShip : ShipController
 
     private void StopShipEvent(EndGameEvent data)
     {
-        if (data.stop == StopShip.stop)
+        if (data.stop == StopShip.stop && data.GameEvent == GameState.Success)
         {
+            Debug.Log(data.stop);
             isOver = data.StopMoving;
 
             ManageThrusters(0f);

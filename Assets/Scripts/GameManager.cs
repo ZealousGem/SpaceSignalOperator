@@ -43,11 +43,9 @@ public class GameManager : MonoBehaviour
 
     private void ReceiveGameEvent(EndGameEvent data)
     {
-        if (data.GameEvent == GameState.Fail)
-        {
-            damagedTo = data.action;
-        }
-
+        if(data.GameEvent == GameState.Success) return;
+        if (data.GameEvent == GameState.Fail) damagedTo = data.action;
+        
         DetermineGame(data.GameEvent);
     }
     //  private void Update()
@@ -62,11 +60,13 @@ public class GameManager : MonoBehaviour
         if(PlanetObjectives.Count == 0)
         {
            currentGameState = GameState.Success;
+            UnityEngine.Debug.Log(PlanetObjectives.Count);
            DetermineGame(currentGameState);
            return;     
         }
-
+    
         DeliveredPlanet Planet = PlanetObjectives.Dequeue();
+         UnityEngine.Debug.Log(Planet.gameObject.name);
         Planet.setTargetPlanet();
         EventBus.Act(new GetTransformOfObject(Planet.gameObject.transform));      
        
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
     {
         switch (state)
         {
-            case GameState.Success: EventBus.Act(new EndGameEvent(StopShip.stop, true)); UnityEngine.Debug.Log("delivery successful"); break;
+            case GameState.Success: EventBus.Act(new EndGameEvent(GameState.Success,StopShip.stop, true)); UnityEngine.Debug.Log("delivery successful"); break;
             case GameState.Fail: currentGameState = state; Fail(damagedTo); break;
             case GameState.Delivered: setPlanetCoordinate(); break;
         }

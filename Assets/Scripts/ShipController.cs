@@ -53,26 +53,19 @@ public class ShipController : MonoBehaviour
     {
          EventBus.Subscribe<setInput>(retriveInputSingal);
          EventBus.Subscribe<GetTransformOfObject>(GetPlanetCoordinates);
-         EventBus.Subscribe<EndGameEvent>(StopShipEvent);
+        
     }
 
     protected virtual void OnDisable()
     {
         EventBus.Unsubscribe<setInput>(retriveInputSingal);
         EventBus.Unsubscribe<GetTransformOfObject>(GetPlanetCoordinates);
-        EventBus.Unsubscribe<EndGameEvent>(StopShipEvent);
     }
 
     private void Awake()
     {
         subject = GameObject.FindWithTag("Manager").GetComponent<UIObersver>();
         rb = gameObject.GetComponent<Rigidbody>();
-    }
-
-    private void StopShipEvent(EndGameEvent data)
-    {
-        if (data.stop == StopShip.stop) isOver = data.StopMoving;
-        
     }
 
     private void retriveInputSingal(setInput data)=> RecieveSingals(data.action);

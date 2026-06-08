@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StaticAsteroid
   Damage: 10
   Object: {fileID: 2894402653774190605}
-  renderDistance: 20
+  renderDistance: 30
   checkInterval: 0.5
   rotationSpeed: 12.8
   duration: 1
