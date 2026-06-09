@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class CameraShipTracker : MonoBehaviour
 
    private const float cameraHeight = 35.53f;
 
-   private const float SpacshipDistance = -10.2f;
+   private const float SpacshipDistance = -5.8f;
 
    Vector3 camDistance = new Vector3(-29.16f, cameraHeight, SpacshipDistance);
 
@@ -48,20 +49,27 @@ public class CameraShipTracker : MonoBehaviour
         //Zoom();
     }
 
-    // private void ShakeCamera(float ShakeAmount, float timeDuration)
-    // {
-        
+    private IEnumerator ShakeCamera(float ShakeAmount, float timeDuration)
+    {
+        Vector3 oriPos = transform.localPosition;
 
-    //    var definition = impulseSource.ImpulseDefinition;
+        float timer = 0.0f;
 
-    //     // Note: In some versions, these are just 'SustainTime' and 'DecayTime'
-    //     // without the 'm_' prefix if they are accessed via the public property.
-    //     definition.TimeEnvelope.SustainTime =  timeDuration * 0.5f;
-    //     definition.TimeEnvelope.DecayTime =  timeDuration * 0.5f;
+        while (timer < timeDuration)
+        {
+            float x = Random.Range(-1f, 1f) * ShakeAmount;
+            float y = Random.Range(-1f, 1f) * ShakeAmount;
 
-    //     impulseSource.GenerateImpulse(Vector3.up * ShakeAmount);
+            transform.localPosition = new Vector3(x, y, oriPos.z);
+
+            timer += Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.localPosition = oriPos;
        
-    // }
+    }
 
     private void Move()
     {
