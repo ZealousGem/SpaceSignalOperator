@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,7 +48,29 @@ public class UIManager : MonoBehaviour, IObserver
         ActivateStaticScreen(state);
     } 
 
-    private void ActivateStaticScreen(bool state) => StaticScreen.gameObject.SetActive(state);
+    private void ActivateStaticScreen(bool state)
+    {
+       
+        if (state)
+        {
+             Vector3 orignalScale = StaticScreen.gameObject.transform.localScale;
+             StaticScreen.gameObject.transform.localScale = Vector3.zero;
+
+             StaticScreen.gameObject.SetActive(true);
+             StaticScreen.gameObject.transform.DOKill();
+
+             float duration = 0.2f;
+             StaticScreen.gameObject.transform.DOScale(orignalScale,duration).From(Vector3.zero).SetEase(Ease.OutBack); 
+             Debug.Log("transition");    
+        }
+     
+        else
+        {
+            StaticScreen.gameObject.SetActive(false);
+        }
+
+    }
+    
 
     private void DisplayPlanetDirection(float pos, Vector3 dir)
     {

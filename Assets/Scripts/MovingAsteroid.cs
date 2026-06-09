@@ -35,7 +35,12 @@ public class MovingAsteroid : StaticAsteroid
         {
             Speed = 0;
             rb.linearVelocity = Vector3.zero;  
-        } 
+        }
+
+        if (other.GetComponent<BasePlanet>() || other.GetComponent<Star>())
+        {
+            KillAsteroid();
+        }
 
         
     }
