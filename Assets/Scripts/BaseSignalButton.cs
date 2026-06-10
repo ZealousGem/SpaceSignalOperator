@@ -56,6 +56,7 @@ public class BaseSignalButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
    protected virtual void OnMouseDown()
    {
+      if(Time.deltaTime == 0f) return;
       StartCoroutine(ButtonDownSequence());
 
    }
