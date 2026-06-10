@@ -47,19 +47,27 @@ public class BaseSignalButton : MonoBehaviour
 
     private void RetrieveData(ButtonEvent data)
    {
+      if(Time.timeScale == 0f) return;
+
       if (data.action ==buttonType)
       {
          StartCoroutine(ButtonUpSequence());
       }
+      //Debug.Log(gameObject.name + "pressed");
    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-   protected virtual void OnMouseDown()
+   protected void OnMouseDown()
    {
-      if(Time.deltaTime == 0f) return;
+      if(Time.timeScale == 0f) return;
       StartCoroutine(ButtonDownSequence());
+     // Debug.Log(gameObject.name + "pressed");
+      
+      ActivateButton();
 
    }
+
+   protected virtual void ActivateButton(){}
 
    private IEnumerator ButtonUpSequence()
    {

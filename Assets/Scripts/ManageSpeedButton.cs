@@ -4,10 +4,9 @@ public class ManageSpeedButton : BaseSignalButton
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private bool isMoving = true;
-    protected override void OnMouseDown()
+    protected override void ActivateButton()
     {
         
-        base.OnMouseDown();
         if (isMoving)
         {
              EventBus.Act(new setInput(SignalDirections.Stop));

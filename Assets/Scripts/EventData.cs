@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EventData
@@ -124,4 +125,37 @@ public class GetTransformOfObject : EventData
         PlanetCoordinates = Planet;
     }
 
+}
+
+public class endGameUI: EventData
+{
+    public GameState gameState;
+
+    public string Title;
+
+    public string Reason;
+
+    public float Amount;
+
+    public endGameUI(GameState _gameState)
+    {
+        gameState = _gameState;
+    }
+
+    public endGameUI(GameState _gameState, string title, string reason)
+    {
+        gameState = _gameState;
+        Title = title;
+        Reason = reason;
+    }
+
+    public endGameUI(GameState _gameState, string title, string reason, float timer)
+    {
+        gameState = _gameState;
+        Title = title;
+        Reason = reason;
+        Amount = timer;
+
+
+    }
 }
