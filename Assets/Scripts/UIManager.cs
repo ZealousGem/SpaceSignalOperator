@@ -13,9 +13,7 @@ public class UIManager : MonoBehaviour, IObserver
     public TMP_Text LightYearsScale;
     public Image Arrow;
     public FuelGauge guage;
-
     public Image TempImage;
-
     public Image StaticScreen;
     
     private readonly float maxAlhpa = 7f / 255f;
@@ -75,7 +73,7 @@ public class UIManager : MonoBehaviour, IObserver
     private void DisplayPlanetDirection(float pos, Vector3 dir)
     {
         int displayLightYears = (int)pos;
-        LightYearsScale.text = displayLightYears.ToString() +" light years";
+        LightYearsScale.text = displayLightYears.ToString() +" AU to Delivery";
 
         float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
 

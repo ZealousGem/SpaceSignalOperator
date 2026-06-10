@@ -5,31 +5,40 @@ using UnityEngine;
 public class CameraShipTracker : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-  [SerializeField] private float DampTime = 0.2f;
-   private Camera cam;
+   [SerializeField] private float DampTime = 0.2f;
    public  List<Transform> targets; 
+   public Camera cam;
    private Vector3 Velocity;
    private Vector3 DesiredPos;
-
    private const float cameraHeight = 35.53f;
 
    private const float SpacshipDistance = -5.8f;
 
    Vector3 camDistance = new Vector3(-29.16f, cameraHeight, SpacshipDistance);
 
-    
-
-    // private void setCamerShake(CameraShakeEvent cameraMovements)
-    // {
-    //     ShakeCamera(cameraMovements.ShakeAmount, cameraMovements.TimeDuration);
-    // }
-
-    private void Awake()
+    private void OnEnable()
     {
-        cam = GetComponent<Camera>();
-        //impulseSource = GetComponent<CinemachineImpulseSource>();
-        
+        EventBus.Subscribe<DamageShip>(RetrieveData);
     }
+
+    private void OnDisable()
+    {
+         EventBus.Unsubscribe<DamageShip>(RetrieveData);
+    }
+
+    private void RetrieveData(DamageShip damageShip)
+    {
+        if (damageShip.Damaged > 0 && 
+            damageShip.action != Damagedby.Blackhole && 
+            damageShip.action != Damagedby.FlewAway && 
+            damageShip.action != Damagedby.OringalPlanet && 
+            damageShip.action != Damagedby.BurnUp)
+        {
+           StartCoroutine(ShakeCamera(0.3f, 0.3f));    
+        }
+       
+    }
+    
 
     private void FixedUpdate()
     {
@@ -44,23 +53,25 @@ public class CameraShipTracker : MonoBehaviour
 
     private IEnumerator ShakeCamera(float ShakeAmount, float timeDuration)
     {
-        Vector3 oriPos = transform.localPosition;
+        if (cam == null) yield break;
+
+        Vector3 oriPos = cam.gameObject.transform.localPosition;
 
         float timer = 0.0f;
 
         while (timer < timeDuration)
         {
-            float x = Random.Range(-1f, 1f) * ShakeAmount;
+           // float x = Random.Range(-1f, 1f) * ShakeAmount;
             float y = Random.Range(-1f, 1f) * ShakeAmount;
 
-            transform.localPosition = new Vector3(x, y, oriPos.z);
+            cam.gameObject.transform.localPosition = new Vector3(oriPos.x, y, oriPos.z);
 
             timer += Time.deltaTime;
 
             yield return null;
         }
 
-        transform.localPosition = oriPos;
+        cam.gameObject.transform.localPosition = oriPos;
        
     }
 
