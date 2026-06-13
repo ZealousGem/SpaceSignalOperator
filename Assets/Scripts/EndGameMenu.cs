@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class EndGameMenu : BaseMainMenu
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Button MenuButton;
-    public TMP_Text timer; 
+    public Button MenuButton; 
     public TMP_Text Title;
     public TMP_Text Reason;
 

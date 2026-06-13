@@ -108,23 +108,30 @@ public class GameManager : MonoBehaviour
     {
         switch (state)
         {
-            case GameState.Success: EventBus.Act(new EndGameEvent(GameState.Success,StopShip.stop, true)); UnityEngine.Debug.Log("delivery successful"); break;
+            case GameState.Success: StartCoroutine(setSuccessScreen());  break;
             case GameState.Fail: currentGameState = state; Fail(damagedTo); break;
             case GameState.Delivered: setPlanetCoordinate(); break;
         }
 
     }
 
+    private IEnumerator setSuccessScreen()
+    {
+        EventBus.Act(new EndGameEvent(GameState.Success,StopShip.stop, true));
+        yield return new WaitForSeconds(1f);
+        EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done", TimerToReachPlanet));
+    }
+
     private void Fail(Damagedby damagedby)
     {
         switch (damagedby)
         {
-            case Damagedby.Blackhole:  break;
-            case Damagedby.NeutronStar:  break;
-            case Damagedby.BurnUp:  break;
-            case Damagedby.Timer: break;
-            case Damagedby.FlewAway: break;
-            case Damagedby.Default:  break;
+            case Damagedby.Blackhole: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "Your Delivery has been lost into the depths of a black hole, good luck getting that back."));  break;
+            case Damagedby.NeutronStar: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "You sent the ship too close to a neutron star disintigrating it to pieces.")); break;
+            case Damagedby.BurnUp: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "You failed to check your ship's temperature leaving it to burn up and losing the goods.")); break;
+            case Damagedby.FlewAway: EventBus.Act(new endGameUI(GameState.Fail, "Ship Missing", "where the fuck are you going???")); break;
+            case Damagedby.Default: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "You forgot that asteroids and debris exists, maybe dodge it next time.")); break;
+            case Damagedby.OringalPlanet: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "You lazy mother fucker you still got other planets to head to, no slacking.")); break;
         }
     }
 }
