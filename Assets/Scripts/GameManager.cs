@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Success: StartCoroutine(setSuccessScreen());  break;
             case GameState.Fail: currentGameState = state; Fail(damagedTo); break;
-            case GameState.Delivered: setPlanetCoordinate(); break;
+            case GameState.Delivered: EventBus.Act(new WarningTextEvent(UITextInfo.PlanetText)); setPlanetCoordinate(); break;
         }
 
     }

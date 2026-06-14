@@ -159,3 +159,13 @@ public class endGameUI: EventData
 
     }
 }
+
+public class WarningTextEvent : EventData
+{
+    public UITextInfo textInfo; 
+
+    public WarningTextEvent(UITextInfo uITextInfo)
+    {
+        textInfo = uITextInfo;
+    }
+}

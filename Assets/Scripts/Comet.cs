@@ -6,10 +6,21 @@ public class Comet : MovingAsteroid
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out StaticAsteroid Asteroid)) Asteroid.KillAsteroid();
+        if(other.TryGetComponent(out StaticAsteroid Asteroid)) KillDebrisInTheWay(Asteroid);
         base.OnTriggerEnter(other);
 
     }
+
+    protected override void UIWarningText() => EventBus.Act(new WarningTextEvent(UITextInfo.CometText));
+
+    private void KillDebrisInTheWay(StaticAsteroid asteroid)
+    {
+        if (asteroid is not Comet)
+        {
+            asteroid.KillAsteroid();
+        }
+    }
+    
 
   
 }

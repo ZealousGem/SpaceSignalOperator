@@ -1,8 +1,11 @@
 using System.Collections;
 using DG.Tweening;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum UITextInfo{PlanetText, AsteroidText, solarFlare, CometText}
 
 public class UIManager : MonoBehaviour, IObserver
 {
@@ -11,6 +14,8 @@ public class UIManager : MonoBehaviour, IObserver
     public TMP_Text ShipHealth;
     public TMP_Text ShipTemperature;
     public TMP_Text LightYearsScale;
+    public TMP_Text WarningText;
+    public TMP_Text DeliveredtoPlanetText;
     public Image Arrow;
     public FuelGauge guage;
     public Image TempImage;
@@ -21,11 +26,13 @@ public class UIManager : MonoBehaviour, IObserver
     private void OnEnable()
     {
         subject.AddObersver(this);
+        EventBus.Subscribe<WarningTextEvent>(ExtractUItext);
     }
 
     private void OnDisable()
     {
         subject.RemoveObserver(this);
+        EventBus.Unsubscribe<WarningTextEvent>(ExtractUItext);
     }
 
     public void onNotify<T>(T notificationData)
@@ -105,6 +112,44 @@ public class UIManager : MonoBehaviour, IObserver
 
         ShipHealth.text =100.ToString()+"%";
         ShipTemperature.text =0.ToString() +"c";
+    }
+
+    private void ExtractUItext(WarningTextEvent data)
+    {
+        switch (data.textInfo)
+        {
+            case UITextInfo.PlanetText: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
+            case UITextInfo.AsteroidText: StartCoroutine(EvokeText(WarningText, "Asteroid Incoming", 0.5f)); break;
+            case UITextInfo.CometText:StartCoroutine(EvokeText(WarningText, "Comet Incoming", 0.5f)); break;
+            case UITextInfo.solarFlare: StartCoroutine(EvokeText(WarningText, "SolarFlare Incoming", 0.5f)); break;
+        }
+    } 
+
+
+
+    private IEnumerator EvokeText(TMP_Text font, string text, float duration)
+    {
+        font.DOKill();
+        font.rectTransform.DOKill();
+        
+        font.alpha = 1f;
+        font.text = text;
+        font.gameObject.SetActive(true);
+        
+        RectTransform rectT = font.gameObject.GetComponent<RectTransform>();
+
+        Vector3 orignalScale = rectT.transform.localScale;
+        rectT.transform.localScale = Vector3.zero;
+
+        rectT.DOScale(orignalScale, 0.5f).SetEase(Ease.OutBack);
+
+        yield return new WaitForSeconds(duration);
+
+        font.DOFade(0f, 0.5f).OnComplete(() => 
+        {
+        font.gameObject.SetActive(false);
+        });
+
     }
 
     // Update is called once per frame

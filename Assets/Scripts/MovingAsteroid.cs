@@ -16,7 +16,7 @@ public class MovingAsteroid : StaticAsteroid
       
         if (state is true)
         {  
-
+            UIWarningText();
             ShipTarget = new Vector3(shipCoordinates.position.x, 0, shipCoordinates.position.z);
             Vector3 direction = (ShipTarget - transform.position).normalized;
             rb.AddForce(direction * Speed, ForceMode.Impulse);
@@ -25,6 +25,9 @@ public class MovingAsteroid : StaticAsteroid
 
 
     }
+
+    protected virtual void UIWarningText() => EventBus.Act(new WarningTextEvent(UITextInfo.AsteroidText));
+    
 
     protected override void OnTriggerEnter(Collider other)
     {
