@@ -26,7 +26,7 @@ public class MovingAsteroid : StaticAsteroid
 
     }
 
-    protected virtual void UIWarningText() => EventBus.Act(new WarningTextEvent(UITextInfo.AsteroidText));
+    protected virtual void UIWarningText() => EventBus.Act(new WarningTextEvent(UITextInfo.AsteroidText, this));
     
 
     protected override void OnTriggerEnter(Collider other)

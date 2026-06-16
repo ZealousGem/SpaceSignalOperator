@@ -16,6 +16,8 @@ public struct ShipTemp{public float amount;}
 
 public struct PlanetPosDirection{public float amount; public Vector3 Direction;}
 
+public struct UIinformation{public Vector3 Direction; public BaseObstacle obstacle; public UITextInfo info;}
+
 public struct EvokeSpawnScreen{public bool action; public float timer;}
 
 public class UIObersver : MonoBehaviour

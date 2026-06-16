@@ -11,7 +11,7 @@ public class Comet : MovingAsteroid
 
     }
 
-    protected override void UIWarningText() => EventBus.Act(new WarningTextEvent(UITextInfo.CometText));
+    protected override void UIWarningText() => EventBus.Act(new WarningTextEvent(UITextInfo.CometText ,this));
 
     private void KillDebrisInTheWay(StaticAsteroid asteroid)
     {

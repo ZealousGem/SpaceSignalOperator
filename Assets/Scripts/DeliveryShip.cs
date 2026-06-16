@@ -179,14 +179,14 @@ public class DeliveryShip : ShipController
     private void RetrunToOringialPlanet()
     {
         StartCoroutine(ShrinkEffect(5f));
-        subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 1f});
+        subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 2f});
         EventBus.Act(new EndGameEvent(Damagedby.OringalPlanet, GameState.Fail));
     }
 
     private void ObliterateShip()
     {
          StartCoroutine(DissolveShip(dissolveRate, refreshRate, blueHexidicaml));
-        subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 1.5f});
+         subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 1.5f});
          EventBus.Act(new EndGameEvent(Damagedby.NeutronStar, GameState.Fail));
     }
 

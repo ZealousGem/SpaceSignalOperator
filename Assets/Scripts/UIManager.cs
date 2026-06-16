@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour, IObserver
     public TMP_Text ShipHealth;
     public TMP_Text ShipTemperature;
     public TMP_Text LightYearsScale;
-    public TMP_Text WarningText;
+    public RectTransform WarningText;
     public TMP_Text DeliveredtoPlanetText;
     public Image Arrow;
     public FuelGauge guage;
@@ -23,17 +23,9 @@ public class UIManager : MonoBehaviour, IObserver
     
     private readonly float maxAlhpa = 7f / 255f;
 
-    private void OnEnable()
-    {
-        subject.AddObersver(this);
-        EventBus.Subscribe<WarningTextEvent>(ExtractUItext);
-    }
+    private void OnEnable() => subject.AddObersver(this); 
 
-    private void OnDisable()
-    {
-        subject.RemoveObserver(this);
-        EventBus.Unsubscribe<WarningTextEvent>(ExtractUItext);
-    }
+    private void OnDisable() => subject.RemoveObserver(this);
 
     public void onNotify<T>(T notificationData)
     {
@@ -44,6 +36,7 @@ public class UIManager : MonoBehaviour, IObserver
             case ShipTemp temp: setTemperature(temp.amount); break;
             case PlanetPosDirection planet: DisplayPlanetDirection(planet.amount, planet.Direction); break;
             case EvokeSpawnScreen spawnStaticScreen: StartCoroutine(StaticScreenTimer(spawnStaticScreen.timer, spawnStaticScreen.action)); break; 
+            case UIinformation information: ExtractUItext(information); break;
         }
     }
 
@@ -66,7 +59,7 @@ public class UIManager : MonoBehaviour, IObserver
 
              float duration = 0.2f;
              StaticScreen.gameObject.transform.DOScale(orignalScale,duration).From(Vector3.zero).SetEase(Ease.OutBack); 
-             Debug.Log("transition");    
+            // Debug.Log("transition");    
         }
      
         else
@@ -83,6 +76,8 @@ public class UIManager : MonoBehaviour, IObserver
         LightYearsScale.text = displayLightYears.ToString() +" AU to Delivery";
 
         float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+
+
 
         Arrow.rectTransform.localRotation = Quaternion.Euler(0,0, angle);
 
@@ -114,20 +109,56 @@ public class UIManager : MonoBehaviour, IObserver
         ShipTemperature.text =0.ToString() +"c";
     }
 
-    private void ExtractUItext(WarningTextEvent data)
+    private void ExtractUItext(UIinformation data)
     {
-        switch (data.textInfo)
+        switch (data.info)
         {
             case UITextInfo.PlanetText: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
-            case UITextInfo.AsteroidText: StartCoroutine(EvokeText(WarningText, "Asteroid Incoming", 0.5f)); break;
-            case UITextInfo.CometText:StartCoroutine(EvokeText(WarningText, "Comet Incoming", 0.5f)); break;
-            case UITextInfo.solarFlare: StartCoroutine(EvokeText(WarningText, "SolarFlare Incoming", 0.5f)); break;
+            case UITextInfo.AsteroidText: StartCoroutine(EvokeText(WarningText, "Asteroid Incoming", 0.5f, data.Direction)); break;
+            case UITextInfo.CometText:StartCoroutine(EvokeText(WarningText, "Comet Incoming", 0.5f, data.Direction)); break;
+            case UITextInfo.solarFlare: StartCoroutine(EvokeText(WarningText, "SolarFlare Incoming", 0.5f, data.Direction)); break;
         }
     } 
 
+    private IEnumerator EvokeText(RectTransform element, string text, float duration, Vector3 dir)
+    {
+        element.DOKill();
 
+        CanvasGroup group = element.GetComponent<CanvasGroup>(); 
+        if(group == null) yield break;
 
-    private IEnumerator EvokeText(TMP_Text font, string text, float duration)
+        group.alpha = 1f;
+
+        TMP_Text font = element.GetComponentInChildren<TMP_Text>();
+        if(font == null) yield break;
+
+        font.text = text;
+
+        Image arrow = element.GetComponentInChildren<Image>();
+        if(arrow == null) yield break;
+
+        float angle = (Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg) + 180f;
+        arrow.rectTransform.localRotation = Quaternion.Euler(0,0, angle);      
+       
+        element.gameObject.SetActive(true);
+
+        Vector3 orignalScale = element.transform.localScale;
+        element.transform.localScale = Vector3.zero;
+
+        element.DOScale(orignalScale, 0.5f).SetEase(Ease.OutBack);
+
+        yield return new WaitForSeconds(duration);
+
+        group.DOFade(0f, 0.5f).OnComplete(() => 
+        {
+        group.gameObject.SetActive(false);
+        });
+
+        Debug.Log("done");
+
+    }
+
+     private IEnumerator EvokeText(TMP_Text font, string text, float duration)
     {
         font.DOKill();
         font.rectTransform.DOKill();
@@ -151,7 +182,5 @@ public class UIManager : MonoBehaviour, IObserver
         });
 
     }
-
-    // Update is called once per frame
 
 }

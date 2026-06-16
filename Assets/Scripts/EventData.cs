@@ -164,8 +164,16 @@ public class WarningTextEvent : EventData
 {
     public UITextInfo textInfo; 
 
+    public BaseObstacle obstacle;
+
     public WarningTextEvent(UITextInfo uITextInfo)
     {
         textInfo = uITextInfo;
+    }
+
+    public WarningTextEvent(UITextInfo uITextInfo, BaseObstacle _obstacle)
+    {
+        textInfo = uITextInfo;
+        obstacle = _obstacle;
     }
 }

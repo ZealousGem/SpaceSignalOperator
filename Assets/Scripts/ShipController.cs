@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum SignalDirections
 {
@@ -53,6 +54,7 @@ public class ShipController : MonoBehaviour
     {
          EventBus.Subscribe<setInput>(retriveInputSingal);
          EventBus.Subscribe<GetTransformOfObject>(GetPlanetCoordinates);
+         EventBus.Subscribe<WarningTextEvent>(ExtractUItext);
         
     }
 
@@ -60,6 +62,7 @@ public class ShipController : MonoBehaviour
     {
         EventBus.Unsubscribe<setInput>(retriveInputSingal);
         EventBus.Unsubscribe<GetTransformOfObject>(GetPlanetCoordinates);
+        EventBus.Unsubscribe<WarningTextEvent>(ExtractUItext);
     }
 
     private void Awake()
@@ -186,6 +189,25 @@ public class ShipController : MonoBehaviour
       //Debug.Log(DistacnetoPlanet);
       
 
+    }
+
+    private void ExtractUItext(WarningTextEvent data)
+    {
+        if (data.textInfo == UITextInfo.PlanetText)
+        {
+             subject.TellObervers(new UIinformation{info = data.textInfo});
+        }
+
+        else
+        {
+            EvokeDistanceBetweenShipandObject(data.textInfo, data.obstacle);
+        }
+    }
+
+    private void EvokeDistanceBetweenShipandObject(UITextInfo _info, BaseObstacle _obstalce)
+    {
+        Vector3 direction = _obstalce.gameObject.transform.position - gameObject.transform.position; 
+        subject.TellObervers(new UIinformation{Direction = direction, obstacle = _obstalce, info = _info});
     }
 
     private void EvokeDistanceBetweenShipandPlanet()
