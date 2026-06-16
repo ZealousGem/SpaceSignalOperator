@@ -154,7 +154,7 @@ public class UIManager : MonoBehaviour, IObserver
         group.gameObject.SetActive(false);
         });
 
-        Debug.Log("done");
+       // Debug.Log("done");
 
     }
 
