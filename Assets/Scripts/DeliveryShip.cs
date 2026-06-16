@@ -84,9 +84,9 @@ public class DeliveryShip : ShipController
     {
         switch (data.action)
         {
-            case StationType.Repairs: ShipHealth += data.amount; break;
-            case StationType.ReactorCoolDown: ShipTemp -= data.amount; break;
-            case StationType.Fuel: Fuel += data.amount; break;
+            case StationType.Repairs: ShipHealth += data.amount; subject.TellObervers(new ShipHealth{amount = (int)Mathf.Max(0, ShipHealth)}); break;
+            case StationType.ReactorCoolDown: ShipTemp -= data.amount; subject.TellObervers(new ShipTemp{amount = (int)ShipTemp});break;
+            case StationType.Fuel: Fuel += data.amount; subject.TellObervers(new ShipFuel{amount = Fuel}); break;
         }
     }
 

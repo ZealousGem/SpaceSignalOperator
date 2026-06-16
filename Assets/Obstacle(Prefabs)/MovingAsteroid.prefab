@@ -103,7 +103,7 @@ MonoBehaviour:
   rotationSpeed: 50
   duration: 1.2
   ExplosionEffect: {fileID: 4839581987906955898}
-  Speed: 10
+  Speed: 8
 --- !u!1001 &5233263980276837704
 PrefabInstance:
   m_ObjectHideFlags: 0

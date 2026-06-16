@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum UITextInfo{PlanetText, AsteroidText, solarFlare, CometText}
+public enum UITextInfo{PlanetText, AsteroidText, solarFlare, CometText, StationImage}
 
 public class UIManager : MonoBehaviour, IObserver
 {
@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour, IObserver
     public TMP_Text ShipTemperature;
     public TMP_Text LightYearsScale;
     public RectTransform WarningText;
+    public RectTransform StationText;
     public TMP_Text DeliveredtoPlanetText;
     public Image Arrow;
     public FuelGauge guage;
@@ -114,13 +115,14 @@ public class UIManager : MonoBehaviour, IObserver
         switch (data.info)
         {
             case UITextInfo.PlanetText: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
-            case UITextInfo.AsteroidText: StartCoroutine(EvokeText(WarningText, "Asteroid Incoming", 0.5f, data.Direction)); break;
-            case UITextInfo.CometText:StartCoroutine(EvokeText(WarningText, "Comet Incoming", 0.5f, data.Direction)); break;
-            case UITextInfo.solarFlare: StartCoroutine(EvokeText(WarningText, "SolarFlare Incoming", 0.5f, data.Direction)); break;
+            case UITextInfo.AsteroidText: StartCoroutine(EvokeText(data.info, WarningText, "Asteroid Incoming", 0.5f, data.Direction)); break;
+            case UITextInfo.CometText:StartCoroutine(EvokeText(data.info, WarningText, "Comet Incoming", 0.5f, data.Direction)); break;
+            case UITextInfo.solarFlare: StartCoroutine(EvokeText(data.info, WarningText, "SolarFlare Incoming", 0.5f, data.Direction)); break;
+            case UITextInfo.StationImage: StartCoroutine(EvokeText(data.info, StationText, "Space-Station Nearby", 3f, data.Direction)); break;
         }
     } 
 
-    private IEnumerator EvokeText(RectTransform element, string text, float duration, Vector3 dir)
+    private IEnumerator EvokeText(UITextInfo type,RectTransform element, string text, float duration, Vector3 dir)
     {
         element.DOKill();
 
@@ -137,7 +139,13 @@ public class UIManager : MonoBehaviour, IObserver
         Image arrow = element.GetComponentInChildren<Image>();
         if(arrow == null) yield break;
 
-        float angle = (Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg) + 180f;
+        float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+
+        if (type != UITextInfo.StationImage)
+        {
+            angle = (angle + 180f) % 360f;
+        }
+
         arrow.rectTransform.localRotation = Quaternion.Euler(0,0, angle);      
        
         element.gameObject.SetActive(true);

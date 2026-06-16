@@ -15,10 +15,10 @@ public class Station : BasePlanet
     {
         base.ToggleVisibility(state);
 
-        if (state && StationCollider == null)
-        {
-             StationCollider = gameObject.GetComponent<SphereCollider>();
-        }
+        if (state && !PickedUp) EventBus.Act(new WarningTextEvent(UITextInfo.StationImage, this));
+
+        if (state && StationCollider == null)StationCollider = gameObject.GetComponent<SphereCollider>();
+        
     }
 
     protected override void OnTriggerEnter(Collider other)
