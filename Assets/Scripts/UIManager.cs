@@ -134,6 +134,7 @@ public class UIManager : MonoBehaviour, IObserver
 
     private void EvokeTextSeq(UITextInfo type,RectTransform element, string text, float duration, Vector3 dir)
     {
+        element.DOComplete();
         element.DOKill();
 
         CanvasGroup group = element.GetComponent<CanvasGroup>(); 
@@ -142,11 +143,13 @@ public class UIManager : MonoBehaviour, IObserver
         TMP_Text font = element.GetComponentInChildren<TMP_Text>();
         if(font == null) return;
 
-        font.text = text;
-
         Image arrow = element.GetComponentInChildren<Image>();
         if(arrow == null) return;
 
+        element.DOKill();
+        group.DOKill();
+
+        font.text = text;
         float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
 
         if (type != UITextInfo.StationImage)
@@ -159,16 +162,16 @@ public class UIManager : MonoBehaviour, IObserver
         group.alpha = 1f;
         element.gameObject.SetActive(true);
 
-        Vector3 orignalScale = element.transform.localScale;
-        element.transform.localScale = Vector3.zero;
+    //     Vector3 orignalScale = element.transform.localScale;
+    //   //  element.transform.localScale = Vector3.zero;
 
-        element.DOScale(orignalScale, 0.5f).SetEase(Ease.OutBack);
+    //     element.DOScale(orignalScale, 0.5f).SetEase(Ease.OutBack);
 
         Sequence textSequence = DOTween.Sequence();
 
         textSequence.SetId(element); 
 
-        textSequence.Append(element.transform.DOScale(orignalScale, 0.5f).SetEase(Ease.OutBack))
+        textSequence.Append(element.transform.DOScale(element.transform.localScale, 0.5f).From(Vector3.zero).SetEase(Ease.OutBack))
                 .AppendInterval(duration) // This replaces WaitForSeconds
                 .Append(group.DOFade(0f, 0.5f))
                 .OnComplete(() => group.gameObject.SetActive(false));

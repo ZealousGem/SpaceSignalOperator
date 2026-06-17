@@ -60,13 +60,13 @@ public class GameManager : MonoBehaviour
         if(PlanetObjectives.Count == 0)
         {
            currentGameState = GameState.Success;
-            UnityEngine.Debug.Log(PlanetObjectives.Count);
+           UnityEngine.Debug.Log(PlanetObjectives.Count);
            DetermineGame(currentGameState);
            return;     
         }
     
         DeliveredPlanet Planet = PlanetObjectives.Dequeue();
-         UnityEngine.Debug.Log(Planet.gameObject.name);
+        UnityEngine.Debug.Log(Planet.gameObject.name);
         Planet.setTargetPlanet();
         EventBus.Act(new GetTransformOfObject(Planet.gameObject.transform));      
        
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Success: StartCoroutine(setSuccessScreen());  break;
             case GameState.Fail: currentGameState = state; Fail(damagedTo); break;
-            case GameState.Delivered: EventBus.Act(new WarningTextEvent(UITextInfo.PlanetText)); setPlanetCoordinate(); break;
+            case GameState.Delivered: setPlanetCoordinate(); EventBus.Act(new WarningTextEvent(UITextInfo.PlanetText));  break;
         }
 
     }
