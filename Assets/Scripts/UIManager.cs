@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum UITextInfo{PlanetText, AsteroidText, solarFlare, CometText, StationImage}
+public enum UITextInfo{PlanetText, AsteroidText, Sun, CometText, StationImage, Fuel, Temp, Repairs}
 
 public class UIManager : MonoBehaviour, IObserver
 {
@@ -115,29 +115,37 @@ public class UIManager : MonoBehaviour, IObserver
         switch (data.info)
         {
             case UITextInfo.PlanetText: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
-            case UITextInfo.AsteroidText: StartCoroutine(EvokeText(data.info, WarningText, "Asteroid Incoming", 0.5f, data.Direction)); break;
-            case UITextInfo.CometText:StartCoroutine(EvokeText(data.info, WarningText, "Comet Incoming", 0.5f, data.Direction)); break;
-            case UITextInfo.solarFlare: StartCoroutine(EvokeText(data.info, WarningText, "SolarFlare Incoming", 0.5f, data.Direction)); break;
-            case UITextInfo.StationImage: StartCoroutine(EvokeText(data.info, StationText, "Space-Station Nearby", 3f, data.Direction)); break;
+
+            case UITextInfo.AsteroidText: EvokeTextSeq(data.info, WarningText, "Asteroid Incoming", 0.5f, data.Direction); break;
+
+            case UITextInfo.CometText:EvokeTextSeq(data.info, WarningText, "Comet Incoming", 0.5f, data.Direction); break;
+
+            case UITextInfo.Sun: EvokeTextSeq(data.info, WarningText, "Star Nearby", 0.5f, data.Direction); break;
+
+            case UITextInfo.StationImage: EvokeTextSeq(data.info, StationText, "Space-Station Nearby", 3f, data.Direction); break;
+
+            case UITextInfo.Fuel: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Refueled", 0.5f));break;
+
+            case UITextInfo.Temp: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Temperature Cooled", 0.5f));break;
+
+            case UITextInfo.Repairs:StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Repaired", 0.5f)); break;
         }
     } 
 
-    private IEnumerator EvokeText(UITextInfo type,RectTransform element, string text, float duration, Vector3 dir)
+    private void EvokeTextSeq(UITextInfo type,RectTransform element, string text, float duration, Vector3 dir)
     {
         element.DOKill();
 
         CanvasGroup group = element.GetComponent<CanvasGroup>(); 
-        if(group == null) yield break;
-
-        group.alpha = 1f;
+        if(group == null) return;
 
         TMP_Text font = element.GetComponentInChildren<TMP_Text>();
-        if(font == null) yield break;
+        if(font == null) return;
 
         font.text = text;
 
         Image arrow = element.GetComponentInChildren<Image>();
-        if(arrow == null) yield break;
+        if(arrow == null) return;
 
         float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
 
@@ -148,6 +156,7 @@ public class UIManager : MonoBehaviour, IObserver
 
         arrow.rectTransform.localRotation = Quaternion.Euler(0,0, angle);      
        
+        group.alpha = 1f;
         element.gameObject.SetActive(true);
 
         Vector3 orignalScale = element.transform.localScale;
@@ -155,14 +164,14 @@ public class UIManager : MonoBehaviour, IObserver
 
         element.DOScale(orignalScale, 0.5f).SetEase(Ease.OutBack);
 
-        yield return new WaitForSeconds(duration);
+        Sequence textSequence = DOTween.Sequence();
 
-        group.DOFade(0f, 0.5f).OnComplete(() => 
-        {
-        group.gameObject.SetActive(false);
-        });
+        textSequence.SetId(element); 
 
-       // Debug.Log("done");
+        textSequence.Append(element.transform.DOScale(orignalScale, 0.5f).SetEase(Ease.OutBack))
+                .AppendInterval(duration) // This replaces WaitForSeconds
+                .Append(group.DOFade(0f, 0.5f))
+                .OnComplete(() => group.gameObject.SetActive(false));
 
     }
 
