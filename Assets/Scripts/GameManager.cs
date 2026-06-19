@@ -48,12 +48,10 @@ public class GameManager : MonoBehaviour
         
         DetermineGame(data.GameEvent);
     }
-    //  private void Update()
-    //  {
-
-    //   if (currentGameState == GameState.Ongoing)TimerToReachPlanet += Time.deltaTime;   
-
-    //  }
+     private void Update()
+     {
+      if (currentGameState == GameState.Ongoing)TimerToReachPlanet += Time.deltaTime;   
+     }
 
     private void setPlanetCoordinate()
     {
@@ -75,33 +73,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         setPlanetCoordinate();
+        UnityEngine.Debug.Log(currentGameState);
         //StartCoroutine(StartDelivery());
-    }
-     
-
-    private IEnumerator StartDelivery()
-    {
-        yield return new WaitForSeconds(0.5f);
-        float timer = 3;
-        int lastDisplayedTime = -1;
-
-        while (timer > 0)
-        {
-
-            timer -= Time.deltaTime;
-            int currentTime = Mathf.CeilToInt(timer);
-
-            if (currentTime != lastDisplayedTime)
-            {
-                lastDisplayedTime = currentTime;
-            }
-            
-            yield return null;
-        }
-        
-        
-       currentGameState = GameState.Ongoing; 
-       
     }
 
     private void DetermineGame(GameState state)
@@ -111,6 +84,7 @@ public class GameManager : MonoBehaviour
             case GameState.Success: StartCoroutine(setSuccessScreen());  break;
             case GameState.Fail: currentGameState = state; Fail(damagedTo); break;
             case GameState.Delivered: setPlanetCoordinate(); EventBus.Act(new WarningTextEvent(UITextInfo.PlanetText));  break;
+            case GameState.Ongoing: currentGameState = state;  EventBus.Act(new endGameUI(GameState.Ongoing)); break;
         }
 
     }
@@ -119,7 +93,7 @@ public class GameManager : MonoBehaviour
     {
         EventBus.Act(new EndGameEvent(GameState.Success,StopShip.stop, true));
         yield return new WaitForSeconds(1f);
-        EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done", TimerToReachPlanet));
+        EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done. ", TimerToReachPlanet));
     }
 
     private void Fail(Damagedby damagedby)

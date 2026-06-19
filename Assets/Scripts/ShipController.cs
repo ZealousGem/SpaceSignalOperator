@@ -40,9 +40,9 @@ public class ShipController : MonoBehaviour
 
     protected Rigidbody rb; 
 
-    private const float ThrusterSize = 1.5f;
+    protected const float ThrusterSize = 1.5f;
 
-    private float currentThrust = ThrusterSize;
+    private float currentThrust = 0f;
     
     private bool isRotating = false;
 
@@ -73,8 +73,11 @@ public class ShipController : MonoBehaviour
 
     private void retriveInputSingal(setInput data)=> RecieveSingals(data.action);
 
-    private void GetPlanetCoordinates(GetTransformOfObject Destination)=> PlanetCoordinates = Destination.PlanetCoordinates;
-    
+    private void GetPlanetCoordinates(GetTransformOfObject Destination)
+    {
+         PlanetCoordinates = Destination.PlanetCoordinates;
+         EvokeDistanceBetweenShipandPlanet();
+    }
 
     protected virtual void RecieveSingals(SignalDirections dir)
     {

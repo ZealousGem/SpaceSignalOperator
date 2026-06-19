@@ -4,7 +4,7 @@ public class PauseMenu : BaseMainMenu
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private bool isPaused = false;
-    private bool isOver = false;
+    private bool isOver = true;
 
     protected override void retrieveData(endGameUI data)
     {

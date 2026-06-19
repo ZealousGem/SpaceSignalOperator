@@ -65,19 +65,50 @@ public class DeliveryShip : ShipController
 
     private void StopShipEvent(EndGameEvent data)
     {
-        if (data.stop == StopShip.stop && data.GameEvent == GameState.Success)
+        if (data.GameEvent == GameState.Success && StopShip.stop == data.stop)
+        { 
+          SetShipAmount(true);
+        }
+
+        else if(data.GameEvent == GameState.Ongoing)
         {
-            Debug.Log(data.stop);
-            isOver = data.StopMoving;
+          SetShipAmount(false);
+        }  
+    }
 
-            ManageThrusters(0f);
+    private void SetShipAmount(bool state)
+    {  
+          isOver = state;
 
+         if (state)
+         {   
+           ManageThrusters(0f);
            ShipSpeed = 0f;
            rb.linearVelocity = Vector3.zero;
            rb.angularVelocity = Vector3.zero;
         }
-        
-        
+
+        else
+        {
+           ManageThrusters(ThrusterSize);
+           ShipSpeed = 3f;
+        }
+    }
+
+    private void Update()
+    {
+        if (!isOver)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                DamageShip(110f, Damagedby.Default);
+            }
+        }
+    }
+
+    private void Start()
+    {
+        SetShipAmount(true);
     }
 
     private void RetrieveData(StationEvent data)

@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour, IObserver
     public TMP_Text ShipHealth;
     public TMP_Text ShipTemperature;
     public TMP_Text LightYearsScale;
+    public TMP_Text Counter;
     public RectTransform WarningText;
     public RectTransform StationText;
     public TMP_Text DeliveredtoPlanetText;
@@ -21,6 +22,10 @@ public class UIManager : MonoBehaviour, IObserver
     public FuelGauge guage;
     public Image TempImage;
     public Image StaticScreen;
+
+    
+
+   // public TMP_Text CountDownText;
     
     private readonly float maxAlhpa = 7f / 255f;
 
@@ -69,6 +74,46 @@ public class UIManager : MonoBehaviour, IObserver
         }
 
     }
+
+    private IEnumerator StartDelivery()
+    {
+        yield return new WaitForSeconds(0.5f);
+        float timer = 3;
+        int lastDisplayedTime = -1;
+        
+
+        while (timer > 0)
+        {
+
+            timer -= Time.deltaTime;
+            int currentTime = Mathf.CeilToInt(timer);
+
+            if (currentTime != lastDisplayedTime)
+            {
+                lastDisplayedTime = currentTime;
+                setCounterAnimation(currentTime);
+            }
+            
+            yield return null;
+        }
+         
+         EventBus.Act(new EndGameEvent(GameState.Ongoing));
+       
+    }
+
+    private void setCounterAnimation(int currentTime)
+    {
+        if (currentTime != 0)
+        {
+             StartCoroutine(EvokeText(Counter, currentTime.ToString(), 0.5f));
+        }
+
+        else
+        {
+             StartCoroutine(EvokeText(Counter, "go!", 0.5f));
+        }
+       
+    }
     
 
     private void DisplayPlanetDirection(float pos, Vector3 dir)
@@ -108,6 +153,8 @@ public class UIManager : MonoBehaviour, IObserver
 
         ShipHealth.text =100.ToString()+"%";
         ShipTemperature.text =0.ToString() +"c";
+
+        StartCoroutine(StartDelivery());
     }
 
     private void ExtractUItext(UIinformation data)
