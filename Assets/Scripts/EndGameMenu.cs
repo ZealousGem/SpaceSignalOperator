@@ -57,6 +57,6 @@ public class EndGameMenu : BaseMainMenu
         Menu(true);
         Title.text = title;
         TimeSpan timeSpan = TimeSpan.FromSeconds(tim);
-        Reason.text = reason + "your time was: " + timeSpan.ToString();
+        Reason.text = reason + "Your time was: " + timeSpan.ToString();
     }
 }
