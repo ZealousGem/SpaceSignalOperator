@@ -4,6 +4,7 @@ using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class SettingsManager : BaseMainMenu
 {
@@ -60,7 +61,7 @@ public class SettingsManager : BaseMainMenu
     {
         QualityDropDown.ClearOptions();
 
-        List<string> options = new List<string>(QualitySettings.names);
+        List<string> options = new List<string>(QualitySettings.names.ToList());
         QualityDropDown.AddOptions(options);
 
         QualityDropDown.RefreshShownValue();
