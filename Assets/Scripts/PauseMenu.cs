@@ -6,6 +6,14 @@ public class PauseMenu : BaseMainMenu
     private bool isPaused = false;
     private bool isOver = true;
 
+    private inGameOptionsMenu optionsMenu;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        optionsMenu = GetComponent<inGameOptionsMenu>();
+    }
+
     protected override void retrieveData(endGameUI data)
     {
         if (data.gameState == GameState.Ongoing)
@@ -37,7 +45,7 @@ public class PauseMenu : BaseMainMenu
             UnPauseGame();
         }
 
-        else
+        else  
         {
             PauseGame();
         }
@@ -52,9 +60,28 @@ public class PauseMenu : BaseMainMenu
 
     public void UnPauseGame()
     {
-        Menu(false);
+        if (optionsMenu.menu.activeSelf && optionsMenu != null)
+        {
+          optionsMenu.Menu(false);  
+        }
+
+        else
+        {
+          Menu(false);
+        }
+       
         Time.timeScale = 1f;
         isPaused = false;
+    }
+
+    public void OptionsMenu()
+    {
+        inGameOptionsMenu OptionsMenu = GetComponent<inGameOptionsMenu>();
+
+        if(OptionsMenu == null) return;
+        
+        OptionsMenu.Menu(true);
+        Menu(false);
     }
 
 }

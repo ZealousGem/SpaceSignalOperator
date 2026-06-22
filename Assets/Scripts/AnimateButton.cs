@@ -30,6 +30,16 @@ public class AnimateButton : ButtonBase
         SetButtonAplha(false);
     }
 
+    private void OnDisable()
+    {
+        if (_routine != null)
+        {
+            StopCoroutine(_routine);
+            _routine = null;
+        }
+        transform.localScale = _baseScale;
+    }
+
     public override void Entered()
     {
         StartScaleTo(hoverScale);
@@ -79,6 +89,8 @@ public class AnimateButton : ButtonBase
 
     private void StartScaleTo(Vector3 target)
     {
+        if (!gameObject.activeInHierarchy) return;
+        
         if (_routine != null) StopCoroutine(_routine);
         _routine = StartCoroutine(ScaleTo(target));
     }

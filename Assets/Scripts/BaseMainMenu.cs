@@ -23,7 +23,7 @@ public class BaseMainMenu : MonoBehaviour
         Menu(false);
     }
     
-    protected virtual void Menu(bool state)
+    public virtual void Menu(bool state)
     {
         if(menu == null) return;
 

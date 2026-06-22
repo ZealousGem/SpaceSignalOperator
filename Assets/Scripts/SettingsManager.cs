@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsManager : BaseMainMenu
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Dropdown ResoluationDropDown;
+    public TMP_Dropdown ResoluationDropDown;
 
-    public Dropdown QualityDropDown;
+    public TMP_Dropdown QualityDropDown;
 
-    public Dropdown WindowScaleDropDown;
+    public TMP_Dropdown WindowScaleDropDown;
 
-    public Dropdown VsyncDropDown; 
+    public TMP_Dropdown VsyncDropDown; 
 
     private Resolution[] sizes;
-
-    private int resIndex = 0;
 
     protected override void Awake()
     {
@@ -41,6 +40,8 @@ public class SettingsManager : BaseMainMenu
 
         WindowScaleDropDown.AddOptions(Options);
 
+        WindowScaleDropDown.RefreshShownValue();
+
         WindowScaleDropDown.onValueChanged.AddListener(ChangeWindowScale);
     }
 
@@ -62,6 +63,8 @@ public class SettingsManager : BaseMainMenu
         List<string> options = new List<string>(QualitySettings.names);
         QualityDropDown.AddOptions(options);
 
+        QualityDropDown.RefreshShownValue();
+
         QualityDropDown.onValueChanged.AddListener(ChangeQuality);
     }
 
@@ -75,6 +78,17 @@ public class SettingsManager : BaseMainMenu
         VsyncDropDown.AddOptions(Options);
 
         VsyncDropDown.onValueChanged.AddListener(setVysnc);
+    }
+
+    public virtual void Back()
+    {
+        BaseMainMenu menu = GetComponent<BaseMainMenu>();
+
+        if(menu == null) return;
+
+        menu.Menu(true);
+        Menu(false);
+        
     }
 
     public void setVysnc(int index)
@@ -116,13 +130,13 @@ public class SettingsManager : BaseMainMenu
         }
 
         ResoluationDropDown.AddOptions(option);
-      //  dropdown.value = sizesIndex;
-        resIndex = sizesIndex;
-      //  dropdown.RefreshShownValue();
-       ResoluationDropDown.onValueChanged.AddListener(delegate { setSize(); });
+        ResoluationDropDown.value = sizesIndex;
+        ResoluationDropDown.RefreshShownValue();
+
+       ResoluationDropDown.onValueChanged.AddListener(setSize);
     }
 
-    public void setSize()
+    public void setSize(int index)
     {
         if (sizes == null || sizes.Length == 0) 
         {
@@ -130,7 +144,7 @@ public class SettingsManager : BaseMainMenu
         return;
         }
 
-        int safeIndex = Mathf.Clamp(resIndex, 0, sizes.Length - 1);
+        int safeIndex = Mathf.Clamp(index, 0, sizes.Length - 1);
         Resolution resolution = sizes[safeIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         //data.ResolutionInd = safeIndex;
