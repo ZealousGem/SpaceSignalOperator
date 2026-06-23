@@ -97,32 +97,34 @@ public class ShipController : MonoBehaviour
     private IEnumerator RotateShip(float amount, float duration, ButtonAnimations button, float ShipRoatationAmount)
     {
           //Debug.Log("rotating");
-          isRotating = true;
-          Movement.y = amount; 
-          Movement.z = ShipRoatationAmount;
+        isRotating = true;
+        Movement.y = amount; 
+        Movement.z = ShipRoatationAmount;
 
-           Quaternion startRotation = transform.rotation;
-           Quaternion EndRotation = startRotation * Quaternion.Euler(0, amount, 0);
-           //Quaternion EndRotation = startRotation * Quaternion.Euler(0, Movement.y, 0) * Quaternion.Euler(0,0, Movement.z);
+        Quaternion startRotation = transform.rotation;
+        Quaternion EndRotation = startRotation * Quaternion.Euler(0, amount, 0);
 
-          float timeElapsed = 0f;
-          
-          float currentTilt = 0f;
+        float timeElapsed = 0f;
+
+        if (!isMoving && currentThrust == 0f) ManageThrusters(ThrusterSize);
 
         while (timeElapsed < duration)
         {
              timeElapsed += Time.deltaTime;
              float t = timeElapsed / duration;
-             Quaternion rotate = Quaternion.Slerp(startRotation, EndRotation, t); 
-             
-             if(t <= 0.5f) currentTilt = Mathf.Lerp(0f, ShipRoatationAmount, t*2f);
-             else currentTilt = Mathf.Lerp(ShipRoatationAmount, 0f, (t - 0.5f)* 2f);
-             
-             Quaternion currentBank = Quaternion.Euler(0, 0, currentTilt);
+             Quaternion rotate = Quaternion.Slerp(startRotation, EndRotation, t);
+
+            float currentTilt;
+            if (t <= 0.5f) currentTilt = Mathf.Lerp(0f, ShipRoatationAmount, t * 2f);
+            else currentTilt = Mathf.Lerp(ShipRoatationAmount, 0f, (t - 0.5f) * 2f);
+
+            Quaternion currentBank = Quaternion.Euler(0, 0, currentTilt);
              rb.MoveRotation(rotate * currentBank);
              yield return null;
 
         }
+
+        if (!isMoving && currentThrust == ThrusterSize) ManageThrusters(0f); 
 
         rb.MoveRotation(EndRotation);
         isRotating = false; 
@@ -135,6 +137,8 @@ public class ShipController : MonoBehaviour
     {
         var mainModule = ShipThrusters[i].main;
         mainModule.startLifetime = new ParticleSystem.MinMaxCurve(amount);
+
+        currentThrust = amount;
     }
     }
 
