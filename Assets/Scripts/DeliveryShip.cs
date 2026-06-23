@@ -95,16 +95,16 @@ public class DeliveryShip : ShipController
         }
     }
 
-    private void Update()
-    {
-        if (!isOver)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                DamageShip(110f, Damagedby.Default);
-            }
-        }
-    }
+    // private void Update()
+    // {
+    //     if (!isOver)
+    //     {
+    //         if (Input.GetKeyDown(KeyCode.E))
+    //         {
+    //             DamageShip(110f, Damagedby.Default);
+    //         }
+    //     }
+    // }
 
     private void Start()
     {

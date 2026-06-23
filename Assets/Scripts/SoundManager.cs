@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public enum SoundType{NonDiagetic, Diagetic}
 
@@ -22,7 +23,7 @@ public class Sound
 
     public void setSource(AudioSource sourceClip)
     {
-        this.source = sourceClip;
+        source = sourceClip;
         source.clip = clip;
         source.volume = volume;
         maxvol = volume;
@@ -44,6 +45,31 @@ public class Sound
                 source.volume = maxvol;
             }
         }
+    }
+
+    public async void FadeOutTransition(float duration)
+    {
+        if(source == null) return;
+
+        float oringalsound = source.volume;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            if(source == null) return;
+
+            elapsed += Time.deltaTime;
+            source.volume = Mathf.Lerp(oringalsound, 0f, elapsed / duration);
+
+            await Task.Yield();
+        }
+
+        if (source != null)
+        {
+         source.Stop();
+         source.volume = oringalsound;    
+        }
+        
     }
 
     public void Stop()
@@ -83,6 +109,18 @@ public class SoundManager : Singleton<SoundManager>
             if (sounds[i].nameClip == name)
             {
                 sounds[i].Play();
+                return;
+            }
+        }
+    }
+
+    public void FadeOutTransition(string name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].nameClip == name)
+            {
+                sounds[i].Stop();
                 return;
             }
         }
