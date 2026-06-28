@@ -1,7 +1,9 @@
 using UnityEngine;
-using System.Threading.Tasks;
+using System.Collections;
 
 public enum SoundType{NonDiagetic, Diagetic}
+
+public enum SourceState{NotPlaying, isPlaying, Default}
 
 [System.Serializable]
 public class Sound
@@ -19,7 +21,12 @@ public class Sound
     
     public SoundType type;
 
+    public SourceState state;
+
     public bool isPlaying = false;
+
+    private Coroutine fadeCoroutine;
+    private Coroutine sfxCoroutine;
 
     public void setSource(AudioSource sourceClip)
     {
@@ -47,40 +54,95 @@ public class Sound
         }
     }
 
-    public async void FadeOutTransition(float duration)
+    public void PauseSource()
+    {
+         if(source == null) return;
+         source.Pause();
+    }
+
+    public void UnPuaseSource()
     {
         if(source == null) return;
+        source.UnPause();
+    }
+
+    public IEnumerator FadeOutTransition(float duration)
+    {
+        if(source == null) yield break;
 
         float oringalsound = source.volume;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            if(source == null) return;
+            if(source == null) yield break;
 
             elapsed += Time.deltaTime;
             source.volume = Mathf.Lerp(oringalsound, 0f, elapsed / duration);
 
-            await Task.Yield();
+            yield return null;
         }
 
         if (source != null)
         {
          source.Stop();
-         source.volume = oringalsound;    
+         source.volume = oringalsound; 
+
         }
+
+        state = SourceState.NotPlaying;
         
+    }
+
+    public void FadeCourtine(MonoBehaviour runningScript)
+    {
+        if (fadeCoroutine != null) runningScript.StopCoroutine(fadeCoroutine);
+            fadeCoroutine = runningScript.StartCoroutine(FadeOutTransition(1f));
     }
 
     public void Stop()
     {
         source.Stop();
+        if (state != SourceState.Default) state = SourceState.NotPlaying;      
     }
 
-    public void Play()
+    public void Play(MonoBehaviour runningScript)
+    {  
+          source.Play(); 
+          if(state != SourceState.Default) state = SourceState.isPlaying;   
+        
+
+        if(!loop || state == SourceState.Default)
+        {
+             if (sfxCoroutine != null) runningScript.StopCoroutine(sfxCoroutine);
+             sfxCoroutine = runningScript.StartCoroutine(PlaySFX());
+        }
+        
+    }
+
+    private IEnumerator PlaySFX()
     {
-        //Debug.Log("Playing sound: " + nameClip);
-        source.Play();
+        if(source == null) yield break;
+
+        while (source.time < source.clip.length)
+        {
+
+           if (state == SourceState.NotPlaying) yield break;
+           yield return null;
+        }
+
+        if (state == SourceState.isPlaying) state = SourceState.NotPlaying;
+        
+    }
+
+    public void PauseSound()
+    {
+        source.Pause();
+    }
+
+    public void UnpauseSound()
+    {
+        source.UnPause();
     }
 }
 
@@ -89,6 +151,11 @@ public class SoundManager : Singleton<SoundManager>
 
      [SerializeField]
      private Sound[] sounds;
+
+     public Sound[] GetSounds()
+    {
+        return sounds;
+    }
 
      void Start()
     {
@@ -108,7 +175,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             if (sounds[i].nameClip == name)
             {
-                sounds[i].Play();
+                sounds[i].Play(this);
                 return;
             }
         }
@@ -120,7 +187,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             if (sounds[i].nameClip == name)
             {
-                sounds[i].Stop();
+                sounds[i].FadeCourtine(this);
                 return;
             }
         }
@@ -149,8 +216,24 @@ public class SoundManager : Singleton<SoundManager>
     {
         for (int i = 0; i < sounds.Length; i++)
         {
-            if (sounds[i].type == SoundType.NonDiagetic)  sounds[i].SetVolume(vol);   
+            if (sounds[i].type == SoundType.NonDiagetic) sounds[i].SetVolume(vol);   
             
+        }
+    }
+
+    public void PauseAudio()
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if(sounds[i].state == SourceState.isPlaying) sounds[i].PauseSound();
+        }
+    }
+
+    public void UnPauseAudio()
+    {
+         for (int i = 0; i < sounds.Length; i++)
+        {
+            if(sounds[i].state == SourceState.isPlaying) sounds[i].UnpauseSound();
         }
     }
 }
