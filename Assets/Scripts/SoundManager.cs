@@ -26,6 +26,9 @@ public class Sound
     public bool isPlaying = false;
 
     private Coroutine fadeCoroutine;
+    
+    private Coroutine fadeOutCourtine;
+
     private Coroutine sfxCoroutine;
 
     public void setSource(AudioSource sourceClip)
@@ -94,7 +97,7 @@ public class Sound
         
     }
 
-    public void FadeCourtine(MonoBehaviour runningScript)
+    public void FadeOutCourtine(MonoBehaviour runningScript)
     {
         if (fadeCoroutine != null) runningScript.StopCoroutine(fadeCoroutine);
             fadeCoroutine = runningScript.StartCoroutine(FadeOutTransition(1f));
@@ -112,7 +115,7 @@ public class Sound
           if(state != SourceState.Default) state = SourceState.isPlaying;   
         
 
-        if(!loop || state == SourceState.Default)
+        if(!loop && state != SourceState.Default)
         {
              if (sfxCoroutine != null) runningScript.StopCoroutine(sfxCoroutine);
              sfxCoroutine = runningScript.StartCoroutine(PlaySFX());
@@ -166,7 +169,7 @@ public class SoundManager : Singleton<SoundManager>
             sounds[i].setSource(play.AddComponent<AudioSource>());
         }
 
-        PlaySound("theme");
+       // PlaySound("theme");
     }
 
     public void PlaySound(string name)
@@ -187,7 +190,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             if (sounds[i].nameClip == name)
             {
-                sounds[i].FadeCourtine(this);
+                sounds[i].FadeOutCourtine(this);
                 return;
             }
         }
