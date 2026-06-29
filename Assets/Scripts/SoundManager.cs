@@ -27,7 +27,7 @@ public class Sound
 
     private Coroutine fadeCoroutine;
     
-    private Coroutine fadeOutCourtine;
+    private Coroutine fadeInCourtine;
 
     private Coroutine sfxCoroutine;
 
@@ -97,10 +97,44 @@ public class Sound
         
     }
 
+    public IEnumerator FadeInTransition(float duration)
+    {
+        if(source == null) yield break;
+
+        float oringalsound = source.volume;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            if(source == null) yield break;
+
+            elapsed += Time.deltaTime;
+            source.volume = Mathf.Lerp(0f, oringalsound, elapsed / duration);
+
+            yield return null;
+        }
+
+        if (source != null)
+        {
+         source.Play();
+         source.volume = oringalsound; 
+
+        }
+
+        state = SourceState.isPlaying;
+        
+    }
+
     public void FadeOutCourtine(MonoBehaviour runningScript)
     {
         if (fadeCoroutine != null) runningScript.StopCoroutine(fadeCoroutine);
             fadeCoroutine = runningScript.StartCoroutine(FadeOutTransition(1f));
+    }
+
+     public void FadeInCourtine(MonoBehaviour runningScript)
+    {
+        if (fadeInCourtine != null) runningScript.StopCoroutine(fadeInCourtine);
+            fadeInCourtine= runningScript.StartCoroutine(FadeOutTransition(1f));
     }
 
     public void Stop()
@@ -191,6 +225,18 @@ public class SoundManager : Singleton<SoundManager>
             if (sounds[i].nameClip == name)
             {
                 sounds[i].FadeOutCourtine(this);
+                return;
+            }
+        }
+    }
+
+    public void FadeInTransition(string name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].nameClip == name)
+            {
+                sounds[i].FadeInCourtine(this);
                 return;
             }
         }

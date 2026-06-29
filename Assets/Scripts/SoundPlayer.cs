@@ -39,4 +39,18 @@ public static class SoundPlayer
           SoundManager.Instance.FadeOutTransition(name);
 
     }
+
+    public static void FadeInSound(string name)
+     {
+          if(SoundManager.Instance != null) return;
+
+          SoundManager.Instance.FadeInTransition(name);
+     }
+
+     public static void FadeOutSound(string name)
+     {
+          if(SoundManager.Instance != null) return;
+
+          SoundManager.Instance.FadeOutTransition(name);
+     }
 }
