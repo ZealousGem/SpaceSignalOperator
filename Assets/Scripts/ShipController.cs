@@ -86,8 +86,8 @@ public class ShipController : MonoBehaviour
         {
             case SignalDirections.Left: if(isRotating) return; StartCoroutine(RotateShip(-45f, RotationTime, ButtonAnimations.LeftButton, 25f)); break;
             case SignalDirections.Right:if(isRotating) return; StartCoroutine(RotateShip(45f, RotationTime, ButtonAnimations.RightButton, -25f));break; 
-            case SignalDirections.Stop: StartCoroutine(ManageShipSpeed(0.6f, 0f, 0f)); isMoving = false; break;
-            case SignalDirections.Move: StartCoroutine(ManageShipSpeed(0.3f, 3f, ThrusterSize)); isMoving = true; break;
+            case SignalDirections.Stop: StartCoroutine(ManageShipSpeed(0.6f, 0f, 0f));  SoundPlayer.StopSound("Thrusters"); isMoving = false; break;
+            case SignalDirections.Move: StartCoroutine(ManageShipSpeed(0.3f, 3f, ThrusterSize)); SoundPlayer.PlaySound("Thrusters"); isMoving = true; break;
             default: break;
         }
     }
@@ -106,7 +106,12 @@ public class ShipController : MonoBehaviour
 
         float timeElapsed = 0f;
 
-        if (!isMoving && currentThrust == 0f) ManageThrusters(ThrusterSize);
+        if (!isMoving && currentThrust == 0f)
+        {
+          ManageThrusters(ThrusterSize);
+          SoundPlayer.PlaySound("Thrusters");
+
+        }
 
         while (timeElapsed < duration)
         {
@@ -124,7 +129,11 @@ public class ShipController : MonoBehaviour
 
         }
 
-        if (!isMoving && currentThrust == ThrusterSize) ManageThrusters(0f); 
+        if (!isMoving && currentThrust == ThrusterSize)
+        {
+          ManageThrusters(0f); 
+          SoundPlayer.StopSound("Thrusters"); 
+        }  
 
         rb.MoveRotation(EndRotation);
         isRotating = false; 

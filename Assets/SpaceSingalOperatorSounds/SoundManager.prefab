@@ -45,11 +45,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   sounds:
-  - nameClip: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
+  - nameClip: AsteroidSignal
+    clip: {fileID: 8300000, guid: dedb357844eac644a968f801263b4713, type: 3}
+    volume: 0.501
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: AsteroidExplosion
+    clip: {fileID: 8300000, guid: d3ba2b5c4e27ebb429aa30628103bba4, type: 3}
+    volume: 0.501
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: SpaceShipExplosion
+    clip: {fileID: 8300000, guid: 630d55cbdfd84af438a3b2ca96332b9c, type: 3}
+    volume: 0.501
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: SpaceStationSound
+    clip: {fileID: 8300000, guid: 8c71522cc2847cb4f8ac5b298ea3ff00, type: 3}
+    volume: 0.501
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: StationFix
+    clip: {fileID: 8300000, guid: 43140f3a107fc7f4f9bb68a01530975b, type: 3}
+    volume: 0.501
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: PackageDevilvered
+    clip: {fileID: 8300000, guid: 87441fbacc1ff484ea375b669300b0e3, type: 3}
+    volume: 0.501
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: LevelComplete
+    clip: {fileID: 8300000, guid: 89ab36a382ae6fe46a20aceb7f1d1193, type: 3}
+    volume: 0.501
+    pitch: 1
     maxvol: 0
     loop: 0
     type: 0
+    state: 2
+    isPlaying: 0
+  - nameClip: LevelFailed
+    clip: {fileID: 8300000, guid: 1eb6be79f6e515d4e8b0cdda2dff04d3, type: 3}
+    volume: 0.501
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 0
+    state: 2
+    isPlaying: 0
+  - nameClip: Thrusters
+    clip: {fileID: 8300000, guid: 305777d51d2568245b36a01d0dc2396e, type: 3}
+    volume: 0.062
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: SignalButtonIn
+    clip: {fileID: 8300000, guid: 5a9d78b1df15a604784c60f944494e07, type: 3}
+    volume: 0.532
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: SignalButtonOut
+    clip: {fileID: 8300000, guid: acce83e1df0371848998be33f4259b1d, type: 3}
+    volume: 0.572
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
     isPlaying: 0

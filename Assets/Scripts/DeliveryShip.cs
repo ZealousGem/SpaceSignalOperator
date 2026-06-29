@@ -84,27 +84,32 @@ public class DeliveryShip : ShipController
          {   
            ManageThrusters(0f);
            ShipSpeed = 0f;
+
            rb.linearVelocity = Vector3.zero;
            rb.angularVelocity = Vector3.zero;
+
+           SoundPlayer.StopSound("Thrusters");
         }
 
         else
         {
            ManageThrusters(ThrusterSize);
            ShipSpeed = 3f;
+
+           SoundPlayer.PlaySound("Thrusters");
         }
     }
 
-    // private void Update()
-    // {
-    //     if (!isOver)
-    //     {
-    //         if (Input.GetKeyDown(KeyCode.E))
-    //         {
-    //             DamageShip(110f, Damagedby.Default);
-    //         }
-    //     }
-    // }
+    private void Update()
+    {
+        if (!isOver)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                DamageShip(110f, Damagedby.Default);
+            }
+        }
+    }
 
     private void Start()
     {
@@ -160,6 +165,8 @@ public class DeliveryShip : ShipController
         ShipTemp = 100f;
         isOver = true;
 
+        SoundPlayer.StopSound("Thrusters");
+
         ManageThrusters(0f);
 
         ShipSpeed = 0f;
@@ -181,6 +188,8 @@ public class DeliveryShip : ShipController
        // Debug.Log("ShipHealth: " + ShipHealth);
 
         if (ShipHealth > 0) return;
+
+        SoundPlayer.StopSound("Thrusters");
 
         ShipHealth = 0; 
         isOver = true; 
@@ -294,7 +303,9 @@ public class DeliveryShip : ShipController
     {
         Ship.SetActive(false);
         Explosion.SetActive(true);
+
         float timeElapsed = 0f;
+        SoundPlayer.PlaySound("SpaceShipExplosion");
 
         while (timeElapsed < duration)
         {

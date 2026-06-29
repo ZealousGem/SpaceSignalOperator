@@ -47,6 +47,8 @@ public class EndGameMenu : BaseMainMenu
     private void EvokeMenu(string title, string reason)
     {
         Menu(true);
+        SoundPlayer.PlaySound("LevelFailed");
+
         Title.text = title;
         Reason.text = reason;
 
@@ -56,6 +58,9 @@ public class EndGameMenu : BaseMainMenu
     {
         Menu(true);
         Title.text = title;
+
+        SoundPlayer.PlaySound("LevelComplete");
+
         TimeSpan timeSpan = TimeSpan.FromSeconds(tim);
         Reason.text = reason + "Your time was: " + timeSpan.ToString();
     }

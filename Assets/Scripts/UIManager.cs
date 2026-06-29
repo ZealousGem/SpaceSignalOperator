@@ -161,21 +161,21 @@ public class UIManager : MonoBehaviour, IObserver
     {
         switch (data.info)
         {
-            case UITextInfo.PlanetText: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
+            case UITextInfo.PlanetText: SoundPlayer.PlaySound("PackageDevilvered"); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
 
-            case UITextInfo.AsteroidText: EvokeTextSeq(data.info, WarningText, "Asteroid Incoming", 0.5f, data.Direction); break;
+            case UITextInfo.AsteroidText: SoundPlayer.PlaySound("AsteroidSignal"); EvokeTextSeq(data.info, WarningText, "Asteroid Incoming", 0.5f, data.Direction); break;
 
-            case UITextInfo.CometText:EvokeTextSeq(data.info, WarningText, "Comet Incoming", 0.5f, data.Direction); break;
+            case UITextInfo.CometText: SoundPlayer.PlaySound("AsteroidSignal"); EvokeTextSeq(data.info, WarningText, "Comet Incoming", 0.5f, data.Direction); break;
 
             case UITextInfo.Sun: EvokeTextSeq(data.info, WarningText, "Star Nearby", 0.5f, data.Direction); break;
 
-            case UITextInfo.StationImage: EvokeTextSeq(data.info, StationText, "Space-Station Nearby", 3f, data.Direction); break;
+            case UITextInfo.StationImage: SoundPlayer.PlaySound("SpaceStationSound"); EvokeTextSeq(data.info, StationText, "Space-Station Nearby", 3f, data.Direction); break;
 
-            case UITextInfo.Fuel: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Refueled", 0.5f));break;
+            case UITextInfo.Fuel: SoundPlayer.PlaySound("StationFix"); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Refueled", 0.5f));break;
 
-            case UITextInfo.Temp: StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Temperature Cooled", 0.5f));break;
+            case UITextInfo.Temp: SoundPlayer.PlaySound("StationFix"); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Temperature Cooled", 0.5f));break;
 
-            case UITextInfo.Repairs:StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Repaired", 0.5f)); break;
+            case UITextInfo.Repairs: SoundPlayer.PlaySound("StationFix"); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Repaired", 0.5f)); break;
         }
     } 
 

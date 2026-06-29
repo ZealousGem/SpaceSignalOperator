@@ -134,7 +134,7 @@ public class Sound
      public void FadeInCourtine(MonoBehaviour runningScript)
     {
         if (fadeInCourtine != null) runningScript.StopCoroutine(fadeInCourtine);
-            fadeInCourtine= runningScript.StartCoroutine(FadeOutTransition(1f));
+            fadeInCourtine= runningScript.StartCoroutine(FadeInTransition(1f));
     }
 
     public void Stop()

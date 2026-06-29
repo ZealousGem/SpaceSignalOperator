@@ -51,6 +51,7 @@ public class BaseSignalButton : MonoBehaviour
 
       if (data.action ==buttonType)
       {
+         SoundPlayer.PlaySound("SignalButtonIn");
          StartCoroutine(ButtonUpSequence());
       }
       //Debug.Log(gameObject.name + "pressed");
@@ -60,6 +61,7 @@ public class BaseSignalButton : MonoBehaviour
    protected void OnMouseDown()
    {
       if(Time.timeScale == 0f) return;
+      SoundPlayer.PlaySound("SignalButtonOut");
       StartCoroutine(ButtonDownSequence());
      // Debug.Log(gameObject.name + "pressed");
       
@@ -78,7 +80,6 @@ public class BaseSignalButton : MonoBehaviour
 
    private IEnumerator ButtonDownSequence()
    {
-    // 'yield return' tells the code to wait until the MoveButton Coroutine finishes
     yield return StartCoroutine(MoveButton(0.2f, DownPos));
     yield return StartCoroutine(MoveButton(0.02f, LittleUpDownPos));
     yield return StartCoroutine(MoveButton(0.01f, DownPos));

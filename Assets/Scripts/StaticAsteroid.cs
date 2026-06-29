@@ -63,6 +63,7 @@ public class StaticAsteroid : BaseObstacle
         if (other.gameObject.tag == "Player")
         {
             rotationSpeed = 0; 
+            SoundPlayer.PlaySound("AsteroidExplosion");
             StartCoroutine(Explosion(duration));
         }
      
