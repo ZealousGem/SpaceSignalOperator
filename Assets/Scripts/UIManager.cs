@@ -209,11 +209,6 @@ public class UIManager : MonoBehaviour, IObserver
         group.alpha = 1f;
         element.gameObject.SetActive(true);
 
-    //     Vector3 orignalScale = element.transform.localScale;
-    //   //  element.transform.localScale = Vector3.zero;
-
-    //     element.DOScale(orignalScale, 0.5f).SetEase(Ease.OutBack);
-
         Sequence textSequence = DOTween.Sequence();
 
         textSequence.SetId(element); 

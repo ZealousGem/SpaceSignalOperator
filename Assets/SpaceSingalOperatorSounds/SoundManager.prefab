@@ -64,7 +64,7 @@ MonoBehaviour:
     state: 0
     isPlaying: 0
   - nameClip: SpaceShipExplosion
-    clip: {fileID: 8300000, guid: 630d55cbdfd84af438a3b2ca96332b9c, type: 3}
+    clip: {fileID: 8300000, guid: f6e76c2affdcf0a43954cfd5c522a49c, type: 3}
     volume: 0.501
     pitch: 1
     maxvol: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
     state: 2
     isPlaying: 0
   - nameClip: Thrusters
-    clip: {fileID: 8300000, guid: 305777d51d2568245b36a01d0dc2396e, type: 3}
+    clip: {fileID: 8300000, guid: 33cd1907257e4e44d990f0a53e0a597c, type: 3}
     volume: 0.062
     pitch: 1
     maxvol: 0
@@ -141,6 +141,24 @@ MonoBehaviour:
     pitch: 1
     maxvol: 0
     loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: Counter
+    clip: {fileID: 8300000, guid: 6f67a53d99b94c547b5f9e2cd22a7be1, type: 3}
+    volume: 0.572
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: AmbientSounds
+    clip: {fileID: 8300000, guid: 6be0e51ba5b3d6549b83134ea9acd491, type: 3}
+    volume: 0.572
+    pitch: 1
+    maxvol: 0
+    loop: 1
     type: 1
     state: 0
     isPlaying: 0
