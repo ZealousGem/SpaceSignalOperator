@@ -155,7 +155,7 @@ MonoBehaviour:
     isPlaying: 0
   - nameClip: AmbientSounds
     clip: {fileID: 8300000, guid: 6be0e51ba5b3d6549b83134ea9acd491, type: 3}
-    volume: 0.572
+    volume: 0.292
     pitch: 1
     maxvol: 0
     loop: 1

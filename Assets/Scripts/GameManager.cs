@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         setPlanetCoordinate();
         UnityEngine.Debug.Log(currentGameState);
+        SoundPlayer.PlaySound("AmbientSounds");
         //StartCoroutine(StartDelivery());
     }
 

@@ -105,11 +105,13 @@ public class UIManager : MonoBehaviour, IObserver
     {
         if (currentTime != 0)
         {
+             SoundPlayer.PlaySound("Counter");
              StartCoroutine(EvokeText(Counter, currentTime.ToString(), 0.5f));
         }
 
         else
         {
+             SoundPlayer.PlaySound("Counter");
              StartCoroutine(EvokeText(Counter, "go!", 0.5f));
         }
        
