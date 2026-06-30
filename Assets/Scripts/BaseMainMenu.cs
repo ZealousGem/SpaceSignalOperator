@@ -30,6 +30,10 @@ public class BaseMainMenu : MonoBehaviour
         menu.SetActive(state);
     }
 
-    public void ReturnToMainMenu() => SceneManager.LoadScene(1);
+    public void ReturnToMainMenu()
+    {
+        SoundPlayer.StopAllInGameSounds();
+        SceneManager.LoadScene(1);
+    } 
     
 }

@@ -65,6 +65,8 @@ public class UIManager : MonoBehaviour, IObserver
 
              float duration = 0.2f;
              StaticScreen.gameObject.transform.DOScale(orignalScale,duration).From(Vector3.zero).SetEase(Ease.OutBack); 
+
+             SoundPlayer.PlaySound("Static");
             // Debug.Log("transition");    
         }
      

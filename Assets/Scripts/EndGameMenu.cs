@@ -36,11 +36,13 @@ public class EndGameMenu : BaseMainMenu
 
     private void NextLevel()
     {
+         SoundPlayer.StopAllInGameSounds();
          SceneManager.LoadScene(2);
     }
 
     private void ResetLevel()
     {
+        SoundPlayer.StopAllInGameSounds();
         SceneManager.LoadScene(1);
     }
 

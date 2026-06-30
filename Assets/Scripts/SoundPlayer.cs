@@ -31,15 +31,6 @@ public static class SoundPlayer
 
          SoundManager.Instance.UnPauseAudio();
     } 
-
-    public static void FadeoutSong(string name)
-    {
-          if(SoundManager.Instance == null) return;
-          
-          SoundManager.Instance.FadeOutTransition(name);
-
-    }
-
     public static void FadeInSound(string name)
      {
           if(SoundManager.Instance == null) return;
@@ -52,5 +43,12 @@ public static class SoundPlayer
           if(SoundManager.Instance == null) return;
 
           SoundManager.Instance.FadeOutTransition(name);
+     }
+
+     public static void StopAllInGameSounds()
+     {
+        if(SoundManager.Instance == null) return;
+
+         SoundManager.Instance.StopAllSounds();
      }
 }

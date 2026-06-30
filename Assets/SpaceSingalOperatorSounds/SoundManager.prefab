@@ -162,3 +162,12 @@ MonoBehaviour:
     type: 1
     state: 0
     isPlaying: 0
+  - nameClip: Static
+    clip: {fileID: 8300000, guid: 589436d21fac6f54fbb06eecb1179843, type: 3}
+    volume: 0.015
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 1
+    state: 0
+    isPlaying: 0

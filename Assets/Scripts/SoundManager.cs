@@ -153,9 +153,7 @@ public class Sound
         {
              if (sfxCoroutine != null) runningScript.StopCoroutine(sfxCoroutine);
              sfxCoroutine = runningScript.StartCoroutine(PlaySFX());
-        }
-
-       
+        }   
         
     }
 
@@ -199,7 +197,7 @@ public class SoundManager : Singleton<SoundManager>
      public override void Awake()
     {
         base.Awake();
-        
+
         for (int i = 0; i < sounds.Length; i++)
         {
             GameObject play = new GameObject("Sound : " + i + " : " + sounds[i].nameClip);
@@ -217,7 +215,6 @@ public class SoundManager : Singleton<SoundManager>
             if (sounds[i].nameClip == name)
             {
                 sounds[i].Play(this);
-                if (name == "AmbientSounds") Debug.Log("playing ambientSound");
                 return;
             }
         }
@@ -288,6 +285,17 @@ public class SoundManager : Singleton<SoundManager>
          for (int i = 0; i < sounds.Length; i++)
         {
             if(sounds[i].state == SourceState.isPlaying) sounds[i].UnpauseSound();
+        }
+    }
+
+     public void StopAllSounds()
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].state == SourceState.isPlaying)
+            {
+                sounds[i].Stop();
+            }
         }
     }
 }
