@@ -14,7 +14,11 @@ public class GameManager : MonoBehaviour
 
     private GameState currentGameState = GameState.Start;
 
-    private Damagedby damagedTo; 
+    private Damagedby damagedTo;
+
+    public string Song; 
+
+    public static string SongName;
 
     public List<DeliveredPlanet> Planets;
 
@@ -22,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     protected virtual void Awake()
     {
+        SongName = Song;
         AddPlanetsToQueue();
     }
 
@@ -64,9 +69,11 @@ public class GameManager : MonoBehaviour
         }
     
         DeliveredPlanet Planet = PlanetObjectives.Dequeue();
-        UnityEngine.Debug.Log(Planet.gameObject.name);
+        //UnityEngine.Debug.Log(Planet.gameObject.name);
         Planet.setTargetPlanet();
-        EventBus.Act(new GetTransformOfObject(Planet.gameObject.transform));      
+
+        EventBus.Act(new GetTransformOfObject(Planet.gameObject.transform));   
+        EventBus.Act(new WarningTextEvent(UITextInfo.PlanetText));   
        
     }
 
@@ -75,7 +82,7 @@ public class GameManager : MonoBehaviour
         setPlanetCoordinate();
         UnityEngine.Debug.Log(currentGameState);
        // SoundPlayer.PlaySound("AmbientSounds");
-        SoundPlayer.PlaySound("Level2Song");
+        SoundPlayer.PlaySound(SongName);
         //StartCoroutine(StartDelivery());
     }
 
@@ -85,7 +92,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Success: StartCoroutine(setSuccessScreen());  break;
             case GameState.Fail: currentGameState = state; Fail(damagedTo); break;
-            case GameState.Delivered: setPlanetCoordinate(); EventBus.Act(new WarningTextEvent(UITextInfo.PlanetText));  break;
+            case GameState.Delivered: setPlanetCoordinate(); break;
             case GameState.Ongoing: currentGameState = state;  EventBus.Act(new endGameUI(GameState.Ongoing)); break;
         }
 
@@ -96,19 +103,26 @@ public class GameManager : MonoBehaviour
         EventBus.Act(new EndGameEvent(GameState.Success,StopShip.stop, true));
         yield return new WaitForSeconds(1f);
         
-        SoundPlayer.StopSound("Level2Song");
+        SoundPlayer.StopSound(SongName);
         EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done. ", TimerToReachPlanet));
     }
 
     private void Fail(Damagedby damagedby)
     {
+       // SoundPlayer.StopSound(SongName);
+
         switch (damagedby)
         {
             case Damagedby.Blackhole: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "Your Delivery has been lost into the depths of a black hole, good luck getting that back."));  break;
+
             case Damagedby.NeutronStar: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "You sent the ship too close to a neutron star disintigrating it to pieces.")); break;
+
             case Damagedby.BurnUp: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "You failed to check your ship's temperature leaving it to burn up and losing the goods.")); break;
+
             case Damagedby.FlewAway: EventBus.Act(new endGameUI(GameState.Fail, "Ship Missing", "where the fuck are you going???")); break;
+            
             case Damagedby.Default: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "You forgot that asteroids and debris exists, maybe dodge it next time.")); break;
+
             case Damagedby.OringalPlanet: EventBus.Act(new endGameUI(GameState.Fail, "Fired", "You lazy mother fucker you still got other planets to head to, no slacking.")); break;
         }
     }

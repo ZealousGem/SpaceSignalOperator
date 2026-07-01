@@ -10038,7 +10038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SolarFlare
   Damage: 20
-  action: 2
+  action: 3
   Object: {fileID: 2605564613796060743}
   ExplosionEffect: {fileID: 5328368691063160258}
   rb: {fileID: 5413652984376997255}

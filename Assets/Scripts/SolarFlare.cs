@@ -18,6 +18,7 @@ public class SolarFlare : Pulsar
         if (other.gameObject.tag == "Player")
         {
             rb.linearVelocity = Vector3.zero; 
+            SoundPlayer.PlaySound("AsteroidExplosion");
             StartCoroutine(Explosion(duration));
         }
 

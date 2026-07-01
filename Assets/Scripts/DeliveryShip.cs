@@ -39,7 +39,7 @@ public class DeliveryShip : ShipController
     public VisualEffect burningVFX;
     private readonly string OrangeHexidicaml = "#BF2C03";
 
-    private readonly string blueHexidicaml = "#18D4EA";
+    private readonly string BlueHexidicaml = "#18D4EA";
 
     private  readonly float intensity = 1f;
 
@@ -165,7 +165,7 @@ public class DeliveryShip : ShipController
         ShipTemp = 100f;
         isOver = true;
 
-        SoundPlayer.StopSound("Level2Song");
+        SoundPlayer.StopSound(GameManager.SongName);
         SoundPlayer.StopSound("Thrusters");
 
         ManageThrusters(0f);
@@ -191,7 +191,7 @@ public class DeliveryShip : ShipController
         if (ShipHealth > 0) return;
 
         SoundPlayer.StopSound("Thrusters");
-        SoundPlayer.StopSound("Level2Song");
+        SoundPlayer.StopSound(GameManager.SongName);
 
         ShipHealth = 0; 
         isOver = true; 
@@ -238,7 +238,7 @@ public class DeliveryShip : ShipController
 
     private void ObliterateShip()
     {
-         StartCoroutine(DissolveShip(dissolveRate, refreshRate, blueHexidicaml));
+         StartCoroutine(DissolveShip(dissolveRate, refreshRate, BlueHexidicaml));
          subject.TellObervers(new EvokeSpawnScreen{action = true, timer = 1.5f});
          EventBus.Act(new EndGameEvent(Damagedby.NeutronStar, GameState.Fail));
     }

@@ -52,6 +52,7 @@ public class AnimateButton : ButtonBase
 
     public override void Clicked()
     {
+        SetButtonAplha(false);
         StartScaleTo(pressedScale);
     }
 
