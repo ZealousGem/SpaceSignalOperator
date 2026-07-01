@@ -171,3 +171,21 @@ MonoBehaviour:
     type: 1
     state: 0
     isPlaying: 0
+  - nameClip: BurnShip
+    clip: {fileID: 8300000, guid: 652816a996fb8d34e8eaa7aa46858795, type: 3}
+    volume: 0.508
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    type: 1
+    state: 0
+    isPlaying: 0
+  - nameClip: Level2Song
+    clip: {fileID: 8300000, guid: 8d5804b5a7ac772418a861a94b071fc5, type: 3}
+    volume: 0.135
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 1
+    state: 0
+    isPlaying: 0

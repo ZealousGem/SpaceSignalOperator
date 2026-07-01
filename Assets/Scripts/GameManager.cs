@@ -74,7 +74,8 @@ public class GameManager : MonoBehaviour
     {
         setPlanetCoordinate();
         UnityEngine.Debug.Log(currentGameState);
-        SoundPlayer.PlaySound("AmbientSounds");
+       // SoundPlayer.PlaySound("AmbientSounds");
+        SoundPlayer.PlaySound("Level2Song");
         //StartCoroutine(StartDelivery());
     }
 
@@ -94,6 +95,8 @@ public class GameManager : MonoBehaviour
     {
         EventBus.Act(new EndGameEvent(GameState.Success,StopShip.stop, true));
         yield return new WaitForSeconds(1f);
+        
+        SoundPlayer.StopSound("Level2Song");
         EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done. ", TimerToReachPlanet));
     }
 

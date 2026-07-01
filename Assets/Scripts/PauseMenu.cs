@@ -54,6 +54,8 @@ public class PauseMenu : BaseMainMenu
     private void PauseGame()
     {
         Menu(true);
+        SoundPlayer.PauseSound();
+
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -69,7 +71,8 @@ public class PauseMenu : BaseMainMenu
         {
           Menu(false);
         }
-       
+        
+        SoundPlayer.UnpauseSound();
         Time.timeScale = 1f;
         isPaused = false;
     }

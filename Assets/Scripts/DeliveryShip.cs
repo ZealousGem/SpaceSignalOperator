@@ -165,6 +165,7 @@ public class DeliveryShip : ShipController
         ShipTemp = 100f;
         isOver = true;
 
+        SoundPlayer.StopSound("Level2Song");
         SoundPlayer.StopSound("Thrusters");
 
         ManageThrusters(0f);
@@ -190,6 +191,7 @@ public class DeliveryShip : ShipController
         if (ShipHealth > 0) return;
 
         SoundPlayer.StopSound("Thrusters");
+        SoundPlayer.StopSound("Level2Song");
 
         ShipHealth = 0; 
         isOver = true; 
@@ -285,6 +287,8 @@ public class DeliveryShip : ShipController
         }
 
         float counter = 0;
+
+        SoundPlayer.PlaySound("BurnShip");
 
         while (ShipMaterial.materials[0].GetFloat("_DissolveAmount") < 1)
         {
