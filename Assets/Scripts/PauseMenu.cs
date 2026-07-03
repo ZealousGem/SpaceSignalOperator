@@ -73,6 +73,7 @@ public class PauseMenu : BaseMainMenu
         }
         
         SoundPlayer.UnpauseSound();
+        
         Time.timeScale = 1f;
         isPaused = false;
     }

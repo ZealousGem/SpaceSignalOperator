@@ -53,10 +53,10 @@ public class GameManager : MonoBehaviour
         
         DetermineGame(data.GameEvent);
     }
-     private void Update()
-     {
+    private void Update()
+    {
       if (currentGameState == GameState.Ongoing)TimerToReachPlanet += Time.deltaTime;   
-     }
+    }
 
     private void setPlanetCoordinate()
     {
@@ -64,17 +64,22 @@ public class GameManager : MonoBehaviour
         {
            currentGameState = GameState.Success;
            UnityEngine.Debug.Log(PlanetObjectives.Count);
+
            DetermineGame(currentGameState);
+           EventBus.Act(new WarningTextEvent(UITextInfo.PlanetLeftText, 0));
+
            return;     
         }
+
+        if(currentGameState == GameState.Start) EventBus.Act(new WarningTextEvent(UITextInfo.PlanetLeftText, PlanetObjectives.Count));
+
+        if(currentGameState == GameState.Ongoing) EventBus.Act(new WarningTextEvent(UITextInfo.PlanetText, PlanetObjectives.Count));
     
         DeliveredPlanet Planet = PlanetObjectives.Dequeue();
         //UnityEngine.Debug.Log(Planet.gameObject.name);
         Planet.setTargetPlanet();
 
-        EventBus.Act(new GetTransformOfObject(Planet.gameObject.transform));   
-        EventBus.Act(new WarningTextEvent(UITextInfo.PlanetText));   
-       
+        EventBus.Act(new GetTransformOfObject(Planet.gameObject.transform));               
     }
 
     private void Start()
@@ -91,8 +96,11 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Success: StartCoroutine(setSuccessScreen());  break;
+
             case GameState.Fail: currentGameState = state; Fail(damagedTo); break;
-            case GameState.Delivered: setPlanetCoordinate(); break;
+
+            case GameState.Delivered: setPlanetCoordinate();break;
+
             case GameState.Ongoing: currentGameState = state;  EventBus.Act(new endGameUI(GameState.Ongoing)); break;
         }
 
@@ -101,7 +109,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator setSuccessScreen()
     {
         EventBus.Act(new EndGameEvent(GameState.Success,StopShip.stop, true));
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         
         SoundPlayer.StopSound(SongName);
         EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done. ", TimerToReachPlanet));

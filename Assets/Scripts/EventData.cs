@@ -155,8 +155,6 @@ public class endGameUI: EventData
         Title = title;
         Reason = reason;
         Amount = timer;
-
-
     }
 }
 
@@ -166,9 +164,17 @@ public class WarningTextEvent : EventData
 
     public BaseObstacle obstacle;
 
+    public int PlanetsLeft;
+
     public WarningTextEvent(UITextInfo uITextInfo)
     {
         textInfo = uITextInfo;
+    }
+
+    public WarningTextEvent(UITextInfo uITextInfo, int _PlanetLeft)
+    {
+        textInfo = uITextInfo;
+        PlanetsLeft = _PlanetLeft;
     }
 
     public WarningTextEvent(UITextInfo uITextInfo, BaseObstacle _obstacle)

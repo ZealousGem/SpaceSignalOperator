@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum UITextInfo{PlanetText, AsteroidText, Sun, CometText, StationImage, Fuel, Temp, Repairs}
+public enum UITextInfo{PlanetText, AsteroidText, Sun, CometText, StationImage, Fuel, Temp, Repairs, PlanetLeftText}
 
 public class UIManager : MonoBehaviour, IObserver
 {
@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour, IObserver
     public TMP_Text ShipHealth;
     public TMP_Text ShipTemperature;
     public TMP_Text LightYearsScale;
+    public TMP_Text PlanetsLeft;
     public TMP_Text Counter;
     public RectTransform WarningText;
     public RectTransform StationText;
@@ -165,7 +166,7 @@ public class UIManager : MonoBehaviour, IObserver
     {
         switch (data.info)
         {
-            case UITextInfo.PlanetText: SoundPlayer.PlaySound("PackageDevilvered"); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
+            case UITextInfo.PlanetText: SoundPlayer.PlaySound("PackageDevilvered"); PlanetsLeft.text = "Planets Left " +  data.count.ToString(); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
 
             case UITextInfo.AsteroidText: SoundPlayer.PlaySound("AsteroidSignal"); EvokeTextSeq(data.info, WarningText, "Asteroid Incoming", 0.5f, data.Direction); break;
 
@@ -180,6 +181,8 @@ public class UIManager : MonoBehaviour, IObserver
             case UITextInfo.Temp: SoundPlayer.PlaySound("StationFix"); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Temperature Cooled", 0.5f));break;
 
             case UITextInfo.Repairs: SoundPlayer.PlaySound("StationFix"); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Repaired", 0.5f)); break;
+
+            case UITextInfo.PlanetLeftText: PlanetsLeft.text = "Planets Left " +  data.count.ToString(); break;
         }
     } 
 

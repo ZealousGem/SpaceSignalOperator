@@ -211,7 +211,12 @@ public class ShipController : MonoBehaviour
     {
         if (data.textInfo == UITextInfo.PlanetText)
         {
-             subject.TellObervers(new UIinformation{info = data.textInfo});
+             subject.TellObervers(new UIinformation{info = data.textInfo, count = data.PlanetsLeft});
+        }
+
+        else if (data.textInfo == UITextInfo.PlanetLeftText)
+        {
+            subject.TellObervers(new UIinformation{info = data.textInfo, count = data.PlanetsLeft});
         }
 
         else

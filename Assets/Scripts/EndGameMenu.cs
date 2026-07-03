@@ -64,6 +64,7 @@ public class EndGameMenu : BaseMainMenu
         SoundPlayer.PlaySound("LevelComplete");
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(tim);
-        Reason.text = reason + "Your time was: " + timeSpan.ToString();
+        
+        Reason.text = reason + "Your time was " + timeSpan.ToString(@"mm\:ss\:fff");
     }
 }
