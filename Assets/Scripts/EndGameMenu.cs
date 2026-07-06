@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,6 +10,24 @@ public class EndGameMenu : BaseMainMenu
     public Button MenuButton; 
     public TMP_Text Title;
     public TMP_Text Reason;
+    public GameObject StarBorder;
+    public GameObject Stars;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        HandleStarSystem(false);
+    }
+
+    private void HandleStarSystem(bool state)
+    {
+        if(StarBorder == null || Stars == null) throw new InvalidOperationException("Stars is not instantiated.");
+
+        if(!StarBorder.activeSelf || !Stars.activeSelf) return;
+
+        StarBorder.SetActive(state);
+        Stars.SetActive(state);
+    }
 
     protected override void retrieveData(endGameUI data)
     {
@@ -43,7 +62,10 @@ public class EndGameMenu : BaseMainMenu
     private void ResetLevel()
     {
         SoundPlayer.StopAllInGameSounds();
-        SceneManager.LoadScene(1);
+        
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     private void EvokeMenu(string title, string reason)
@@ -63,8 +85,25 @@ public class EndGameMenu : BaseMainMenu
 
         SoundPlayer.PlaySound("LevelComplete");
 
+        
+
         TimeSpan timeSpan = TimeSpan.FromSeconds(tim);
         
         Reason.text = reason + "Your time was " + timeSpan.ToString(@"mm\:ss\:fff");
+    }
+
+    private void StarRating(int amount)
+    {
+        HandleStarSystem(true);
+
+        GameObject[] ColouredStars = Stars.GetComponentsInChildren<GameObject>();
+
+        if(amount > ColouredStars.Length) amount = ColouredStars.Length;
+
+        for (int i = 0; i < amount; i++)
+        {
+            ColouredStars[i].SetActive(true);
+        }  
+
     }
 }
