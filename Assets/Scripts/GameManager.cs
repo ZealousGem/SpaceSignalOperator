@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     public string Song; 
 
+    public int HighScore, SecondaryScore;
+
     public static string SongName;
 
     public List<DeliveredPlanet> Planets;
@@ -112,7 +114,17 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         
         SoundPlayer.StopSound(SongName);
-        EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done. ", TimerToReachPlanet));
+
+        int amount = 1;
+
+        if (TimerToReachPlanet < HighScore) amount = 3;
+
+        else if(TimerToReachPlanet >= HighScore && TimerToReachPlanet < SecondaryScore) amount = 2;
+
+        
+        
+
+        EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done. ", TimerToReachPlanet, amount));
     }
 
     private void Fail(Damagedby damagedby)

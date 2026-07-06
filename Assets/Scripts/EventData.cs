@@ -137,6 +137,8 @@ public class endGameUI: EventData
 
     public float Amount;
 
+    public int StarRating;
+
     public endGameUI(GameState _gameState)
     {
         gameState = _gameState;
@@ -149,12 +151,13 @@ public class endGameUI: EventData
         Reason = reason;
     }
 
-    public endGameUI(GameState _gameState, string title, string reason, float timer)
+    public endGameUI(GameState _gameState, string title, string reason, float timer, int amount)
     {
         gameState = _gameState;
         Title = title;
         Reason = reason;
         Amount = timer;
+        StarRating = amount;
     }
 }
 

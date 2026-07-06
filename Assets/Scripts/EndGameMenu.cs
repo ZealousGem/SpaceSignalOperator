@@ -12,13 +12,6 @@ public class EndGameMenu : BaseMainMenu
     public TMP_Text Reason;
     public GameObject StarBorder;
     public GameObject Stars;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        HandleStarSystem(false);
-    }
-
     private void HandleStarSystem(bool state)
     {
         if(StarBorder == null || Stars == null) throw new InvalidOperationException("Stars is not instantiated.");
@@ -33,7 +26,7 @@ public class EndGameMenu : BaseMainMenu
     {
         setButtonClickLinster(data.gameState);
 
-        if (data.gameState == GameState.Success) EvokeMenu(data.Title, data.Reason, data.Amount);
+        if (data.gameState == GameState.Success) EvokeMenu(data.Title, data.Reason, data.Amount, data.StarRating);
         else if (data.gameState == GameState.Fail) EvokeMenu(data.Title, data.Reason);
         
     }
@@ -78,14 +71,14 @@ public class EndGameMenu : BaseMainMenu
 
     }
 
-    protected void EvokeMenu(string title, string reason, float tim)
+    protected void EvokeMenu(string title, string reason, float tim, int StarAmount)
     {
         Menu(true);
         Title.text = title;
 
         SoundPlayer.PlaySound("LevelComplete");
 
-        
+        StarRating(StarAmount);
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(tim);
         
@@ -94,15 +87,19 @@ public class EndGameMenu : BaseMainMenu
 
     private void StarRating(int amount)
     {
-        HandleStarSystem(true);
+        if (!Stars.activeSelf || !StarBorder.activeSelf)
+        {
+          HandleStarSystem(true); 
+        }
 
-        GameObject[] ColouredStars = Stars.GetComponentsInChildren<GameObject>();
+        int totalStars = Stars.transform.childCount;
 
-        if(amount > ColouredStars.Length) amount = ColouredStars.Length;
+        if(amount > totalStars) amount = totalStars;
 
         for (int i = 0; i < amount; i++)
         {
-            ColouredStars[i].SetActive(true);
+            Transform childStar = Stars.transform.GetChild(i);
+            childStar.gameObject.SetActive(i < amount);
         }  
 
     }
