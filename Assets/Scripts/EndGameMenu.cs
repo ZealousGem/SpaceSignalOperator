@@ -49,7 +49,7 @@ public class EndGameMenu : BaseMainMenu
     private void NextLevel()
     {
          SoundPlayer.StopAllInGameSounds();
-         SceneManager.LoadScene(2);
+       //  SceneManager.LoadScene(2);
     }
 
     private void ResetLevel()
@@ -58,11 +58,16 @@ public class EndGameMenu : BaseMainMenu
         
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        SceneManager.LoadScene(currentSceneIndex);
+        LoadingNextScene.LoadScene(currentSceneIndex);
     }
 
     private void EvokeMenu(string title, string reason)
     {
+        if (Stars.activeSelf || StarBorder.activeSelf)
+        {
+          HandleStarSystem(false); 
+        }
+
         Menu(true);
         SoundPlayer.PlaySound("LevelFailed");
 

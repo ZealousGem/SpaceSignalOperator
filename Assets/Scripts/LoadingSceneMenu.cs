@@ -33,18 +33,30 @@ public class LoadingSceneMenu : BaseMainMenu
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneId);
 
-        asyncOperation.allowSceneActivation = true;
+        asyncOperation.allowSceneActivation = false;
 
         float progressValue = 0f;
 
-        while (!asyncOperation.isDone)
+        while (LoadingBar.fillAmount < 1f)
         {
-            progressValue = Mathf.Clamp01(asyncOperation.progress / 0.9f);
+            if (asyncOperation.progress < 0.9f)
+            {
+              progressValue = Mathf.Clamp01(asyncOperation.progress / 0.9f);    
+            }
+
+
+            else
+            {
+                progressValue = 1f;
+            }
+            
 
             LoadingBar.fillAmount = Mathf.MoveTowards(LoadingBar.fillAmount, progressValue, Time.deltaTime * smoothSpeed);
 
             yield return null;
         }
 
+       yield return new WaitForSeconds(0.1f);
+       asyncOperation.allowSceneActivation = true;
     }
 }

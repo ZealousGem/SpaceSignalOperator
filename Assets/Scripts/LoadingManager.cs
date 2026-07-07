@@ -21,6 +21,6 @@ public static class LoadingNextScene
     public static void LoadScene(int SceneNo)
     {
         if(LoadingManager.Instance == null) return;
-        LoadScene(SceneNo);
+        LoadingManager.Instance.LoadScene(SceneNo);
     }
 }
