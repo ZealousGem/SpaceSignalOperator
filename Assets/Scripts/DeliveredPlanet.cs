@@ -7,6 +7,7 @@ public class DeliveredPlanet : BasePlanet
     private Material outlineMaterial;
     private readonly float outlineSize = 1.02f;
     private readonly float planetradius = 7.79f;
+    private readonly float interactablePlanetRadius = 12.44f; 
     private float currentPlanet = 0f;
     private bool interactablePlanet = false;
     private SphereCollider sphereCollider;
@@ -15,7 +16,9 @@ public class DeliveredPlanet : BasePlanet
     {
 
       base.Awake();
+      
       sphereCollider = gameObject.GetComponent<SphereCollider>(); 
+      sphereCollider.radius = planetradius;
        
     } 
 
@@ -51,6 +54,8 @@ public class DeliveredPlanet : BasePlanet
     {
       interactablePlanet = true;  
       currentPlanet = outlineSize;
+
+      sphereCollider.radius = interactablePlanetRadius;
 
         if (mesh.gameObject.activeSelf)
         {

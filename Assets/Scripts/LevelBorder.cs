@@ -14,7 +14,7 @@ public class LevelBorder : MonoBehaviour
 
         switch (selectedBorder)
         {
-            case Border.innerBorder: break;
+            case Border.innerBorder: EventBus.Act(new WarningTextEvent(UITextInfo.MapWarning)); break;
             case Border.outerBorder: EventBus.Act(new DamageShip(Damagedby.FlewAway, 100f)); PassedBorder = true;break; 
         }
     }

@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum UITextInfo{PlanetText, AsteroidText, Sun, CometText, StationImage, Fuel, Temp, Repairs, PlanetLeftText}
+public enum UITextInfo{PlanetText, AsteroidText, Sun, CometText, StationImage, Fuel, Temp, Repairs, PlanetLeftText, MapWarning}
 
 public class UIManager : MonoBehaviour, IObserver
 {
@@ -183,6 +183,8 @@ public class UIManager : MonoBehaviour, IObserver
             case UITextInfo.Repairs: SoundPlayer.PlaySound("StationFix"); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Space-Ship Repaired", 0.5f)); break;
 
             case UITextInfo.PlanetLeftText: PlanetsLeft.text = "Planets Left " +  data.count.ToString(); break;
+
+            case UITextInfo.MapWarning: StartCoroutine(EvokeText(DeliveredtoPlanetText, "You are too far away from our Space HQ Radius, Turn Around!", 3f)); break;
         }
     } 
 
