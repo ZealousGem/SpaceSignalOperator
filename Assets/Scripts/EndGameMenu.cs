@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,7 +27,7 @@ public class EndGameMenu : BaseMainMenu
     {
         setButtonClickLinster(data.gameState);
 
-        if (data.gameState == GameState.Success) EvokeMenu(data.Title, data.Reason, data.Amount, data.StarRating);
+        if (data.gameState == GameState.Success) EvokeMenu(data.Title, data.Reason, data.Amount, data.StarRating, data.scoreList);
         else if (data.gameState == GameState.Fail) EvokeMenu(data.Title, data.Reason);
         
     }
@@ -63,12 +64,10 @@ public class EndGameMenu : BaseMainMenu
 
     private void EvokeMenu(string title, string reason)
     {
-        if (Stars.activeSelf || StarBorder.activeSelf)
-        {
-          HandleStarSystem(false); 
-        }
-
         Menu(true);
+
+        if (Stars.activeSelf || StarBorder.activeSelf) HandleStarSystem(false); 
+
         SoundPlayer.PlaySound("LevelFailed");
 
         Title.text = title;
@@ -76,36 +75,58 @@ public class EndGameMenu : BaseMainMenu
 
     }
 
-    protected void EvokeMenu(string title, string reason, float tim, int StarAmount)
+    protected void EvokeMenu(string title, string reason, float tim, int StarAmount, List<float> ScoreList)
     {
         Menu(true);
         Title.text = title;
 
         SoundPlayer.PlaySound("LevelComplete");
 
-        StarRating(StarAmount);
+        StarRating(StarAmount, ScoreList);
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(tim);
         
         Reason.text = reason + "Your time was " + timeSpan.ToString(@"mm\:ss\:fff");
     }
 
-    private void StarRating(int amount)
+    private void StarRating(int amount, List<float> ScoreAmount)
     {
-        if (!Stars.activeSelf || !StarBorder.activeSelf)
-        {
-          HandleStarSystem(true); 
-        }
+        if(ScoreAmount == null || StarBorder == null || ScoreAmount == null) return;
 
+        if (!Stars.activeSelf || !StarBorder.activeSelf) HandleStarSystem(true); 
+        
         int totalStars = Stars.transform.childCount;
+        int borderStarAmount = StarBorder.transform.childCount;
 
-        if(amount > totalStars) amount = totalStars;
+        amount = Mathf.Clamp(amount, 0, Mathf.Min(totalStars, borderStarAmount));
+       // Debug.Log(amount);
 
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < totalStars; i++)
         {
             Transform childStar = Stars.transform.GetChild(i);
             childStar.gameObject.SetActive(i < amount);
+
+            if (i > 0 && i <= ScoreAmount.Count)
+            {
+                Transform star = StarBorder.transform.GetChild(i);
+                DisplayStarTimer(ScoreAmount[i-1], star.gameObject);
+            }        
+            
         }  
+
+    }
+
+    private void DisplayStarTimer(float timer, GameObject Star)
+    {
+      
+      if(Star == null) throw new Exception("What Star Lol");
+      
+      TMP_Text timeUi = Star.GetComponentInChildren<TMP_Text>();
+
+      if(timeUi == null) throw new Exception("Text does not Exist");
+      
+      TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+      timeUi.text = timeSpan.ToString(@"mm\:ss");
 
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EventData
@@ -139,6 +140,8 @@ public class endGameUI: EventData
 
     public int StarRating;
 
+    public List<float> scoreList;
+
     public endGameUI(GameState _gameState)
     {
         gameState = _gameState;
@@ -151,13 +154,14 @@ public class endGameUI: EventData
         Reason = reason;
     }
 
-    public endGameUI(GameState _gameState, string title, string reason, float timer, int amount)
+    public endGameUI(GameState _gameState, string title, string reason, float timer, int amount, List<float> _scoreList)
     {
         gameState = _gameState;
         Title = title;
         Reason = reason;
         Amount = timer;
         StarRating = amount;
+        scoreList = _scoreList;
     }
 }
 

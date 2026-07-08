@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     public string Song; 
 
-    public int HighScore, SecondaryScore;
+    public float HighScore, SecondaryScore;
 
     public static string SongName;
 
@@ -119,12 +119,18 @@ public class GameManager : MonoBehaviour
 
         if (TimerToReachPlanet < HighScore) amount = 3;
 
-        else if(TimerToReachPlanet >= HighScore && TimerToReachPlanet < SecondaryScore) amount = 2;
+        else if(TimerToReachPlanet < SecondaryScore) amount = 2;
 
-        
-        
+        List<float> ScoreList = new()
+        {
+             SecondaryScore,
+             HighScore
+        };
 
-        EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done. ", TimerToReachPlanet, amount));
+        EventBus.Act(new endGameUI(GameState.Success, "Packages Successfully Delivered", "All Packages have been delivered to the Planets Well Done. ", 
+        TimerToReachPlanet, amount, ScoreList));
+
+       // UnityEngine.Debug.Log(TimerToReachPlanet);
     }
 
     private void Fail(Damagedby damagedby)
