@@ -51,4 +51,18 @@ public static class SoundPlayer
 
          SoundManager.Instance.StopAllSounds();
      }
+
+     public static void PlayDialogueSound(Sound Clip)
+     {
+          if(SoundManager.Instance == null) return;
+
+          SoundManager.Instance.PlayDialogueClip(Clip);
+     }
+
+     public static void StopDialogueSound()
+     {
+          if(SoundManager.Instance == null) return;
+
+          SoundManager.Instance.StopDialogue();
+     }
 }

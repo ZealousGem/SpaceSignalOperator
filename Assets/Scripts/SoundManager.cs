@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum SoundType{NonDiagetic, Diagetic}
 
@@ -30,6 +31,8 @@ public class Sound
     private Coroutine fadeInCourtine;
 
     private Coroutine sfxCoroutine;
+
+     private Coroutine DialogueCoroutine;
 
     public void setSource(AudioSource sourceClip)
     {
@@ -157,6 +160,15 @@ public class Sound
         
     }
 
+    public void PlayDialogue(MonoBehaviour runningScript)
+    {
+        source.Play();
+        if(state != SourceState.Default) state = SourceState.isPlaying;
+        
+         if (DialogueCoroutine != null) runningScript.StopCoroutine(DialogueCoroutine);
+             DialogueCoroutine = runningScript.StartCoroutine(PlayDialogueClip());
+    }
+
     private IEnumerator PlaySFX()
     {
         if(source == null) yield break;
@@ -171,6 +183,19 @@ public class Sound
         if (state == SourceState.isPlaying) state = SourceState.NotPlaying;
         
     }
+
+     private IEnumerator PlayDialogueClip()
+     {
+        if(source == null) yield break;
+
+         while (source.time < source.clip.length)
+        {
+           if (state == SourceState.NotPlaying) yield break; 
+           yield return null;
+        }
+
+        if (state == SourceState.isPlaying) state = SourceState.NotPlaying;
+     }
 
     public void PauseSound()
     {
@@ -189,11 +214,12 @@ public class SoundManager : Singleton<SoundManager>
      [SerializeField]
      private Sound[] sounds;
 
+     private Sound DialogueSound;
+
      public Sound[] GetSounds()
     {
         return sounds;
     }
-
      public override void Awake()
     {
         base.Awake();
@@ -204,9 +230,21 @@ public class SoundManager : Singleton<SoundManager>
             play.transform.SetParent(this.transform);
             sounds[i].setSource(play.AddComponent<AudioSource>());
         }
-
+          
+            GameObject DialoguePlay = new GameObject("Dialogue : AudioSource");
+            DialoguePlay.transform.SetParent(this.transform);
+            DialogueSound.setSource(DialoguePlay.AddComponent<AudioSource>());
        // PlaySound("theme");
     }
+
+    public void PlayDialogueClip(Sound SoundClip)
+    {
+        DialogueSound.clip = SoundClip.clip;
+        DialogueSound.PlayDialogue(this);
+
+    }
+
+    public void StopDialogue()=>  DialogueSound.Stop();
 
     public void PlaySound(string name)
     {
@@ -219,6 +257,7 @@ public class SoundManager : Singleton<SoundManager>
             }
         }
     }
+    
 
     public void FadeOutTransition(string name)
     {
