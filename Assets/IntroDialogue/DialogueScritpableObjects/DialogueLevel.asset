@@ -12,4 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd20afc55e26974198aa9b1c0c0eedf, type: 3}
   m_Name: DialogueLevel
   m_EditorClassIdentifier: Assembly-CSharp::LevelSubtitleDialogueObject
-  AudioClip: []
+  AudioClip:
+  - AudioClip:
+      nameClip: example
+      clip: {fileID: 0}
+      volume: 0
+      pitch: 0
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Hello

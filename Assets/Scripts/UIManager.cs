@@ -5,11 +5,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum UITextInfo{PlanetText, AsteroidText, Sun, CometText, StationImage, Fuel, Temp, Repairs, PlanetLeftText, MapWarning}
+public enum UITextInfo{PlanetText, AsteroidText, Sun, CometText, StationImage, Fuel, Temp, Repairs, PlanetLeftText, MapWarning, Counter}
 
 public class UIManager : MonoBehaviour, IObserver
 {
-    
     public UIObersver subject;
     public TMP_Text ShipHealth;
     public TMP_Text ShipTemperature;
@@ -23,11 +22,6 @@ public class UIManager : MonoBehaviour, IObserver
     public FuelGauge guage;
     public Image TempImage;
     public Image StaticScreen;
-
-    
-
-   // public TMP_Text CountDownText;
-    
     private readonly float maxAlhpa = 7f / 255f;
 
     private void OnEnable() => subject.AddObersver(this); 
@@ -147,7 +141,6 @@ public class UIManager : MonoBehaviour, IObserver
 
         TempImage.color = colour;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         ActivateStaticScreen(false);
@@ -185,6 +178,8 @@ public class UIManager : MonoBehaviour, IObserver
             case UITextInfo.PlanetLeftText: PlanetsLeft.text = "Planets Left " +  data.count.ToString(); break;
 
             case UITextInfo.MapWarning: StartCoroutine(EvokeText(DeliveredtoPlanetText, "You are too far away from our Space HQ Radius, Turn Around!", 3f)); break;
+
+            case UITextInfo.Counter: StartCoroutine(StartDelivery()); break;
         }
     } 
 

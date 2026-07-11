@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 
-public enum GameState { Start, Ongoing, Fail, Success, Pause, Delivered};
+public enum GameState { Start, Ongoing, Fail, Success, Pause, Delivered, Dialogue};
 
 public class GameManager : MonoBehaviour
 {
@@ -87,10 +87,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         setPlanetCoordinate();
-        UnityEngine.Debug.Log(currentGameState);
-       // SoundPlayer.PlaySound("AmbientSounds");
+      //  UnityEngine.Debug.Log(currentGameState)
+      // EventBus.Act(new endGameUI(GameState.Dialogue));
         SoundPlayer.PlaySound(SongName);
-        //StartCoroutine(StartDelivery());
+      
     }
 
     private void DetermineGame(GameState state)

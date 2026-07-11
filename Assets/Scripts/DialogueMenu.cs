@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DialogueMenu : BaseMainMenu
@@ -9,6 +11,7 @@ public class DialogueMenu : BaseMainMenu
 
     public TMP_Text Subtitles;
     public string LevelName;
+    public UIObersver Subject;
     public LevelSubtitleDialogueObject LevelDialogue;
     private Queue<Dialogue> DiaologueClips = new Queue<Dialogue>();
 
@@ -18,7 +21,25 @@ public class DialogueMenu : BaseMainMenu
     protected override void Awake()
     {
         addDialogueToQueue();
-        UpdateDialogueSequence();
+       // UpdateDialogueSequence();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+    }
+
+    protected override void retrieveData(endGameUI data)
+    {
+        if (data.gameState == GameState.Dialogue)
+        {
+            UpdateDialogueSequence();
+        }
     }
 
     private void addDialogueToQueue()
@@ -63,5 +84,9 @@ public class DialogueMenu : BaseMainMenu
         }
 
         Menu(false);
+
+        if(Subject == null) throw new Exception("Observer has not been instantied, add the component retard");
+
+        Subject.TellObervers(new UIinformation{info = UITextInfo.Counter});
     }
 }

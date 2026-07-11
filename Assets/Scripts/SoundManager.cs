@@ -164,9 +164,15 @@ public class Sound
     {
         source.Play();
         if(state != SourceState.Default) state = SourceState.isPlaying;
-        
-         if (DialogueCoroutine != null) runningScript.StopCoroutine(DialogueCoroutine);
-             DialogueCoroutine = runningScript.StartCoroutine(PlayDialogueClip());
+
+        if(!loop && state != SourceState.Default)
+        {
+
+          if (DialogueCoroutine != null) runningScript.StopCoroutine(DialogueCoroutine);
+             DialogueCoroutine = runningScript.StartCoroutine(PlayDialogueClip());   
+
+        } 
+         
     }
 
     private IEnumerator PlaySFX()
@@ -195,6 +201,7 @@ public class Sound
         }
 
         if (state == SourceState.isPlaying) state = SourceState.NotPlaying;
+        EventBus.Act(new endGameUI(GameState.Dialogue));
      }
 
     public void PauseSound()
@@ -214,7 +221,7 @@ public class SoundManager : Singleton<SoundManager>
      [SerializeField]
      private Sound[] sounds;
 
-     private Sound DialogueSound;
+     private Sound DialogueSound = new Sound();
 
      public Sound[] GetSounds()
     {
@@ -240,8 +247,9 @@ public class SoundManager : Singleton<SoundManager>
     public void PlayDialogueClip(Sound SoundClip)
     {
         DialogueSound.clip = SoundClip.clip;
-        DialogueSound.PlayDialogue(this);
+        DialogueSound.volume = SoundClip.volume;
 
+        DialogueSound.PlayDialogue(this);
     }
 
     public void StopDialogue()=>  DialogueSound.Stop();
