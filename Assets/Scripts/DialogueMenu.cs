@@ -11,7 +11,7 @@ public class DialogueMenu : BaseMainMenu
 
     public TMP_Text Subtitles;
     public string LevelName;
-    public UIObersver Subject;
+    private UIObersver Subject;
     public LevelSubtitleDialogueObject LevelDialogue;
     private Queue<Dialogue> DiaologueClips = new Queue<Dialogue>();
 
@@ -20,20 +20,9 @@ public class DialogueMenu : BaseMainMenu
 
     protected override void Awake()
     {
+        Subject = GameObject.FindWithTag("Manager").GetComponent<UIObersver>();
         addDialogueToQueue();
-       // UpdateDialogueSequence();
     }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-    }
-
     protected override void retrieveData(endGameUI data)
     {
         if (data.gameState == GameState.Dialogue)
