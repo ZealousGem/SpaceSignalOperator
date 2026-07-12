@@ -7,22 +7,15 @@ using UnityEngine;
 
 public class DialogueMenu : BaseMainMenu
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     public TMP_Text Subtitles;
-    public string LevelName;
     private UIObersver Subject;
     public LevelSubtitleDialogueObject LevelDialogue;
     private Queue<Dialogue> DiaologueClips = new Queue<Dialogue>();
-
     private void PlayText(string text) => Subtitles.text = text;
     private void ClearText() => Subtitles.text = "";
 
-    protected override void Awake()
-    {
-        Subject = GameObject.FindWithTag("Manager").GetComponent<UIObersver>();
-        addDialogueToQueue();
-    }
+    protected override void Awake() => Subject = GameObject.FindWithTag("Manager").GetComponent<UIObersver>();
+    private void Start() => addDialogueToQueue();
     protected override void retrieveData(endGameUI data)
     {
         if (data.gameState == GameState.Dialogue)
@@ -33,10 +26,19 @@ public class DialogueMenu : BaseMainMenu
 
     private void addDialogueToQueue()
     {
+        if(LevelDialogue == null)
+        {
+            EndDialogue();
+           // Debug.Log("dialogue is done");
+            return;
+        }
+
         for (int i = 0; i < LevelDialogue.AudioClip.Count;)
         {
             DiaologueClips.Enqueue(LevelDialogue.AudioClip[i]);
         }
+
+        if(!menu.activeSelf && DiaologueClips.Count != 0) Menu(true); 
     }
 
     private void UpdateDialogueSequence()
@@ -65,6 +67,7 @@ public class DialogueMenu : BaseMainMenu
     public void EndDialogue()
     {
         ClearText();
+
         if (DiaologueClips.Count != 0)
         {
           DiaologueClips.Clear();
@@ -77,5 +80,7 @@ public class DialogueMenu : BaseMainMenu
         if(Subject == null) throw new Exception("Observer has not been instantied, add the component retard");
 
         Subject.TellObervers(new UIinformation{info = UITextInfo.Counter});
+
+       // Debug.Log("donr");
     }
 }

@@ -152,11 +152,12 @@ public class UIManager : MonoBehaviour, IObserver
         ShipHealth.text =100.ToString()+"%";
         ShipTemperature.text =0.ToString() +"c";
 
-        StartCoroutine(StartDelivery());
+      //  StartCoroutine(StartDelivery());
     }
 
     private void ExtractUItext(UIinformation data)
     {
+      //  Debug.Log(data.info);
         switch (data.info)
         {
             case UITextInfo.PlanetText: SoundPlayer.PlaySound("PackageDevilvered"); PlanetsLeft.text = "Planets Left " +  data.count.ToString(); StartCoroutine(EvokeText(DeliveredtoPlanetText, "Package Delivered, Next Planet Coordinates are in", 3f)); break;
