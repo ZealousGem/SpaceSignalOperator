@@ -49,7 +49,14 @@ public class BaseSignalButton : MonoBehaviour
         EventBus.Unsubscribe<EndGameEvent>(SetGameState);
     }
 
-    private void SetGameState(EndGameEvent gameState) => this.gameState = gameState.GameEvent;
+    private void SetGameState(EndGameEvent gameState) 
+    {
+      if (gameState.GameEvent != GameState.Delivered)
+      {
+          this.gameState = gameState.GameEvent; 
+      }   
+      
+    }
 
     private void RetrieveData(ButtonEvent data)
    {

@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartLevel()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1f);
         EventBus.Act(new endGameUI(GameState.Dialogue));
     }
 

@@ -39,8 +39,6 @@ public class DialogueMenu : BaseMainMenu
             DiaologueClips.Enqueue(LevelDialogue.AudioClip[i]);
         }
 
-        if(!menu.activeSelf && DiaologueClips.Count != 0) Menu(true);
-
         if(RingUi.gameObject.activeSelf) RingUi.gameObject.SetActive(false); 
 
        // Debug.Log("dialogue is done");
@@ -61,7 +59,7 @@ public class DialogueMenu : BaseMainMenu
         if(RingUi == null) yield break;
 
        // Debug.Log("playing ringing");
-
+        Menu(true);
         ClearText();
         
         currentDialogue = DiaologueClips.Dequeue();
