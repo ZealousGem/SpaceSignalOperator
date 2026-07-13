@@ -45,6 +45,11 @@ public class Sound
         source.loop = loop;
     }
 
+    public AudioSource getSource()
+    {
+        return source;
+    }
+
     public void SetVolume(float vol)
     {
         if (source != null)
@@ -143,7 +148,8 @@ public class Sound
     public void Stop()
     {
         source.Stop();
-        if (state != SourceState.Default) state = SourceState.NotPlaying;      
+        if (state != SourceState.Default) state = SourceState.NotPlaying;  
+           
     }
 
     public void Play(MonoBehaviour runningScript)
@@ -192,7 +198,7 @@ public class Sound
 
      private IEnumerator PlayDialogueClip()
      {
-        if(source == null) yield break;
+        if(source == null) throw new UnityException("source is null");
 
          while (source.time < source.clip.length)
         {
@@ -202,6 +208,8 @@ public class Sound
 
         if (state == SourceState.isPlaying) state = SourceState.NotPlaying;
         EventBus.Act(new endGameUI(GameState.Dialogue));
+
+       // Debug.Log("PlayedDialogue");
      }
 
     public void PauseSound()
@@ -246,13 +254,24 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayDialogueClip(Sound SoundClip)
     {
-        DialogueSound.clip = SoundClip.clip;
-        DialogueSound.volume = SoundClip.volume;
+      DialogueSound.clip = SoundClip.clip;
+      DialogueSound.volume = SoundClip.volume;
+      DialogueSound.pitch = SoundClip.pitch; 
+      DialogueSound.loop = SoundClip.loop;
+      DialogueSound.state = SoundClip.state;
+    
+      DialogueSound.setSource(DialogueSound.getSource());
 
-        DialogueSound.PlayDialogue(this);
+      DialogueSound.PlayDialogue(this);
+//      Debug.Log("playing clip");
     }
 
     public void StopDialogue()=>  DialogueSound.Stop();
+
+    public Sound GetDialogueSoundProperty()
+   {
+    return DialogueSound;
+   }
 
     public void PlaySound(string name)
     {

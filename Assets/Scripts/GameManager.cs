@@ -90,7 +90,15 @@ public class GameManager : MonoBehaviour
       //  UnityEngine.Debug.Log(currentGameState)
       // EventBus.Act(new endGameUI(GameState.Dialogue));
         SoundPlayer.PlaySound(SongName);
+        StartCoroutine(StartLevel());
+        
       
+    }
+
+    private IEnumerator StartLevel()
+    {
+        yield return new WaitForEndOfFrame();
+        EventBus.Act(new endGameUI(GameState.Dialogue));
     }
 
     private void DetermineGame(GameState state)

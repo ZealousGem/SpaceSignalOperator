@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelSubtitleDialogueObject
   AudioClip:
   - AudioClip:
-      nameClip: example
-      clip: {fileID: 0}
-      volume: 0
-      pitch: 0
+      nameClip: ringng
+      clip: {fileID: 8300000, guid: 795f427c74947774bac40e00da08df91, type: 3}
+      volume: 0.672
+      pitch: 1.566
       maxvol: 0
       loop: 0
       type: 1
       state: 0
       isPlaying: 0
-    DialogueText: Hello
+    DialogueText: (Ringing)

@@ -1,4 +1,6 @@
 
+using System.Diagnostics;
+
 public static class SoundPlayer 
 {
    public static void PlaySound(string name)

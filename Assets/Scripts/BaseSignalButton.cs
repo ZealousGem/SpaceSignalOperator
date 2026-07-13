@@ -34,20 +34,26 @@ public class BaseSignalButton : MonoBehaviour
     private const float DownPos = -0.14f;
 
     private const float LittleUpDownPos = -0.07f;
+
+    private GameState gameState = GameState.Start;
     
     void OnEnable()
     {
+        EventBus.Subscribe<EndGameEvent>(SetGameState);
         EventBus.Subscribe<ButtonEvent>(RetrieveData); 
     }
 
     void OnDisable()
     {
         EventBus.Unsubscribe<ButtonEvent>(RetrieveData);
+        EventBus.Unsubscribe<EndGameEvent>(SetGameState);
     }
+
+    private void SetGameState(EndGameEvent gameState) => this.gameState = gameState.GameEvent;
 
     private void RetrieveData(ButtonEvent data)
    {
-      if(Time.timeScale == 0f) return;
+      if(Time.timeScale == 0f || gameState != GameState.Ongoing) return;
 
       if (data.action ==buttonType)
       {
@@ -57,10 +63,11 @@ public class BaseSignalButton : MonoBehaviour
       //Debug.Log(gameObject.name + "pressed");
    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   
    protected void OnMouseDown()
    {
-      if(Time.timeScale == 0f) return;
+      if(Time.timeScale == 0f || gameState != GameState.Ongoing) return;
+
       SoundPlayer.PlaySound("SignalButtonOut");
       StartCoroutine(ButtonDownSequence());
      // Debug.Log(gameObject.name + "pressed");

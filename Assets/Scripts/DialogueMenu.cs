@@ -2,17 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueMenu : BaseMainMenu
 {
     public TMP_Text Subtitles;
     private UIObersver Subject;
+    public Image RingUi;
     public LevelSubtitleDialogueObject LevelDialogue;
     private Queue<Dialogue> DiaologueClips = new Queue<Dialogue>();
     private void PlayText(string text) => Subtitles.text = text;
     private void ClearText() => Subtitles.text = "";
+    private Dialogue currentDialogue;
 
     protected override void Awake() => Subject = GameObject.FindWithTag("Manager").GetComponent<UIObersver>();
     private void Start() => addDialogueToQueue();
@@ -29,36 +31,68 @@ public class DialogueMenu : BaseMainMenu
         if(LevelDialogue == null)
         {
             EndDialogue();
-           // Debug.Log("dialogue is done");
             return;
         }
 
-        for (int i = 0; i < LevelDialogue.AudioClip.Count;)
+        for (int i = 0; i < LevelDialogue.AudioClip.Count; i++)
         {
             DiaologueClips.Enqueue(LevelDialogue.AudioClip[i]);
         }
 
-        if(!menu.activeSelf && DiaologueClips.Count != 0) Menu(true); 
+        if(!menu.activeSelf && DiaologueClips.Count != 0) Menu(true);
+
+        if(RingUi.gameObject.activeSelf) RingUi.gameObject.SetActive(false); 
+
+       // Debug.Log("dialogue is done");
     }
 
     private void UpdateDialogueSequence()
     {
-        if(DiaologueClips.Count != 0)
+
+        if(DiaologueClips.Count != 0 && RingUi.gameObject.activeSelf) PlayDialogue(); 
+
+        else if (!RingUi.gameObject.activeSelf && DiaologueClips.Count != 0) StartCoroutine(RingingSequence());
+
+        else EndDialogue();     
+    }
+
+    private IEnumerator RingingSequence()
+    {
+        if(RingUi == null) yield break;
+
+       // Debug.Log("playing ringing");
+
+        ClearText();
+        
+        currentDialogue = DiaologueClips.Dequeue();
+
+        PlayText(currentDialogue.DialogueText);
+        SoundPlayer.PlayDialogueSound(currentDialogue.AudioClip);
+
+
+        if(SoundManager.Instance == null) yield break;
+        AudioSource source = SoundManager.Instance.GetDialogueSoundProperty().getSource();
+
+        if(source == null) throw new UnityException("source is null in DialogueMenu");
+    //    yield return new WaitForSeconds(source.clip.length);
+        float timer = 0f;
+
+        while (timer < source.clip.length)
         {
-            PlayDialogue();
+            if(DiaologueClips.Count == 0 && !source.isPlaying) yield break;
+
+            timer += Time.deltaTime;
+            yield return null;
         }
 
-        else
-        {
-            EndDialogue();
-        }
+        RingUi.gameObject.SetActive(true);
     }
 
     private void PlayDialogue()
     {
         ClearText();
         
-        Dialogue currentDialogue = DiaologueClips.Dequeue();
+        currentDialogue = DiaologueClips.Dequeue();
 
         PlayText(currentDialogue.DialogueText);
         SoundPlayer.PlayDialogueSound(currentDialogue.AudioClip);
@@ -68,17 +102,16 @@ public class DialogueMenu : BaseMainMenu
     {
         ClearText();
 
+        SoundPlayer.StopDialogueSound();
+
         if (DiaologueClips.Count != 0)
         {
           DiaologueClips.Clear();
-          SoundPlayer.StopDialogueSound();
-
         }
 
         Menu(false);
 
-        if(Subject == null) throw new Exception("Observer has not been instantied, add the component retard");
-
+        if(Subject == null) throw new UnityException("Observer has not been instantied, add the component retard");
         Subject.TellObervers(new UIinformation{info = UITextInfo.Counter});
 
        // Debug.Log("donr");
