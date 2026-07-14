@@ -24,3 +24,14 @@ MonoBehaviour:
       state: 0
       isPlaying: 0
     DialogueText: (Ringing)
+  - AudioClip:
+      nameClip: Hello
+      clip: {fileID: 8300000, guid: b1ff03c70d6d201418c5ed02f78f63f5, type: 3}
+      volume: 0.672
+      pitch: 1.566
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Hello
