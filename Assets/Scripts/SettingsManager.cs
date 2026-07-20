@@ -4,6 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using JetBrains.Annotations;
+
+public struct SettingsData
+{
+    public int ScreenScaleInd;
+    public int VsyncInd;
+    public int ResolutionInd;
+    public int QualityInd;
+    public float DiageticSoundValue;
+    public float NonDiageticSoundValue; 
+
+}
+
 
 public class SettingsManager : BaseMainMenu
 {
@@ -22,10 +35,94 @@ public class SettingsManager : BaseMainMenu
 
     private Resolution[] sizes;
 
+    private bool hasData = false;
+
+     SettingsData data = new SettingsData();
+
     protected override void Awake()
     {
         base.Awake();
         SetUpUiElements();
+    }
+
+    private void Start()
+    {
+        
+    }
+
+    private void DefaultSettings()
+    {
+        data.ResolutionInd = 0;
+        data.VsyncInd = 0;
+        data.ScreenScaleInd = 1;
+        data.QualityInd = QualitySettings.GetQualityLevel();
+
+        data.DiageticSoundValue = 1f;
+        data.NonDiageticSoundValue = 1f;
+    }
+
+    private void setUpUserChoices()
+    {
+       if ( SettingsDataManager.Instance != null &&  SettingsDataManager.Instance.DataInFile())
+        {
+            data = SettingsDataManager.Instance.getFileData();
+            hasData = true;
+        }
+    }
+
+    private void setSettings()
+    {
+        if ( SettingsDataManager.Instance == null) return;
+
+        if (hasData)
+        {
+            data = SettingsDataManager.Instance.getFileData();
+            ApplySettings();        
+        }
+
+        else
+        {
+          DefaultSettings();
+          ApplySettings();
+          
+        }    
+
+    }
+
+    private void ApplySettings()
+    {
+        
+        ChangeQuality(data.QualityInd);
+        setSize(data.ResolutionInd);
+        ChangeWindowScale(data.ScreenScaleInd);
+        setVysnc(data.VsyncInd);
+        
+        ManageDiageticAudio(data.DiageticSoundValue);
+        ManageNonDiageticAudio(data.NonDiageticSoundValue);
+
+        setUI();
+
+        SettingsDataManager.Instance.setData(data);
+       
+    }
+
+    void setUI()
+    {
+        ResoluationDropDown.value = data.ResolutionInd;
+        ResoluationDropDown.RefreshShownValue();
+
+        QualityDropDown.value = data.QualityInd;
+        QualityDropDown.RefreshShownValue();
+
+        VsyncDropDown.value = data.VsyncInd;
+        VsyncDropDown.RefreshShownValue();
+
+        WindowScaleDropDown.value = data.ScreenScaleInd;
+        WindowScaleDropDown.RefreshShownValue();
+
+        DiageticSlider.value = data.DiageticSoundValue;
+        NonDiageticSlider.value = data.NonDiageticSoundValue;
+
     }
 
     private void SetUpUiElements()
