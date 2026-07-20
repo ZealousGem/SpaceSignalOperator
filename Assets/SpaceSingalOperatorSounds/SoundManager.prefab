@@ -187,7 +187,7 @@ MonoBehaviour:
     pitch: 1
     maxvol: 0
     loop: 1
-    type: 1
+    type: 0
     state: 0
     isPlaying: 0
 --- !u!114 &-678181181896155615

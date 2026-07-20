@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using JetBrains.Annotations;
 
 public class SettingsManager : BaseMainMenu
 {
@@ -17,20 +18,48 @@ public class SettingsManager : BaseMainMenu
 
     public TMP_Dropdown VsyncDropDown; 
 
+    public Slider DiageticSlider; 
+
+    public Slider NonDiageticSlider; 
+
     private Resolution[] sizes;
 
     protected override void Awake()
     {
         base.Awake();
-        setUpDropwDowns();
+        SetUpUiElements();
     }
 
-    private void setUpDropwDowns()
+    private void SetUpUiElements()
     {
         SetUpResDropDown();
         setVsyncDropDown();
         setQualityDropDown();
         SetWindowScaleDropdown();
+
+        SetUpSliders();
+    }
+
+    private void SetUpSliders()
+    {
+        if(DiageticSlider == null || NonDiageticSlider == null) throw new UnityException("Sliders have not been binded");
+
+        DiageticSlider.SetValueWithoutNotify(1f);
+        NonDiageticSlider.SetValueWithoutNotify(1f);
+
+        DiageticSlider.onValueChanged.AddListener(ManageDiageticAudio);
+        NonDiageticSlider.onValueChanged.AddListener(ManageNonDiageticAudio);
+
+    }
+
+    public void ManageDiageticAudio(float volume) => SoundPlayer.ManageDiageticSound(PerceptialVolume(volume));
+
+    public void ManageNonDiageticAudio(float volume)=> SoundPlayer.ManageNonDiageticSound(PerceptialVolume(volume));
+
+    private float PerceptialVolume(float volume)
+    {
+        float PerceptialVolume = Mathf.Pow(volume, 2f);
+        return PerceptialVolume;
     }
 
     private void SetWindowScaleDropdown()

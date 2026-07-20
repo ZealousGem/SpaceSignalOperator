@@ -67,4 +67,18 @@ public static class SoundPlayer
 
           SoundManager.Instance.StopDialogue();
      }
+
+     public static void ManageDiageticSound(float amount)
+     {
+         if(SoundManager.Instance == null) return;
+
+         SoundManager.Instance.VolumeAmount(amount);
+     }
+
+     public static void ManageNonDiageticSound(float amount)
+     {
+         if(SoundManager.Instance == null) return;
+
+         SoundManager.Instance.MusicAmount(amount);
+     }
 }

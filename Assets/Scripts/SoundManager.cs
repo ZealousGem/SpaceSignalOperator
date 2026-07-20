@@ -54,14 +54,7 @@ public class Sound
     {
         if (source != null)
         {
-            if (source.volume <= maxvol)
-            {
-                source.volume = vol;
-            }
-            else
-            {
-                source.volume = maxvol;
-            }
+            source.volume = Mathf.Clamp01(vol) * maxvol;
         }
     }
 
