@@ -1,11 +1,9 @@
-using System;
+
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
-using JetBrains.Annotations;
 
 public class SettingsManager : BaseMainMenu
 {
@@ -179,8 +177,5 @@ public class SettingsManager : BaseMainMenu
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         //data.ResolutionInd = safeIndex;
     }
-
-
-
    
 }
