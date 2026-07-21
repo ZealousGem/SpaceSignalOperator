@@ -17,6 +17,7 @@ public struct SettingsData
 
 }
 
+public enum SettingsDataValue {ScreenScale, Resolution, Quality, DiageticSoundValue, NonDiageticSoundValue, Vsync}
 
 public class SettingsManager : BaseMainMenu
 {
@@ -37,7 +38,9 @@ public class SettingsManager : BaseMainMenu
 
     private bool hasData = false;
 
-     SettingsData data = new SettingsData();
+    private int resIndex = 0;
+
+    SettingsData data = new SettingsData();
 
     protected override void Awake()
     {
@@ -45,14 +48,11 @@ public class SettingsManager : BaseMainMenu
         SetUpUiElements();
     }
 
-    private void Start()
-    {
-        
-    }
+    private void Start() => setUpUserChoices();
 
     private void DefaultSettings()
     {
-        data.ResolutionInd = 0;
+        data.ResolutionInd = resIndex;
         data.VsyncInd = 0;
         data.ScreenScaleInd = 1;
         data.QualityInd = QualitySettings.GetQualityLevel();
@@ -68,11 +68,13 @@ public class SettingsManager : BaseMainMenu
             data = SettingsDataManager.Instance.getFileData();
             hasData = true;
         }
+
+        setSettings();
     }
 
     private void setSettings()
     {
-        if ( SettingsDataManager.Instance == null) return;
+        if (SettingsDataManager.Instance == null) return;
 
         if (hasData)
         {
@@ -82,9 +84,8 @@ public class SettingsManager : BaseMainMenu
 
         else
         {
-          DefaultSettings();
-          ApplySettings();
-          
+           DefaultSettings();
+           ApplySettings(); 
         }    
 
     }
@@ -147,9 +148,17 @@ public class SettingsManager : BaseMainMenu
 
     }
 
-    public void ManageDiageticAudio(float volume) => SoundPlayer.ManageDiageticSound(PerceptialVolume(volume));
+    public void ManageDiageticAudio(float volume)
+    {
+        SoundPlayer.ManageDiageticSound(PerceptialVolume(volume));
+        WriteData(SettingsDataValue.DiageticSoundValue, volume);
+    }
 
-    public void ManageNonDiageticAudio(float volume)=> SoundPlayer.ManageNonDiageticSound(PerceptialVolume(volume));
+    public void ManageNonDiageticAudio(float volume)
+    { 
+        SoundPlayer.ManageNonDiageticSound(PerceptialVolume(volume));
+        WriteData(SettingsDataValue.NonDiageticSoundValue, volume);  
+    } 
 
     private float PerceptialVolume(float volume)
     {
@@ -179,6 +188,8 @@ public class SettingsManager : BaseMainMenu
             case 2: Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, FullScreenMode.Windowed); break;
 
         }
+
+        WriteData(SettingsDataValue.ScreenScale, index);
     }
 
     private void setQualityDropDown()
@@ -193,7 +204,11 @@ public class SettingsManager : BaseMainMenu
         QualityDropDown.onValueChanged.AddListener(ChangeQuality);
     }
 
-    public void ChangeQuality(int index) => QualitySettings.SetQualityLevel(index, false);
+    public void ChangeQuality(int index)
+    {
+        QualitySettings.SetQualityLevel(index, false);
+        WriteData(SettingsDataValue.Quality, index);
+    } 
 
     private void setVsyncDropDown()
     {
@@ -224,6 +239,8 @@ public class SettingsManager : BaseMainMenu
             case 1: QualitySettings.vSyncCount = 0; break;
             default: Debug.Log("not found"); break;
         }
+
+        WriteData(SettingsDataValue.Vsync, index);
     }
 
     private void SetUpResDropDown()
@@ -259,6 +276,8 @@ public class SettingsManager : BaseMainMenu
         ResoluationDropDown.RefreshShownValue();
 
        ResoluationDropDown.onValueChanged.AddListener(setSize);
+
+       resIndex = sizesIndex;
     }
 
     public void setSize(int index)
@@ -270,9 +289,29 @@ public class SettingsManager : BaseMainMenu
         }
 
         int safeIndex = Mathf.Clamp(index, 0, sizes.Length - 1);
+
         Resolution resolution = sizes[safeIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        WriteData(SettingsDataValue.Resolution, safeIndex);
         //data.ResolutionInd = safeIndex;
+    }
+
+    private void WriteData(SettingsDataValue type, float value)
+    {
+        if(SettingsDataManager.Instance == null) return;
+
+        switch (type)
+        {
+          case SettingsDataValue.Resolution: data.ResolutionInd = (int)value; break;
+          case SettingsDataValue.ScreenScale: data.ScreenScaleInd = (int)value; break;
+          case SettingsDataValue.Quality: data.QualityInd = (int)value; break;
+          case SettingsDataValue.Vsync: data.VsyncInd = (int)value; break;
+          case SettingsDataValue.DiageticSoundValue: data.DiageticSoundValue = value; break;
+          case SettingsDataValue.NonDiageticSoundValue: data.NonDiageticSoundValue = value; break;
+        }
+
+        SettingsDataManager.Instance.setData(data);
     }
    
 }

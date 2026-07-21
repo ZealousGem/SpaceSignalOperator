@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7031470787925122736}
   - component: {fileID: 5626523489117343776}
   - component: {fileID: -678181181896155615}
+  - component: {fileID: 1056391847224753339}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -203,3 +204,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadingManager
   SceneIndex: 0
+--- !u!114 &1056391847224753339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789008753718215994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5eee31da9bf99f4893d61fd743fc482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsDataManager

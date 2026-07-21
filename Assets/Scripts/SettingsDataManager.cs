@@ -17,8 +17,8 @@ public class SettingsDataManager : Singleton<SettingsDataManager>
      {
         this.data = data;
             
-            string json = JsonUtility.ToJson(this.data, true);
-            File.WriteAllText(persistentPath, json);     
+        string json = JsonUtility.ToJson(this.data, true);
+        File.WriteAllText(persistentPath, json);     
      }
 
     public bool DataInFile()
@@ -30,7 +30,7 @@ public class SettingsDataManager : Singleton<SettingsDataManager>
             if (string.IsNullOrEmpty(json)) return false;
             
             data = JsonUtility.FromJson<SettingsData>(json);
-          //   Debug.Log("File found " + Application.persistentDataPath);
+          //  Debug.Log("File found " + Application.persistentDataPath);
             return true;
         } catch {
              Debug.Log("File Corrupted");
