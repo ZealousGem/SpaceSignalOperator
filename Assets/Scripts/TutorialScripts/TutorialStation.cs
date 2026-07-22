@@ -8,8 +8,9 @@ public class TutorialStation : Station
     {
         base.ToggleVisibility(state);
 
-        if (state && !HasSeen)
+        if (state && !HasSeen && tutorialObject != null)
         {
+            EventBus.Act(new TutorialEvent(tutorialObject));
             HasSeen = true;
         }
     }
