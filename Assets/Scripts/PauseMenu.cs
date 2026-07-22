@@ -16,7 +16,7 @@ public class PauseMenu : BaseMainMenu
 
     protected override void retrieveData(endGameUI data)
     {
-        if (data.gameState == GameState.Ongoing)
+        if (data.gameState == GameState.Ongoing || data.gameState == GameState.TutorialDone)
         {
             isOver = false;
         }

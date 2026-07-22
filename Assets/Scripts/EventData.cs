@@ -87,6 +87,16 @@ public class EndGameEvent : EventData
     }
 }
 
+public class TutorialEvent : EndGameEvent
+{
+    public TutorialObject obj; 
+
+    public TutorialEvent(TutorialObject _obj) : base(GameState.Tutorial)
+    {
+        obj = _obj;
+    }
+}
+
 public class StationEvent : EventData
 {
     public StationType action;

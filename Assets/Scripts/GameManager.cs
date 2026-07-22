@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 
-public enum GameState { Start, Ongoing, Fail, Success, Pause, Delivered, Dialogue};
+public enum GameState { Start, Ongoing, Fail, Success, Pause, Delivered, Dialogue, Tutorial, TutorialDone};
 
 public class GameManager : MonoBehaviour
 {
