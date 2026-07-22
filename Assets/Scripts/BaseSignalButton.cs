@@ -51,12 +51,8 @@ public class BaseSignalButton : MonoBehaviour
 
     private void SetGameState(EndGameEvent gameState) 
     {
-      if (gameState.GameEvent == GameState.TutorialDone)
-      {
-          this.gameState = GameState.Ongoing;
-      }
-
-      else if (gameState.GameEvent != GameState.Delivered)
+        
+      if (gameState.GameEvent != GameState.Delivered)
       {
           this.gameState = gameState.GameEvent; 
       }   

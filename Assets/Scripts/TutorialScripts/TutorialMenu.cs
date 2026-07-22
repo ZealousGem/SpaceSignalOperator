@@ -8,7 +8,6 @@ using UnityEngine.Video;
 public class TutorialMenu : BaseMainMenu
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     public TMP_Text TutorialText;
     public RawImage rawImage;
     public VideoPlayer videoPlayer;
@@ -16,21 +15,13 @@ public class TutorialMenu : BaseMainMenu
     public Button NextButton;
     private Queue<TutorialList> currentobject = new Queue<TutorialList>();
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        EventBus.Subscribe<TutorialEvent>(RetrieveData);
-    }
+    protected override void OnEnable()=> EventBus.Subscribe<TutorialEvent>(RetrieveData); 
 
-    protected override void OnDisable()
-    {
-       base.OnDisable(); 
-       EventBus.Unsubscribe<TutorialEvent>(RetrieveData);
-    }
-
+    protected override void OnDisable()=> EventBus.Unsubscribe<TutorialEvent>(RetrieveData);
+    
     private void RetrieveData(TutorialEvent data)
     {
-        if(data.GameEvent == GameState.Tutorial) ActivateTutorial(data.obj);
+        if(data.gameState == GameState.Tutorial) ActivateTutorial(data.obj);
     }
 
     protected override void Awake()
@@ -81,7 +72,7 @@ public class TutorialMenu : BaseMainMenu
            Menu(false);
            rawImage.gameObject.SetActive(false);
 
-           EventBus.Act(new EndGameEvent(GameState.TutorialDone));
+           EventBus.Act(new endGameUI(GameState.TutorialDone));
         }
 
         else

@@ -87,7 +87,7 @@ public class EndGameEvent : EventData
     }
 }
 
-public class TutorialEvent : EndGameEvent
+public class TutorialEvent : endGameUI
 {
     public TutorialObject obj; 
 
