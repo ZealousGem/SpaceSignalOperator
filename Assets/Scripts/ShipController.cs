@@ -219,6 +219,11 @@ public class ShipController : MonoBehaviour
             subject.TellObervers(new UIinformation{info = data.textInfo, count = data.PlanetsLeft});
         }
 
+        else if (UITextInfo.MapWarning == data.textInfo)
+        {
+            subject.TellObervers(new UIinformation{info = data.textInfo});
+        }
+
         else
         {
             EvokeDistanceBetweenShipandObject(data.textInfo, data.obstacle);

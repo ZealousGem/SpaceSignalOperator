@@ -2,9 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
+[System.Serializable]
 public struct TutorialList
 {
     public VideoClip clip;
+
+    [TextArea(12,12)]
     public string TutorialText;
 }
 

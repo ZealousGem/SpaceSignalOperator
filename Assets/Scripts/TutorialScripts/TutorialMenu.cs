@@ -84,7 +84,9 @@ public class TutorialMenu : BaseMainMenu
 
     private void NextSequence(string text, VideoClip videoClip)
     {
-        if(currentobject.Count == 0 || videoPlayer == null || rawImage == null || TutorialText == null) throw new UnityException("one of these compooents are not instantied");
+        if(currentobject.Count == 0) return;
+        
+        if(videoPlayer == null || rawImage == null || TutorialText == null) throw new UnityException("one of these compooents are not instantied");
         
         TutorialText.text = text;
 
