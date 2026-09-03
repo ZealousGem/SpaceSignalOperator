@@ -21,7 +21,7 @@ public class TutorialMenu : BaseMainMenu
     
     private void RetrieveData(TutorialEvent data)
     {
-        if(data.gameState == GameState.Tutorial) ActivateTutorial(data.obj);
+        if(data.gameState == GameState.Tutorial) EventBus.Act(new endGameUI(GameState.Tutorial)); StartCoroutine(ActivateTutorial(data.obj));
     }
 
     protected override void Awake()
@@ -41,9 +41,13 @@ public class TutorialMenu : BaseMainMenu
         videoPlayer.isLooping = true; // GIFs usually loop, set this if needed
     }
 
-    private void ActivateTutorial(TutorialObject obj)
+    private IEnumerator ActivateTutorial(TutorialObject obj)
     {
-        if(obj == null) return;
+        if(obj == null)
+        {
+            Debug.Log("Object is null");
+            yield break;
+        }
 
         currentobject.Clear();
 
@@ -51,6 +55,8 @@ public class TutorialMenu : BaseMainMenu
         {
           currentobject.Enqueue(obj.tutorial[i]);  
         }
+
+        yield return new WaitForSeconds(0.2f);
 
         Menu(true);
 
@@ -73,6 +79,7 @@ public class TutorialMenu : BaseMainMenu
            rawImage.gameObject.SetActive(false);
 
            EventBus.Act(new endGameUI(GameState.TutorialDone));
+         //  SoundPlayer.UnpauseSound();
         }
 
         else
@@ -84,7 +91,7 @@ public class TutorialMenu : BaseMainMenu
 
     private void NextSequence(string text, VideoClip videoClip)
     {
-        if(currentobject.Count == 0) return;
+        //if(currentobject.Count == 0) return;
         
         if(videoPlayer == null || rawImage == null || TutorialText == null) throw new UnityException("one of these compooents are not instantied");
         

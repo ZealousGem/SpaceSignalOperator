@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5145154182178711175
+--- !u!1 &9019705402647008422
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5337269799425710626}
-  - component: {fileID: 4375542299108032775}
-  - component: {fileID: 1298870986638294447}
-  - component: {fileID: 2561279999213341721}
+  - component: {fileID: 70068490793564982}
+  - component: {fileID: 5904961110917778212}
+  - component: {fileID: 8324962055014140589}
+  - component: {fileID: 7861553359666574988}
+  - component: {fileID: 7721842017095302541}
   m_Layer: 3
-  m_Name: MovingAsteroid
+  m_Name: tutorialAsteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5337269799425710626
+--- !u!4 &70068490793564982
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5145154182178711175}
+  m_GameObject: {fileID: 9019705402647008422}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.21, y: 0.016704, z: -12.25}
+  m_LocalRotation: {x: -0, y: 0.00014577685, z: -0, w: 1}
+  m_LocalPosition: {x: 59.4, y: 0, z: 66.4}
   m_LocalScale: {x: 2.0695, y: 2.0695, z: 2.0695}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5984304775661222544}
-  - {fileID: 6742437545540927679}
+  - {fileID: 2070853316575244171}
+  - {fileID: 4731470909086351854}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &4375542299108032775
+  m_LocalEulerAnglesHint: {x: 0, y: 0.016704, z: 0}
+--- !u!135 &5904961110917778212
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5145154182178711175}
+  m_GameObject: {fileID: 9019705402647008422}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -57,13 +58,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.67268413
   m_Center: {x: 0, y: -0.015618503, z: 0}
---- !u!54 &1298870986638294447
+--- !u!54 &8324962055014140589
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5145154182178711175}
+  m_GameObject: {fileID: 9019705402647008422}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -84,33 +85,54 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2561279999213341721
+--- !u!114 &7861553359666574988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5145154182178711175}
+  m_GameObject: {fileID: 9019705402647008422}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf008ec07ad154f4fa91700030e4ce1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovingAsteroid
   Damage: 10
-  Object: {fileID: 6258353755520571909}
+  Object: {fileID: 5395979850221591380}
   renderDistance: 30
   checkInterval: 0.5
   rotationSpeed: 50
   duration: 1.2
-  ExplosionEffect: {fileID: 4839581987906955898}
+  ExplosionEffect: {fileID: 907481163420893025}
   Speed: 8
---- !u!1001 &5233263980276837704
+--- !u!114 &7721842017095302541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019705402647008422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36278631d4453f449a847f412b420f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialMovingAsteroid
+  Damage: 0
+  Object: {fileID: 5395979850221591380}
+  renderDistance: 30
+  checkInterval: 0.5
+  rotationSpeed: 50
+  duration: 1.2
+  ExplosionEffect: {fileID: 907481163420893025}
+  Speed: 70
+  tutorialObject: {fileID: 0}
+--- !u!1001 &509446338134587475
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5337269799425710626}
+    m_TransformParent: {fileID: 70068490793564982}
     m_Modifications:
     - target: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
       propertyPath: m_Name
@@ -201,23 +223,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
---- !u!1 &4839581987906955898 stripped
+--- !u!1 &907481163420893025 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 831459427590457138, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
-  m_PrefabInstance: {fileID: 5233263980276837704}
+  m_PrefabInstance: {fileID: 509446338134587475}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5984304775661222544 stripped
+--- !u!4 &2070853316575244171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1994193723873466328, guid: 86a17f955f01ff24aaf233c21993ff28, type: 3}
-  m_PrefabInstance: {fileID: 5233263980276837704}
+  m_PrefabInstance: {fileID: 509446338134587475}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6492864947872343892
+--- !u!1001 &5053943423616329221
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5337269799425710626}
+    m_TransformParent: {fileID: 70068490793564982}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5f54a8209a700ee4588336331c844bba, type: 3}
       propertyPath: m_LocalScale.x
@@ -288,13 +310,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f54a8209a700ee4588336331c844bba, type: 3}
---- !u!1 &6258353755520571909 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f54a8209a700ee4588336331c844bba, type: 3}
-  m_PrefabInstance: {fileID: 6492864947872343892}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6742437545540927679 stripped
+--- !u!4 &4731470909086351854 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f54a8209a700ee4588336331c844bba, type: 3}
-  m_PrefabInstance: {fileID: 6492864947872343892}
+  m_PrefabInstance: {fileID: 5053943423616329221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5395979850221591380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f54a8209a700ee4588336331c844bba, type: 3}
+  m_PrefabInstance: {fileID: 5053943423616329221}
   m_PrefabAsset: {fileID: 0}
