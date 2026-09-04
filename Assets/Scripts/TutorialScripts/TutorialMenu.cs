@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,10 @@ public class TutorialMenu : BaseMainMenu
     public RenderTexture renderTexture; // Output target for the VideoPlayer
     public Button NextButton;
     private Queue<TutorialList> currentobject = new Queue<TutorialList>();
+
+    private CanvasGroup canvasGroup;
+
+    private float fadeDuration = 0.4f;
 
     protected override void OnEnable()=> EventBus.Subscribe<TutorialEvent>(RetrieveData); 
 
@@ -30,6 +35,8 @@ public class TutorialMenu : BaseMainMenu
         {
             NextButton.onClick.AddListener(PlayTutorial);
         }
+
+        canvasGroup = menu.GetComponent<CanvasGroup>();
 
         base.Awake();
     }
@@ -100,6 +107,26 @@ public class TutorialMenu : BaseMainMenu
         videoPlayer.clip = videoClip;
         videoPlayer.Prepare();
         videoPlayer.Play();
+    }
+
+    public override void Menu(bool state)
+    {
+        if(menu == null) return;
+
+        canvasGroup.DOKill();
+
+        if (state)
+        {
+            menu.SetActive(true);
+            canvasGroup.blocksRaycasts = true;
+            canvasGroup.DOFade(1f, fadeDuration).SetUpdate(true);
+        }
+
+        else
+        {
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.DOFade(0f, fadeDuration).SetUpdate(true).OnComplete(() => menu.SetActive(false));    
+        }
     }
 
 
