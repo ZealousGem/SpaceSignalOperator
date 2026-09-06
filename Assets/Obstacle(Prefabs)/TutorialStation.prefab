@@ -104,7 +104,7 @@ MonoBehaviour:
   station: 0
   amount: 50
   StationOutLine: {fileID: 4191932494314611286}
-  tutorialObject: {fileID: 0}
+  tutorialObject: {fileID: 11400000, guid: 58824a14efbe59649804e50f0063cf6a, type: 2}
 --- !u!1001 &3958054621599440647
 PrefabInstance:
   m_ObjectHideFlags: 0

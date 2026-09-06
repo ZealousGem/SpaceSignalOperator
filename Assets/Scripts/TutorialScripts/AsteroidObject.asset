@@ -16,3 +16,7 @@ MonoBehaviour:
   - clip: {fileID: 32900000, guid: a1d814bf535976345adc465a2627472f, type: 3}
     TutorialText: 'When an asteroid flies towards you a pop up will tell you the
       direction it is coming from. '
+  - clip: {fileID: 32900000, guid: 34772018afe76aa42bae99426b4332aa, type: 3}
+    TutorialText: 'This will give you time to dodge before it hurtles towrds you.
+      Make sure to keep an eye on the alert system to know where incoming asterids
+      are coming from. '

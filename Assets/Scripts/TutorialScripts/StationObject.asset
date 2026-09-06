@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a0d561b0b9aa944bea4668652065db, type: 3}
+  m_Name: StationObject
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialObject
+  tutorial:
+  - clip: {fileID: 32900000, guid: a795eebfc58a74a4ba54f78dba433af0, type: 3}
+    TutorialText: Scattered throughout the system, these stations keep your delivery
+      ship running by offering repairs, cooling systems, and refueling. You can easily
+      spot a station's specific service by its color. Approaching a station triggers
+      the detector system, alerting you to its position with a directional arrow.
+  - clip: {fileID: 32900000, guid: 257240ecd57d05e468c1e7f89743844d, type: 3}
+    TutorialText: "Docking isn't required\u2014simply close the distance to initiate
+      automated station maintenance. Watch the station\u2019s outer barrier; when
+      its glowing outline extinguishes, your ship's fuel, hull integrity, and performance
+      boosts have been fully restored. Don't linger too close after servicing. Initiating
+      a full dock will lock your ship down and fail the current delivery."
