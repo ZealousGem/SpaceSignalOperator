@@ -10,11 +10,13 @@ public class MainMenu : BaseMainMenu
     [SerializeField] private Button OptionsButton;
     [SerializeField] private Button QuitButton;
 
-     private StartMenuOptionsManager _OptionsMenu;
+    private StartMenuOptionsManager _OptionsMenu;
+    private PlayMenu playMenu;
 
     protected override void Awake()
     {
          _OptionsMenu = GetComponent<StartMenuOptionsManager>();
+         playMenu = GetComponent<PlayMenu>();
 
          StartButton.onClick.AddListener(PlayMenu);
          OptionsButton.onClick.AddListener(OptionsMenu);
@@ -31,6 +33,8 @@ public class MainMenu : BaseMainMenu
     private void PlayMenu()
     {
         DOTween.KillAll();
+        Menu(false);
+        playMenu.Menu(true);
     }
 
     private void OnApplicationQuit()

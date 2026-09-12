@@ -33,7 +33,7 @@ public class BaseMainMenu : MonoBehaviour
     public void ReturnToMainMenu()
     {
         SoundPlayer.StopAllInGameSounds();
-        SceneManager.LoadScene(1);
+        LoadingManager.Instance.LoadScene(0);
     } 
     
 }

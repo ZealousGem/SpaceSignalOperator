@@ -82,6 +82,8 @@ public class EndGameMenu : BaseMainMenu
 
         SoundPlayer.PlaySound("LevelComplete");
 
+       // ProgressionManager.Instance.CompleteLevel(1);
+
         StarRating(StarAmount, ScoreList);
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(tim);

@@ -1,14 +1,17 @@
 using System.Collections.Generic;
-using NUnit.Framework.Constraints;
-using UnityEngine;
 
 public class ProgressionManager : Singleton<ProgressionManager>
 {
     
-    public int MaxCount = 0;
-    private int ProgressionCounter;
+   public int MaxCount = 0;
+   private int ProgressionCounter;
+   private List<bool> IsAvailable = new List<bool>();
 
-    private List<bool> HasCompleted = new List<bool>();
+    public override void Awake()
+    {
+        base.Awake();
+        LoadDefaults();
+    }
 
    private void LoadDefaults()
     {
@@ -16,8 +19,10 @@ public class ProgressionManager : Singleton<ProgressionManager>
 
         for (int i = 0; i < MaxCount; i++)
         {
-            HasCompleted.Add(false);
+            IsAvailable.Add(false);
         }
+
+        CompleteLevel(0);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,12 +40,14 @@ public class ProgressionManager : Singleton<ProgressionManager>
 
     public void CompleteLevel(int index)
     {
-        for (int i = 0; i < HasCompleted.Count; i++)
+        if(index > MaxCount) return;
+        
+        for (int i = 0; i < IsAvailable.Count; i++)
         {
-            if (index == i && !HasCompleted[i])
+            if (index == i && !IsAvailable[i])
             {
                 IncreaseNum();
-                HasCompleted[i] = true;
+                IsAvailable[i] = true;
                 break;
             }
         }
