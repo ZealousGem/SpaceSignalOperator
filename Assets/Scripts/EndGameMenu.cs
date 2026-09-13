@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class EndGameMenu : BaseMainMenu
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("NextSceneIndex")]
+    [SerializeField] private int NextSceneIndex = 0;
+    [Header("Other Stuff")]
     public Button MenuButton; 
     public TMP_Text Title;
     public TMP_Text Reason;
@@ -51,6 +53,8 @@ public class EndGameMenu : BaseMainMenu
     {
          SoundPlayer.StopAllInGameSounds();
        //  SceneManager.LoadScene(2);
+         if(ProgressionManager.Instance != null && NextSceneIndex != 0) LoadingManager.Instance.LoadScene(NextSceneIndex + 2);
+         else if(ProgressionManager.Instance != null && NextSceneIndex == 0) LoadingManager.Instance.LoadScene(NextSceneIndex);
     }
 
     private void ResetLevel()
@@ -82,7 +86,7 @@ public class EndGameMenu : BaseMainMenu
 
         SoundPlayer.PlaySound("LevelComplete");
 
-       // ProgressionManager.Instance.CompleteLevel(1);
+       if(ProgressionManager.Instance != null && NextSceneIndex != 0) ProgressionManager.Instance.CompleteLevel(NextSceneIndex);
 
         StarRating(StarAmount, ScoreList);
 
