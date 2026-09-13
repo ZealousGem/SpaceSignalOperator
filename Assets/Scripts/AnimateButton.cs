@@ -7,18 +7,16 @@ using UnityEngine.UI;
 public class AnimateButton : ButtonBase
 {
     [Header("Animation")]
-     private Vector3 hoverScale = new Vector3(1.01f, 1.01f, 1.01f);
-     private Vector3 pressedScale = new Vector3(0.95f, 0.95f, 0.95f);
-    [SerializeField] private float duration = 0.12f;
+     [SerializeField] protected Vector3 hoverScale = new Vector3(1.01f, 1.01f, 1.01f);
+     protected Vector3 pressedScale = new Vector3(0.95f, 0.95f, 0.95f);
+    [SerializeField] protected float duration = 0.12f;
 
     private Image ButtonImage;
-
     private TMP_Text ButtonText;
-
-    private Vector3 _baseScale;
+    protected Vector3 _baseScale;
     private Coroutine _routine;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         hoverScale = new Vector3(hoverScale.x * transform.localScale.x, hoverScale.y * transform.localScale.y, hoverScale.z * transform.localScale.z);
         pressedScale = new Vector3(pressedScale.x * transform.localScale.x, pressedScale.y * transform.localScale.y, pressedScale.z * transform.localScale.z);

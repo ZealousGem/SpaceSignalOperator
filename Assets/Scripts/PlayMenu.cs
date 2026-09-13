@@ -16,7 +16,7 @@ public class PlayMenu : BaseMainMenu
 
     private readonly string unLockedHexCode = "#1F4ABA";
 
-    private readonly string textMeshColour = "#544E4E";
+    private readonly string textMeshColour = "#FFFFFF";
 
     protected override void Awake()
     {
@@ -51,7 +51,7 @@ public class PlayMenu : BaseMainMenu
 
            TMP_Text textMesh = Buttons[i].gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
            
-          // if (ColorUtility.TryParseHtmlString(textMeshColour, out Color newTextColor)) textMesh.color = newTextColor;
+           if (ColorUtility.TryParseHtmlString(textMeshColour, out Color newTextColor)) textMesh.color = newTextColor;
            
            textMesh.text = "Level " + i;
 
