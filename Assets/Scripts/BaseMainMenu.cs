@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,8 +31,9 @@ public class BaseMainMenu : MonoBehaviour
         menu.SetActive(state);
     }
 
-    public void ReturnToMainMenu()
+    public virtual void ReturnToMainMenu()
     {
+        DOTween.KillAll();
         SoundPlayer.StopAllInGameSounds();
         LoadingManager.Instance.LoadScene(0);
     } 

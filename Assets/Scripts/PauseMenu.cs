@@ -88,4 +88,11 @@ public class PauseMenu : BaseMainMenu
         Menu(false);
     }
 
+    public override void ReturnToMainMenu()
+    {
+        base.ReturnToMainMenu();
+        
+        if(Time.timeScale == 0f) Time.timeScale = 1f;
+    }
+
 }
