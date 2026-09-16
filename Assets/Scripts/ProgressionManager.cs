@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public struct ProgressionData
+[System.Serializable]
+public class ProgressionData
 {
-   public int ProgressionCounter {get; set;}
-   public List<bool> IsAvailable {get; set;}
+   public int ProgressionCounter; 
+   public List<bool> IsAvailable = new List<bool>();
 }
 
 public class ProgressionManager : Singleton<ProgressionManager>
@@ -42,8 +43,6 @@ public class ProgressionManager : Singleton<ProgressionManager>
         catch 
         {
              Debug.Log("File Corrupted");
-             setParameters();
-            return;
             // Handle corrupted JSON
         }
       }
@@ -55,8 +54,9 @@ public class ProgressionManager : Singleton<ProgressionManager>
 
     private void setParameters()
     {
-        if (!EqualityComparer<ProgressionData>.Default.Equals(data, default))
+        if (data.IsAvailable != null && data.IsAvailable.Count > 0)
         {
+            Debug.Log("file stuff");
             ProgressionCounter = data.ProgressionCounter;
             IsAvailable = data.IsAvailable;
         }
@@ -74,12 +74,15 @@ public class ProgressionManager : Singleton<ProgressionManager>
     {
         data.ProgressionCounter = ProgressionCounter;
         data.IsAvailable = IsAvailable;
-         
 
-        if (File.Exists(persistentPath))
+        try
         {
-           string json = JsonUtility.ToJson(data, true);
-           File.WriteAllText(persistentPath, json);
+            string json = JsonUtility.ToJson(data, true);
+            File.WriteAllText(persistentPath, json);
+        }
+        catch
+        {
+            Debug.LogError($"Failed to save data");
         }
        
     }
