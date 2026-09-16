@@ -74,6 +74,7 @@ public class UIManager : MonoBehaviour, IObserver
 
     private IEnumerator StartDelivery()
     {
+        SoundPlayer.PlaySound(GameManager.SongName);
         yield return new WaitForSeconds(0.5f);
         float timer = 3;
         int lastDisplayedTime = -1;

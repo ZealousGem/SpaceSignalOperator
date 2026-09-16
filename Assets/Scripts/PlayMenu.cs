@@ -47,7 +47,10 @@ public class PlayMenu : BaseMainMenu
 
         for (int i = 0; i < ProgressionCounter; i++)
         {
-           Buttons[i].onClick.AddListener(() => LoadMapIndex(i));
+           int levelIndex = i;
+           
+           Buttons[i].onClick.RemoveAllListeners();
+           Buttons[i].onClick.AddListener(() => LoadMapIndex(levelIndex));
 
            TMP_Text textMesh = Buttons[i].gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
            
@@ -63,7 +66,7 @@ public class PlayMenu : BaseMainMenu
     private void LoadMapIndex(int index)
     {
         Debug.Log(index);
-        LoadingManager.Instance.LoadScene(index + 1);
+        LoadingManager.Instance.LoadScene(index + 2);
     }
 
     public override void Menu(bool state)

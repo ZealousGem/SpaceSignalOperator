@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
         setPlanetCoordinate();
       //  UnityEngine.Debug.Log(currentGameState)
       // EventBus.Act(new endGameUI(GameState.Dialogue));
-        SoundPlayer.PlaySound(SongName);
         StartCoroutine(StartLevel());
         
       
