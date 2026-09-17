@@ -65,7 +65,8 @@ public class PlayMenu : BaseMainMenu
 
     private void LoadMapIndex(int index)
     {
-        Debug.Log(index);
+        SoundPlayer.StopAllInGameSounds();
+       // Debug.Log(index);
         LoadingManager.Instance.LoadScene(index + 2);
     }
 

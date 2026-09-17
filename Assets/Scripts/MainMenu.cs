@@ -23,6 +23,7 @@ public class MainMenu : BaseMainMenu
          QuitButton.onClick.AddListener(OnApplicationQuit);
     }
 
+    private void Start()=> SoundPlayer.PlaySound("MenuSong");
     private void OptionsMenu()
     {
         DOTween.KillAll();

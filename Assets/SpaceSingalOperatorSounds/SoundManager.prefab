@@ -191,6 +191,15 @@ MonoBehaviour:
     type: 0
     state: 0
     isPlaying: 0
+  - nameClip: MenuSong
+    clip: {fileID: 8300000, guid: ea482f53703fcd74f98059741cf88662, type: 3}
+    volume: 0.135
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 0
+    state: 0
+    isPlaying: 0
 --- !u!114 &-678181181896155615
 MonoBehaviour:
   m_ObjectHideFlags: 0
