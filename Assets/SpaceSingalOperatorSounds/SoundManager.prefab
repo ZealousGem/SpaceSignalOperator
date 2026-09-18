@@ -200,6 +200,42 @@ MonoBehaviour:
     type: 0
     state: 0
     isPlaying: 0
+  - nameClip: tutSong
+    clip: {fileID: 8300000, guid: dd180f58aa20a6c419d22a74e067ef12, type: 3}
+    volume: 0.135
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 0
+    state: 0
+    isPlaying: 0
+  - nameClip: Level1Song
+    clip: {fileID: 8300000, guid: 38351c9b97cd1ab4a9c3772c576355b5, type: 3}
+    volume: 0.135
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 0
+    state: 0
+    isPlaying: 0
+  - nameClip: Level3Song
+    clip: {fileID: 8300000, guid: 934b7a61b36179e429a0374659d6cc22, type: 3}
+    volume: 0.135
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 0
+    state: 0
+    isPlaying: 0
+  - nameClip: Level4Song
+    clip: {fileID: 8300000, guid: 68937e6d20e11804daf0d1c10cf6cb5b, type: 3}
+    volume: 0.135
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 0
+    state: 0
+    isPlaying: 0
 --- !u!114 &-678181181896155615
 MonoBehaviour:
   m_ObjectHideFlags: 0
