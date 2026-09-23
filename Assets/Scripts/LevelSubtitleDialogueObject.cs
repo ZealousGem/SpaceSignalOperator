@@ -6,7 +6,8 @@ using UnityEngine;
 public struct Dialogue
 {
     public Sound AudioClip;
-
+    
+    [TextArea(5,5)]
     public string DialogueText;
 }
 

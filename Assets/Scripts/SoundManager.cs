@@ -138,10 +138,20 @@ public class Sound
             fadeInCourtine= runningScript.StartCoroutine(FadeInTransition(1f));
     }
 
-    public void Stop()
+    public void Stop(MonoBehaviour runningScript)
+    {
+    if (source != null)
     {
         source.Stop();
-        if (state != SourceState.Default) state = SourceState.NotPlaying;  
+    }
+    
+    state = SourceState.NotPlaying;
+
+    if (DialogueCoroutine != null)
+    {
+        runningScript.StopCoroutine(DialogueCoroutine);
+        DialogueCoroutine = null;
+    }  
            
     }
 
@@ -191,16 +201,20 @@ public class Sound
 
      private IEnumerator PlayDialogueClip()
      {
-        if(source == null) throw new UnityException("source is null");
+       if (source == null || source.clip == null) yield break;
+       yield return null;
 
-         while (source.time < source.clip.length)
+         while (source != null && source.isPlaying)
         {
            if (state == SourceState.NotPlaying) yield break; 
            yield return null;
         }
 
-        if (state == SourceState.isPlaying) state = SourceState.NotPlaying;
+        if (state == SourceState.isPlaying)
+        {
+        state = SourceState.NotPlaying;
         EventBus.Act(new endGameUI(GameState.Dialogue));
+        }
 
        // Debug.Log("PlayedDialogue");
      }
@@ -259,7 +273,7 @@ public class SoundManager : Singleton<SoundManager>
 //      Debug.Log("playing clip");
     }
 
-    public void StopDialogue()=>  DialogueSound.Stop();
+    public void StopDialogue()=>  DialogueSound.Stop(this);
 
     public Sound GetDialogueSoundProperty()
    {
@@ -309,7 +323,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             if (sounds[i].nameClip == name)
             {
-                sounds[i].Stop();
+                sounds[i].Stop(this);
                 return;
             }
         }
@@ -353,7 +367,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             if (sounds[i].state == SourceState.isPlaying)
             {
-                sounds[i].Stop();
+                sounds[i].Stop(this);
             }
         }
     }

@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd20afc55e26974198aa9b1c0c0eedf, type: 3}
+  m_Name: TutorialLevel
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSubtitleDialogueObject
+  AudioClip:
+  - AudioClip:
+      nameClip: ringng
+      clip: {fileID: 8300000, guid: 795f427c74947774bac40e00da08df91, type: 3}
+      volume: 0.672
+      pitch: 1.566
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: (Ringing)
+  - AudioClip:
+      nameClip: 1
+      clip: {fileID: 8300000, guid: 6bccae1fb1f20204893a92d55825f842, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Heya, This your boss, Welcome to The Space-Whip Delivery Service,
+      the premium space delivery service that distributes goods to any systems in
+      the milky way.
+  - AudioClip:
+      nameClip: 2
+      clip: {fileID: 8300000, guid: d2f1fba104f522d42903b48a9c1abfb9, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: You must be unforu- ahem, a new intern we have just hired yesterday.
+      Welcome aboard, you may think that since you have the job, you will ease right
+      in.
+  - AudioClip:
+      nameClip: 3
+      clip: {fileID: 8300000, guid: bb26664caf4a27945b42abdc8a9d7969, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: " Wrong!!!! Anyone who thinks that is a moron. This job requires
+      extreme focus, resilience and problem solving. If you got all those, then you
+      will survive however most don\u2019t."
+  - AudioClip:
+      nameClip: 4
+      clip: {fileID: 8300000, guid: d8321277f2aa4bf44b1c4931e86fe884, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "so I\u2019ll give you a basic run down. You see those Three big
+      buttons in front of you. Those Buttons are the controls you will be using to
+      get the ship to the next planet that is waiting for our company's delivery.\r\n"
+  - AudioClip:
+      nameClip: 5
+      clip: {fileID: 8300000, guid: ea84ccc8a1a6fdd4b8497ec2157c8aea, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Arrow Buttons, send turning signals to the ship making it turn
+      from left to right. The last Button will signal to the ship to stop or go based
+      on your last input.
+  - AudioClip:
+      nameClip: 6
+      clip: {fileID: 8300000, guid: fb620fd0047726146b35dadbb2b3787a, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "All the ships are run by our own openAI, that is why we have you
+      to make sure it doesn\u2019t go off course from the desired destination."
+  - AudioClip:
+      nameClip: 7
+      clip: {fileID: 8300000, guid: cad61059298422d40ae481fa062efb56, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "What Else\u2026 oh yes the interface, what you see on your screen
+      is the view of the ship you will be directing. This comes from our galactic
+      satellite above the milky way."
+  - AudioClip:
+      nameClip: 8
+      clip: {fileID: 8300000, guid: 2b31233cada699d439251994e4d36f66, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: The bottom left is the amount the ship can withstand any damage,
+      if it reaches 0% you will have no job.
+  - AudioClip:
+      nameClip: 9
+      clip: {fileID: 8300000, guid: d21dc69a783534240838ed7aa1fe5196, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Top Left is the ship's temperature if it reaches 100 degrees once
+      again no job. On the bottom right is the ship's fuel gauge if the ship's fuel
+      is all gone, again no job.
+  - AudioClip:
+      nameClip: 10
+      clip: {fileID: 8300000, guid: 7f91fd3fdab99394fa21e9c0e1f98941, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: The top right is an arrow that will tell you where the ship needs
+      to go, under it is the distance the planet is relative to the ship. so the
+      less the number is the closer you are to your destination.
+  - AudioClip:
+      nameClip: 11
+      clip: {fileID: 8300000, guid: e6704eab0c721ad48aa1af9ef29f1c90, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: One more thing, we have a momentum tracker to check if any debris
+      or asteroid is coming the ship's way, so if it pops up try and dodge it so
+      the ship does not get damaged. Be quick and hasty.
+  - AudioClip:
+      nameClip: 12
+      clip: {fileID: 8300000, guid: c2059bdaed1ebeb40898ea16aa90d6ed, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Well that should be all for now, this delivery you are doing today
+      is a simple delivery in one of our popular systems where our headquarters is
+      located. Not too far, pretty simple for your type skill set.
+  - AudioClip:
+      nameClip: 13
+      clip: {fileID: 8300000, guid: e7be2c72beb691c44b63a9405b162046, type: 3}
+      volume: 0.672
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Good luck if you damage anything or lose anything you know what
+      happens.
