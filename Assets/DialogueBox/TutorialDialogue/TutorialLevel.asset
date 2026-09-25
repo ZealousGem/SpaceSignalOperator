@@ -16,7 +16,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: ringng
       clip: {fileID: 8300000, guid: 795f427c74947774bac40e00da08df91, type: 3}
-      volume: 0.672
+      volume: 0.858
       pitch: 1.566
       maxvol: 0
       loop: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 1
       clip: {fileID: 8300000, guid: 6bccae1fb1f20204893a92d55825f842, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 2
       clip: {fileID: 8300000, guid: d2f1fba104f522d42903b48a9c1abfb9, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 3
       clip: {fileID: 8300000, guid: bb26664caf4a27945b42abdc8a9d7969, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 4
       clip: {fileID: 8300000, guid: d8321277f2aa4bf44b1c4931e86fe884, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 5
       clip: {fileID: 8300000, guid: ea84ccc8a1a6fdd4b8497ec2157c8aea, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 6
       clip: {fileID: 8300000, guid: fb620fd0047726146b35dadbb2b3787a, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 7
       clip: {fileID: 8300000, guid: cad61059298422d40ae481fa062efb56, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 8
       clip: {fileID: 8300000, guid: 2b31233cada699d439251994e4d36f66, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 9
       clip: {fileID: 8300000, guid: d21dc69a783534240838ed7aa1fe5196, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 10
       clip: {fileID: 8300000, guid: 7f91fd3fdab99394fa21e9c0e1f98941, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 11
       clip: {fileID: 8300000, guid: e6704eab0c721ad48aa1af9ef29f1c90, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 12
       clip: {fileID: 8300000, guid: c2059bdaed1ebeb40898ea16aa90d6ed, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   - AudioClip:
       nameClip: 13
       clip: {fileID: 8300000, guid: e7be2c72beb691c44b63a9405b162046, type: 3}
-      volume: 0.672
+      volume: 1
       pitch: 1
       maxvol: 0
       loop: 0
