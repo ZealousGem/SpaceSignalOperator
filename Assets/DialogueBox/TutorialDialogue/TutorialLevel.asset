@@ -26,7 +26,7 @@ MonoBehaviour:
     DialogueText: (Ringing)
   - AudioClip:
       nameClip: 1
-      clip: {fileID: 8300000, guid: 6bccae1fb1f20204893a92d55825f842, type: 3}
+      clip: {fileID: 8300000, guid: 48068f3b47e1e6942a155acf05f879b7, type: 3}
       volume: 1
       pitch: 1
       maxvol: 0
