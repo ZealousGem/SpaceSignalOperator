@@ -17,7 +17,7 @@ MonoBehaviour:
       nameClip: Ringnig
       clip: {fileID: 8300000, guid: 795f427c74947774bac40e00da08df91, type: 3}
       volume: 0.86
-      pitch: 1
+      pitch: 1.566
       maxvol: 0
       loop: 0
       type: 1
