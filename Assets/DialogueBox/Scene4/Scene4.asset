@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd20afc55e26974198aa9b1c0c0eedf, type: 3}
+  m_Name: Scene4
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSubtitleDialogueObject
+  AudioClip:
+  - AudioClip:
+      nameClip: Ringnig
+      clip: {fileID: 8300000, guid: 795f427c74947774bac40e00da08df91, type: 3}
+      volume: 0.86
+      pitch: 1.566
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: (Ringing)
+  - AudioClip:
+      nameClip: 1
+      clip: {fileID: 8300000, guid: a3c6938532a60da45a054710d52a7f3e, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: My superiors and myself have to say, you are something else. Managing
+      to deliver for years now with no mistakes is quite commendable, you really
+      becoming our company's starlight
+  - AudioClip:
+      nameClip: 2
+      clip: {fileID: 8300000, guid: c85186c3739e65242a41e36d536c7cd7, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: So now I believe you are ready to deliver products to Planets that
+      are our highest priority so this job is crucial to become a success.
+  - AudioClip:
+      nameClip: 3
+      clip: {fileID: 8300000, guid: 66c5e26f075fc4547b6489f02bf8537b, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: This is the illustrious Tau Ceti System, one of the first systems
+      our civilizations settled. This does not contain as many asteroids compared
+      to the Fomalhaut system.
+  - AudioClip:
+      nameClip: 4
+      clip: {fileID: 8300000, guid: 6140fbcbbe5ad8c44891aab61c276439, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: However this time you will need to figure out how to not get the
+      ship damaged. One  time one of our employees directed their ship into the Tau
+      Ceti star, they thought it was a planet. Hahahahahahahaha.
+  - AudioClip:
+      nameClip: 5
+      clip: {fileID: 8300000, guid: 3f650e2ac48f4ec46a5a4dfff73a5ecc, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: But anyway I should not keep you any longer to deliver you.
+  - AudioClip:
+      nameClip: 6
+      clip: {fileID: 8300000, guid: b3359477cdf33194f860c3550158da35, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: (crying in the background)
+  - AudioClip:
+      nameClip: 7
+      clip: {fileID: 8300000, guid: 3bbdfbb6042443d4ca7c3c053bf68252, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: It was a mistake. I thought the planet was yellow.

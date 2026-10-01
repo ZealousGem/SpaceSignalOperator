@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd20afc55e26974198aa9b1c0c0eedf, type: 3}
+  m_Name: Scene1
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSubtitleDialogueObject
+  AudioClip:
+  - AudioClip:
+      nameClip: Ringnig
+      clip: {fileID: 8300000, guid: 795f427c74947774bac40e00da08df91, type: 3}
+      volume: 0.86
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: (Ringing)
+  - AudioClip:
+      nameClip: 1
+      clip: {fileID: 8300000, guid: b23223f14e31b1c4fb3c6476a940604a, type: 3}
+      volume: 0.86
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "Heyo Looks like you managed to complete your delivery, Congratulations.
+      You appear to have gotten the gist of how this works, so I\u2019ll keep it
+      brief."
+  - AudioClip:
+      nameClip: 2
+      clip: {fileID: 8300000, guid: ed64f29cc0fd3e84ab4ef87aa74768f3, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: 'This Delivery is a little similar to the one before except this
+      system has more asteroids and debris so make sure the ship does not get damaged.
+      If your delivery is a success then your internship is fully complete and you
+      will finally be able to do some more proper deliveries. '
+  - AudioClip:
+      nameClip: 3
+      clip: {fileID: 8300000, guid: 98a0d8353a2fad840b5c620c87eb4401, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: 'The lifelong contract will be ready once you have completed it
+      but hey have you heard, if you work all your life with no breaks you get a
+      free coffee pass, isn''t that great. '
+  - AudioClip:
+      nameClip: 4
+      clip: {fileID: 8300000, guid: 72f36706eaeb6444c85c002d91c3af8c, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: You don't have to pay for your incredible coffee every time. A
+      free coffee pass for all your life is so cool.
+  - AudioClip:
+      nameClip: 5
+      clip: {fileID: 8300000, guid: b64fd1d5c2db14f48b5c6e98f510f1d6, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "Alright, well anyway. Just keep doing your thing rookie. I don\u2019t
+      think you will be able to get that free coffee pass anyway, Ciao."

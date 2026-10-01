@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd20afc55e26974198aa9b1c0c0eedf, type: 3}
+  m_Name: Scene5
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSubtitleDialogueObject
+  AudioClip:
+  - AudioClip:
+      nameClip: Ringnig
+      clip: {fileID: 8300000, guid: 795f427c74947774bac40e00da08df91, type: 3}
+      volume: 0.86
+      pitch: 1.566
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: (Ringing)
+  - AudioClip:
+      nameClip: 1
+      clip: {fileID: 8300000, guid: 213bbe94c387b294c8015895ab09c5f8, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "Well, Well, I\u2019m back from my holiday, you must have missed
+      me right? I\u2019m guessing you want to know where I went?"
+  - AudioClip:
+      nameClip: 2
+      clip: {fileID: 8300000, guid: 531533044b182a94eb13cfc192551061, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "This is the first holiday I have done since I started working
+      here, so I decided to do something special. I went to the solar system. You
+      know the origin point of mankind, isn\u2019t that cool?"
+  - AudioClip:
+      nameClip: 3
+      clip: {fileID: 8300000, guid: 9a178d02741ea76428e6c41bf8ece046, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: ' I got to learn about our history on Earth, how we settled a planet
+      called Mars and also found out about a devastating war that started because
+      of some painter. It was really cool.'
+  - AudioClip:
+      nameClip: 4
+      clip: {fileID: 8300000, guid: 52eead9ea5b8b16488583636dc3cafc7, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "I mean yeah I didn\u2019t have the money to go to the homeworld
+      itself but I went to it\u2019s close neighbour called\u2026 what was it, Pluto
+      I think so I was close enough. It was on discount and it was cold but I had
+      a great time on my own."
+  - AudioClip:
+      nameClip: 5
+      clip: {fileID: 8300000, guid: 15168eab3b601594cb34a846f80cbac7, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Just me....
+  - AudioClip:
+      nameClip: 6
+      clip: {fileID: 8300000, guid: 4a8245de873065a488bd8f771926ff9c, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "\u2026"
+  - AudioClip:
+      nameClip: 7
+      clip: {fileID: 8300000, guid: eab1d7af14ba1384a8f16505d86777a7, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: I need to call my ex-wife, Okay anyway what system is it this time
+      oh yes. The 3 star System GW Orionis, quite the system, it's still quite a
+      young one with lots of debris so make sure to keep an eye on it I guess.
+  - AudioClip:
+      nameClip: 8
+      clip: {fileID: 8300000, guid: 1172668256dbc21479562e825d0d957a, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Anyway you should be fine, I have an important call to take from
+      my superiors, go deliver already.

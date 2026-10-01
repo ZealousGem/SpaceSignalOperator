@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd20afc55e26974198aa9b1c0c0eedf, type: 3}
+  m_Name: Scene2
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSubtitleDialogueObject
+  AudioClip:
+  - AudioClip:
+      nameClip: Ringnig
+      clip: {fileID: 8300000, guid: 795f427c74947774bac40e00da08df91, type: 3}
+      volume: 0.86
+      pitch: 1.566
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: (Ringing)
+  - AudioClip:
+      nameClip: 1
+      clip: {fileID: 8300000, guid: 6f7a799f56cd5f84881cd366c72f4a4c, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Ah I see someones becoming quite the master huh, well this delivery
+      might change my friend. This time you have more than one planet to deliver.
+  - AudioClip:
+      nameClip: 2
+      clip: {fileID: 8300000, guid: 17ad41e526d8f33438ef8d875b62027d, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: "So you better be conserving your fuel or you won\u2019t have enough
+      by the time you need to deliver to the second planet."
+  - AudioClip:
+      nameClip: 3
+      clip: {fileID: 8300000, guid: 68e03fb039aace84f9d315e883eb8406, type: 3}
+      volume: 1
+      pitch: 1
+      maxvol: 0
+      loop: 0
+      type: 1
+      state: 0
+      isPlaying: 0
+    DialogueText: Well I think I have said enough, start delivering already, time
+      does not wait. Hup hup
