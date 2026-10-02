@@ -97,6 +97,7 @@ public class ProgressionManager : Singleton<ProgressionManager>
         }
 
         CompleteLevel(0);
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -114,6 +115,8 @@ public class ProgressionManager : Singleton<ProgressionManager>
 
     public void CompleteLevel(int index)
     {
+        if (index < 0 || index >= IsAvailable.Count) return;
+        
         if(index > MaxCount) return;
         
         for (int i = 0; i < IsAvailable.Count; i++)

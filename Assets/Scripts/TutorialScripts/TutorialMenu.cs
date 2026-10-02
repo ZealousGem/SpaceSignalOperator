@@ -44,6 +44,7 @@ public class TutorialMenu : BaseMainMenu
     private void Start()
     {
         videoPlayer.targetTexture = renderTexture;
+        videoPlayer.SetDirectAudioMute(0, true);
         rawImage.texture = renderTexture; 
         videoPlayer.isLooping = true; // GIFs usually loop, set this if needed
     }
@@ -104,10 +105,24 @@ public class TutorialMenu : BaseMainMenu
         
         TutorialText.text = text;
 
+        if (videoPlayer.isPlaying || videoPlayer.isPrepared)
+        {
+        videoPlayer.Stop();
+        }
+
         videoPlayer.clip = videoClip;
+
+        videoPlayer.prepareCompleted -= OnVideoPrepared;
+        videoPlayer.prepareCompleted += OnVideoPrepared;
         videoPlayer.Prepare();
-        videoPlayer.Play();
+       // videoPlayer.Play();
     }
+
+    private void OnVideoPrepared(VideoPlayer source)
+{
+    source.prepareCompleted -= OnVideoPrepared;
+    source.Play();
+}
 
     public override void Menu(bool state)
     {
