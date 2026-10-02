@@ -61,7 +61,7 @@ MonoBehaviour:
       isPlaying: 0
     DialogueText: ' I got to learn about our history on Earth, how we settled a planet
       called Mars and also found out about a devastating war that started because
-      of some painter. It was really cool.'
+      of some painter. It was really cool though.'
   - AudioClip:
       nameClip: 4
       clip: {fileID: 8300000, guid: 52eead9ea5b8b16488583636dc3cafc7, type: 3}
@@ -75,7 +75,7 @@ MonoBehaviour:
     DialogueText: "I mean yeah I didn\u2019t have the money to go to the homeworld
       itself but I went to it\u2019s close neighbour called\u2026 what was it, Pluto
       I think so I was close enough. It was on discount and it was cold but I had
-      a great time on my own."
+      a great time on my own. ...Just me"
   - AudioClip:
       nameClip: 5
       clip: {fileID: 8300000, guid: 15168eab3b601594cb34a846f80cbac7, type: 3}
@@ -86,7 +86,7 @@ MonoBehaviour:
       type: 1
       state: 0
       isPlaying: 0
-    DialogueText: Just me....
+    DialogueText: "Only me\u2026"
   - AudioClip:
       nameClip: 6
       clip: {fileID: 8300000, guid: 4a8245de873065a488bd8f771926ff9c, type: 3}
