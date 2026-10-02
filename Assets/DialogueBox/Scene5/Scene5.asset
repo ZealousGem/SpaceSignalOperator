@@ -86,7 +86,7 @@ MonoBehaviour:
       type: 1
       state: 0
       isPlaying: 0
-    DialogueText: "Only me\u2026"
+    DialogueText: "Just me, only me\u2026"
   - AudioClip:
       nameClip: 6
       clip: {fileID: 8300000, guid: 4a8245de873065a488bd8f771926ff9c, type: 3}

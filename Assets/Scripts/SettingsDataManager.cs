@@ -15,10 +15,19 @@ public class SettingsDataManager : Singleton<SettingsDataManager>
 
     public void setData(SettingsData data)
      {
+
         this.data = data;
-            
+        
+        try
+        {    
         string json = JsonUtility.ToJson(this.data, true);
-        File.WriteAllText(persistentPath, json);     
+        File.WriteAllText(persistentPath, json);
+        }
+
+        catch
+        {
+            Debug.Log("json not accesible");
+        }
      }
 
     public bool DataInFile()
