@@ -18,9 +18,11 @@ MonoBehaviour:
       ship running by offering repairs, cooling systems, and refueling. You can easily
       spot a station's specific service by its color. Approaching a station triggers
       the detector system, alerting you to its position with a directional arrow.
+    VideoName: StaionTutorial1.mp4
   - clip: {fileID: 32900000, guid: 257240ecd57d05e468c1e7f89743844d, type: 3}
     TutorialText: "Docking isn't required\u2014simply close the distance to initiate
       automated station maintenance. Watch the station\u2019s outer barrier; when
       its glowing outline extinguishes, your ship's fuel, hull integrity, and performance
       boosts have been fully restored. Don't linger too close after servicing. Initiating
       a full dock will lock your ship down and fail the current delivery."
+    VideoName: StaionTutorial2.mp4

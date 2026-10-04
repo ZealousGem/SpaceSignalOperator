@@ -18,7 +18,9 @@ MonoBehaviour:
       target planet will always be highlighted telling you which one is needed to
       be devliered to first. Once you are close to the planet, the highlight will
       fade away and telling you have succesffuly delivered '
+    VideoName: PlanetTutorial1.mp4
   - clip: {fileID: 32900000, guid: f32f3d4f621eddf4bb59003407e8b7b9, type: 3}
     TutorialText: 'If the planet has no highlight or you have already delivered the
       goods to the planet. Make sure not to go too close, if you do then the ship
       will land on the planet making it game over. '
+    VideoName: PlanetTutorial2.mp4

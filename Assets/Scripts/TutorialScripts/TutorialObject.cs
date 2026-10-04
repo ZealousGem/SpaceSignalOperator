@@ -9,6 +9,8 @@ public struct TutorialList
 
     [TextArea(12,12)]
     public string TutorialText;
+
+    public string VideoName;
 }
 
 [CreateAssetMenu(fileName ="TutorialObject", menuName = "ScriptableObjects/Tutorial")]

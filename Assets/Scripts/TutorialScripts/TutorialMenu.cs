@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -93,11 +94,11 @@ public class TutorialMenu : BaseMainMenu
         else
         {
            TutorialList tutorialPage = currentobject.Dequeue();
-           NextSequence(tutorialPage.TutorialText, tutorialPage.clip);
+           NextSequence(tutorialPage.TutorialText, tutorialPage.clip, tutorialPage.VideoName);
         }
     }
 
-    private void NextSequence(string text, VideoClip videoClip)
+    private void NextSequence(string text, VideoClip videoClip, string videoFileName)
     {
         //if(currentobject.Count == 0) return;
         
@@ -110,7 +111,15 @@ public class TutorialMenu : BaseMainMenu
         videoPlayer.Stop();
         }
 
-        videoPlayer.clip = videoClip;
+        #if UNITY_WEBGL && !UNITY_EDITOR
+        videoPlayer.source = VideoSource.Url;
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
+        #else
+         videoPlayer.source = VideoSource.VideoClip;
+         videoPlayer.clip = videoClip;
+        #endif
+
+        
 
         videoPlayer.prepareCompleted -= OnVideoPrepared;
         videoPlayer.prepareCompleted += OnVideoPrepared;
