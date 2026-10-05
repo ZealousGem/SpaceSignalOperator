@@ -236,6 +236,15 @@ MonoBehaviour:
     type: 0
     state: 0
     isPlaying: 0
+  - nameClip: Level5Song
+    clip: {fileID: 8300000, guid: c35ed18993c2baf4c85265ce0a7c040d, type: 3}
+    volume: 0.135
+    pitch: 1
+    maxvol: 0
+    loop: 1
+    type: 0
+    state: 0
+    isPlaying: 0
 --- !u!114 &-678181181896155615
 MonoBehaviour:
   m_ObjectHideFlags: 0
